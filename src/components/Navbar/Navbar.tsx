@@ -79,11 +79,11 @@ export const Navbar = () => {
           </Stack>
           <Stack
             direction="row"
-            spacing="5"
+            spacing="20"
             display={{ base: "none", md: "none", lg: "flex" }}
             justify="center"
             align="center"
-            flex={1}
+            flex={2}
           >
             <NavbarMenu data={NAVIGATION} />
           </Stack>
