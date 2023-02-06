@@ -1,10 +1,9 @@
 {
   "navigation": {
     "home": "Home",
-    "swap": "Swap",
-    "profile": "Profile",
-    "nftfarming": "Nft Farming",
-    "sharetoearn": "Share To Earn"
+    "landSale": "Land Sale",
+    "roadMap": "Road Map",
+    "download": "Download"
   },
   "footer": {
     "description": "Global network aims to revolutionize the market of network marketing by decentralized millions of users to web3 application.",
