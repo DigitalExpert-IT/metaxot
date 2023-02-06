@@ -1,0 +1,14 @@
+{
+  "connection": {
+    "title": "Please Connect Wallet",
+    "description": "You need to connect wallet to access this page"
+  },
+  "registration": {
+    "title": "Registration Required",
+    "description": "You need to be registered to access this page"
+  },
+  "staffAbove": {
+    "title": "Admin & Staff Only",
+    "description": "You need at least has STAFF role to access this page"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "required": "{{field}} is required!",
+  "address": "{{address}} is invalid address!",
+  "alreadyRegistered": "{{address}} Address already registered",
+  "registrationFee": "Unmatch Registration Fee",
+  "notOwnedNft": "You don't own an NFT",
+  "errorCode": {
+    "ACTION_REJECTED": "User Reject Transaction!",
+    "NotEnoughBalance": "Not Enough Balance",
+    "NotEnoughPool": "Not Enough Pool"
+  }
+}
