@@ -68,17 +68,12 @@ export const Navbar = () => {
               fontSize="xl"
               icon={<GiHamburgerMenu />}
               aria-label="open-menu"
-              display={{ md: "flex", lg: "none" }}
+              display={{ base: "flex", md: "flex", lg: "none" }}
               onClick={isOpen ? onClose : onOpen}
             />
             <Link href="/">
-              <AspectRatio w="200px" h="30px" ratio={1}>
-                <Image
-                  src={"/assets/logo/metaxot.svg"}
-                  alt="logo-image"
-                  h="200px"
-                  w="100px"
-                />
+              <AspectRatio w="120px" h="20px" ratio={1}>
+                <Image src={"/assets/logo/metaxot.svg"} alt="logo-image" />
               </AspectRatio>
             </Link>
           </Stack>

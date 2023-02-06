@@ -29,7 +29,11 @@ export const NavbarMenu: React.FC<NavItemProps> = props => {
           <Popover trigger="hover" placement="bottom-start">
             <PopoverTrigger>
               <Link href={item.href ?? "#"} key={idx}>
-                <Text textTransform="capitalize" fontWeight="bold">
+                <Text
+                  textTransform="capitalize"
+                  fontWeight={"bold"}
+                  fontSize="20px"
+                >
                   {t(`common.navigation.${item.name}`)}
                 </Text>
               </Link>
