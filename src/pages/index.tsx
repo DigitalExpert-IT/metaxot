@@ -1,13 +1,12 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Container, Text } from "@chakra-ui/react";
+import { Footer } from "components/Footer";
 export default function Home() {
   return (
     <Box>
-      <Text>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae laborum
-        eaque officia molestias enim, obcaecati impedit ullam consequatur
-        architecto iste eius dolorum ad mollitia ipsam iure sint quos distinctio
-        assumenda?
-      </Text>
+      <Container maxW={"container.xl"}>
+        <Box minH={"100vh"} />
+        <Footer />
+      </Container>
     </Box>
   );
 }
