@@ -84,6 +84,8 @@ export const Navbar = () => {
             textTransform="capitalize"
             fontSize="20px"
             textAlign={"center"}
+            fontFamily="angkor"
+            fontWeight="400"
           >
             <NavbarMenu data={NAVIGATION} />
           </Stack>
