@@ -1,9 +1,7 @@
-import { Box, Text } from "@chakra-ui/react";
-import { Navbar } from "components";
-export default function Home() {
-  return (
-    <Box>
-      <Navbar />
-    </Box>
-  );
+import { LayoutMain } from "components";
+
+function Home() {
+  return <LayoutMain>new page start from here</LayoutMain>;
 }
+
+export default Home;
