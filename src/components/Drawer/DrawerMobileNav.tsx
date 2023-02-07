@@ -1,26 +1,25 @@
-import React from "react";
-import Link from "next/link";
-import { INavigation } from "constant/navigation";
-// import { ButtonConnectWallet } from "components";
-import { useTranslation } from "react-i18next";
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
+  Text,
+  Icon,
+  Flex,
+  Image,
+  Stack,
   Drawer,
+  Button,
+  Collapse,
   DrawerBody,
+  AspectRatio,
   DrawerHeader,
   DrawerOverlay,
+  useDisclosure,
   DrawerContent,
   DrawerCloseButton,
-  Stack,
-  Text,
-  AspectRatio,
-  Image,
-  Flex,
-  Icon,
-  useDisclosure,
-  Collapse,
-  Button,
 } from "@chakra-ui/react";
+import React from "react";
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
+import { INavigation } from "constant/navigation";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 interface MobileDrawerProps {
   isOpen: boolean;
@@ -41,7 +40,7 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
         <DrawerCloseButton />
         <DrawerHeader>
           <AspectRatio w={100} h={4} ratio={1}>
-            <Image src={props.logo} alt={props.logo} />
+            <Image src={logo} alt={logo} />
           </AspectRatio>
         </DrawerHeader>
         <Stack direction="row" w="full" justify="center" p="2" my="5">
