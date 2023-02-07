@@ -6,10 +6,13 @@
     "download": "Download"
   },
   "footer": {
-    "description": "Global network aims to revolutionize the market of network marketing by decentralized millions of users to web3 application.",
-    "listedOn": "Listen On",
-    "social": "Social"
+    "dropYourEmail": "Drop your email for further information.",
+    "allRightsReserved": "All Rights Reserved."
   },
+  "land": "land",
+  "send": "send",
+  "extras": "extras",
+  
   "back": "Back",
   "balance": "Balance",
   "nftFarming": "NFT FARMING",
