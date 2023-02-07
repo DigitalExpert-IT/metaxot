@@ -32,8 +32,8 @@ export const NavbarMain: React.FC<NavbarMainProps> = props => {
 
   return (
     <Box
-      __css={styles.main}
       as="nav"
+      __css={styles.main}
       boxShadow={scrolled ? "dark-lg" : "none"}
       bg={isOpen ? "gray.800" : scrolled ? "gray.800" : "transparent"}
       {...props}
