@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box, BoxProps, useMultiStyleConfig } from "@chakra-ui/react";
+import { createStylesContext } from "@chakra-ui/system";
 
 interface NavbarMainProps extends BoxProps {
   isOpen?: boolean;
@@ -27,6 +28,7 @@ export const NavbarMain: React.FC<NavbarMainProps> = props => {
   }, [prevScrollPos, scrolled]);
 
   const styles = useMultiStyleConfig("navbarTheme");
+  const [StylesProvider] = createStylesContext("navbarTheme");
 
   return (
     <Box
@@ -36,7 +38,7 @@ export const NavbarMain: React.FC<NavbarMainProps> = props => {
       bg={isOpen ? "gray.800" : scrolled ? "gray.800" : "transparent"}
       {...props}
     >
-      {props.children}
+      <StylesProvider value={styles}>{props.children}</StylesProvider>
     </Box>
   );
 };
