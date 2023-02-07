@@ -12,7 +12,7 @@ import { Flex, Button, useDisclosure } from "@chakra-ui/react";
 export const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <NavbarMain isopen={isOpen}>
+    <NavbarMain isOpen={isOpen}>
       <NavbarBody>
         <NavbarBrandDrawer
           isopen={isOpen}
