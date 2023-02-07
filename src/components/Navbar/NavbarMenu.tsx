@@ -1,18 +1,18 @@
-import React from "react";
-import Link from "next/link";
-import { INavigation } from "constant/navigation";
-import { useTranslation } from "react-i18next";
-import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
+  Box,
+  Icon,
+  Text,
+  Flex,
+  Stack,
   Popover,
   PopoverTrigger,
-  Text,
-  Box,
   PopoverContent,
-  Stack,
-  Flex,
-  Icon,
 } from "@chakra-ui/react";
+import React from "react";
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
+import { INavigation } from "constant/navigation";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 interface NavItemProps {
   data: INavigation[];
