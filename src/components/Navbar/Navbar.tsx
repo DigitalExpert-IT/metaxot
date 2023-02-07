@@ -15,9 +15,9 @@ export const Navbar = () => {
     <NavbarMain isOpen={isOpen}>
       <NavbarBody>
         <NavbarBrandDrawer
-          isopen={isOpen}
-          onopen={onOpen}
-          onclose={onClose}
+          isOpen={isOpen}
+          onOpen={onOpen}
+          onClose={onClose}
           data={NAVIGATION}
         />
         <NavbarItemWrapper>
