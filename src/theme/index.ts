@@ -1,5 +1,4 @@
 import { components } from "./components";
-import { navbarTheme } from "./components/navbar";
 import { foundations } from "./foundations";
 import { semanticTokens } from "./semantic-tokens";
 import { styles } from "./styles";
@@ -17,10 +16,7 @@ export const theme = {
   semanticTokens,
   direction,
   ...foundations,
-  components: {
-    ...components,
-    navbarTheme,
-  },
+  components,
   styles,
   config,
 };

@@ -6,24 +6,31 @@ import {
   AspectRatio,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { INavigation, NAVIGATION } from "constant";
+import { INavigation } from "constant";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { DrawerMobileNav } from "components/Drawer";
 
 interface NavbarBrandDrawerProps extends StackProps {
-  isopen: boolean;
-  onclose: () => void;
-  onopen: () => void;
+  isOpen: boolean;
+  onClose: () => void;
+  onOpen: () => void;
   data: INavigation[];
 }
 
 export const NavbarBrandDrawer: React.FC<NavbarBrandDrawerProps> = props => {
+  const { isOpen, onClose, onOpen, data, ...rest } = props;
   return (
-    <Stack direction="row" align="center" flex={1} justify="space-between">
+    <Stack
+      direction="row"
+      align="center"
+      flex={1}
+      justify="space-between"
+      {...rest}
+    >
       <DrawerMobileNav
         data={props.data}
-        isOpen={props.isopen}
-        onClose={props.onclose}
+        isOpen={props.isOpen}
+        onClose={props.onClose}
         logo="/assets/logo/metaxot.svg"
       />
       <IconButton
@@ -32,7 +39,7 @@ export const NavbarBrandDrawer: React.FC<NavbarBrandDrawerProps> = props => {
         aria-label="open-menu"
         icon={<GiHamburgerMenu />}
         display={{ base: "flex", md: "flex", lg: "none" }}
-        onClick={props.isopen ? props.onclose : props.onopen}
+        onClick={isOpen ? onClose : onOpen}
       />
       <Link href="/">
         <AspectRatio w="120px" h="20px" ratio={1}>

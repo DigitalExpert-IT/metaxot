@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import { Box, BoxProps, useMultiStyleConfig } from "@chakra-ui/react";
-import { createStylesContext } from "@chakra-ui/system";
 
 interface NavbarMainProps extends BoxProps {
   isOpen?: boolean;
@@ -8,8 +7,10 @@ interface NavbarMainProps extends BoxProps {
   variants?: string;
 }
 
+export const ThemeContext = createContext<any>({});
+
 export const NavbarMain: React.FC<NavbarMainProps> = props => {
-  const { isOpen, size, variants } = props;
+  const { isOpen, size, variants, ...rest } = props;
   const [scrolled, setScrolled] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
@@ -29,18 +30,19 @@ export const NavbarMain: React.FC<NavbarMainProps> = props => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos, scrolled]);
 
-  const style = useMultiStyleConfig("navbarTheme", { size, variants });
-  const [StylesProvider] = createStylesContext("navbarTheme");
+  const styles = useMultiStyleConfig("Navbar", { size, variants });
 
   return (
     <Box
       as="nav"
-      __css={style.main}
+      __css={styles.main}
       boxShadow={scrolled ? "dark-lg" : "none"}
       bg={isOpen ? "gray.800" : scrolled ? "gray.800" : "transparent"}
-      {...props}
+      {...rest}
     >
-      <StylesProvider value={style}>{props.children}</StylesProvider>
+      <ThemeContext.Provider value={styles}>
+        {props.children}
+      </ThemeContext.Provider>
     </Box>
   );
 };
