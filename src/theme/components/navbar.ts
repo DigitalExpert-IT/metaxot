@@ -18,6 +18,10 @@ export const navbarTheme = defineMultiStyleConfig({
       pos: "fixed",
       transition: "0.5s",
     },
+    body: {
+      alignItems: "center",
+      justify: "space-around",
+    },
   },
   sizes: {
     sm: {},

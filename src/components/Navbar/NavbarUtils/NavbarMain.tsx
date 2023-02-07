@@ -4,10 +4,12 @@ import { createStylesContext } from "@chakra-ui/system";
 
 interface NavbarMainProps extends BoxProps {
   isOpen?: boolean;
+  size?: string;
+  variants?: string;
 }
 
 export const NavbarMain: React.FC<NavbarMainProps> = props => {
-  const { isOpen } = props;
+  const { isOpen, size, variants } = props;
   const [scrolled, setScrolled] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
@@ -27,18 +29,18 @@ export const NavbarMain: React.FC<NavbarMainProps> = props => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos, scrolled]);
 
-  const styles = useMultiStyleConfig("navbarTheme");
+  const style = useMultiStyleConfig("navbarTheme", { size, variants });
   const [StylesProvider] = createStylesContext("navbarTheme");
 
   return (
     <Box
       as="nav"
-      __css={styles.main}
+      __css={style.main}
       boxShadow={scrolled ? "dark-lg" : "none"}
       bg={isOpen ? "gray.800" : scrolled ? "gray.800" : "transparent"}
       {...props}
     >
-      <StylesProvider value={styles}>{props.children}</StylesProvider>
+      <StylesProvider value={style}>{props.children}</StylesProvider>
     </Box>
   );
 };
