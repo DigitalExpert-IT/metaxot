@@ -7,7 +7,6 @@ import {
   Container,
   IconButton,
   AspectRatio,
-  useMediaQuery,
   useDisclosure,
 } from "@chakra-ui/react";
 import Link from "next/link";
@@ -20,7 +19,6 @@ export const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [scrolled, setScrolled] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [isLargethan800] = useMediaQuery("(min-width: 800px)");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -97,7 +95,6 @@ export const Navbar = () => {
             display={{ base: "none", md: "none", lg: "flex" }}
           >
             <Button colorScheme={"metaxot"}>Connect Wallet</Button>
-            {/* <ButtonConnectWallet /> */}
           </Flex>
         </Flex>
       </Container>
