@@ -18,7 +18,7 @@ interface NavItemProps {
   data: INavigation[];
 }
 
-export const NavbarMenu: React.FC<NavItemProps> = props => {
+export const NavbarItemList: React.FC<NavItemProps> = props => {
   const { data } = props;
   const { t } = useTranslation();
 
@@ -35,22 +35,22 @@ export const NavbarMenu: React.FC<NavItemProps> = props => {
 
             {item.children && (
               <PopoverContent
-                border="0"
-                boxShadow="xl"
-                bg="gray.800"
                 p="4"
-                rounded="xl"
                 maxW="xs"
+                border="0"
+                rounded="xl"
+                bg="gray.800"
+                boxShadow="xl"
               >
                 <Stack>
                   {item.children.map((obj, id) => (
                     <Link key={id} href={obj.link}>
                       <Stack
-                        direction="row"
-                        align="center"
+                        p="2"
                         role="group"
                         rounded="md"
-                        p="2"
+                        align="center"
+                        direction="row"
                         _hover={{ bg: "brand.300" }}
                       >
                         <Text
@@ -60,20 +60,20 @@ export const NavbarMenu: React.FC<NavItemProps> = props => {
                           {t(`common.navigation.${obj.title}`)}
                         </Text>
                         <Flex
-                          transition="all .3s ease"
-                          transform="translateX(-10px)"
+                          flex={1}
+                          align={"center"}
+                          justify={"flex-end"}
                           _groupHover={{
                             opacity: "100%",
                             transform: "translateX(0)",
                           }}
-                          justify={"flex-end"}
-                          align={"center"}
-                          flex={1}
+                          transition="all .3s ease"
+                          transform="translateX(-10px)"
                         >
                           <Icon
-                            color="valhalla.500"
                             w={5}
                             h={5}
+                            color="valhalla.500"
                             as={ChevronRightIcon}
                           />
                         </Flex>
