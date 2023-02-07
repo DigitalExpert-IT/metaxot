@@ -40,14 +40,14 @@ export const Navbar = () => {
 
   return (
     <Box
-      pt={{ base: "2", lg: "2" }}
-      pb="2"
+      py="6"
       w="full"
       zIndex={5}
       bg={isOpen ? "gray.800" : scrolled ? "gray.800" : "transparent"}
       boxShadow={scrolled ? "dark-lg" : "none"}
       pos="fixed"
       transition="0.5s"
+      as="nav"
     >
       <Container maxW="container.xl">
         <Flex alignItems="center" justify="space-around">
@@ -79,11 +79,13 @@ export const Navbar = () => {
           </Stack>
           <Stack
             direction="row"
-            spacing="20"
             display={{ base: "none", md: "none", lg: "flex" }}
             justify="center"
             align="center"
-            flex={2}
+            flex={3}
+            textTransform="capitalize"
+            fontSize="20px"
+            textAlign={"center"}
           >
             <NavbarMenu data={NAVIGATION} />
           </Stack>
@@ -94,7 +96,7 @@ export const Navbar = () => {
             justify="right"
             display={{ base: "none", md: "none", lg: "flex" }}
           >
-            <Button>Connect</Button>
+            <Button colorScheme={"metaxot"}>Connect Wallet</Button>
             {/* <ButtonConnectWallet /> */}
           </Flex>
         </Flex>

@@ -8,7 +8,7 @@ import { runIfFn } from "../utils/run-if-fn";
 
 const baseStyle = defineStyle({
   lineHeight: "1.2",
-  borderRadius: "full",
+  borderRadius: "xl",
   fontWeight: "semibold",
   transitionProperty: "common",
   transitionDuration: "normal",
@@ -117,6 +117,12 @@ const accessibleColorMap: { [key: string]: AccessibleColor } = {
     hoverBg: "cyan.500",
     activeBg: "cyan.600",
   },
+  metaxot: {
+    bg: "metaxot.400",
+    color: "white",
+    hoverBg: "metaxot.500",
+    activeBg: "metaxot.600",
+  },
 };
 
 const variantSolid = defineStyle(props => {
@@ -148,7 +154,7 @@ const variantSolid = defineStyle(props => {
 
   return {
     bg: background,
-    color: mode(color, `gray.800`)(props),
+    color: mode(color, `white`)(props),
     _hover: {
       bg: mode(hoverBg, `${c}.500`)(props),
       _disabled: {

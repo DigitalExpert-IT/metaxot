@@ -46,7 +46,7 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
         </DrawerHeader>
         <Stack direction="row" w="full" justify="center" p="2" my="5">
           {/* <ButtonConnectWallet /> */}
-          <Button>Connect</Button>
+          <Button colorScheme={"metaxot"}>Connect Wallet</Button>
         </Stack>
         <DrawerBody>
           <Stack spacing="5">
