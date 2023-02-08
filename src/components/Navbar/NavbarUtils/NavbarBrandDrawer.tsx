@@ -6,11 +6,11 @@ import {
   AspectRatio,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { useContext } from "react";
 import { INavigation } from "constant";
+import { ThemeContext } from "./NavbarMain";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { DrawerMobileNav } from "components/Drawer";
-import { useContext } from "react";
-import { ThemeContext } from "./NavbarMain";
 
 interface NavbarBrandDrawerProps extends StackProps {
   isOpen: boolean;

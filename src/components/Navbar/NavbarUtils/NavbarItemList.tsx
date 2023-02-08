@@ -8,12 +8,12 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@chakra-ui/react";
-import React, { useContext } from "react";
 import Link from "next/link";
+import React, { useContext } from "react";
+import { ThemeContext } from "./NavbarMain";
 import { useTranslation } from "react-i18next";
 import { INavigation } from "constant/navigation";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { ThemeContext } from "./NavbarMain";
 
 interface NavItemProps {
   data: INavigation[];

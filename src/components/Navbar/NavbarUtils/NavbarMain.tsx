@@ -2,8 +2,8 @@ import { useEffect, useState, createContext } from "react";
 import { Box, BoxProps, useMultiStyleConfig } from "@chakra-ui/react";
 
 interface NavbarMainProps extends BoxProps {
-  isOpen?: boolean;
   size?: string;
+  isOpen?: boolean;
   variants?: string;
 }
 
