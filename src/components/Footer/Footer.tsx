@@ -1,23 +1,20 @@
 import {
   Box,
-  Button,
   Container,
   HStack,
   Image,
-  Input,
   SimpleGrid,
   Text,
-  VStack,
   Wrap,
 } from "@chakra-ui/react";
 import { FOOTER_NAVIGATION, SOSMED_FOOTER } from "constant/footer";
 import Link from "next/link";
-import React from "react";
 import { useTranslation } from "react-i18next";
-import { FooterNav } from "./FooterNav";
+import { FooterNav, FooterDropEmail } from ".";
 
 export const Footer = () => {
   const { t } = useTranslation();
+
   return (
     <Box bg={"gray.700"}>
       <Container maxW="container.xl">
@@ -31,22 +28,7 @@ export const Footer = () => {
             <Text fontSize={"4xl"} fontWeight={"black"}>
               METAXOT
             </Text>
-            <VStack spacing={4} align={"start"} mt={"4"}>
-              <Text>{t("common.footer.dropYourEmail")}</Text>
-              <Input
-                type={"email"}
-                variant={"outline"}
-                size="sm"
-                rounded="xl"
-              />
-              <Button
-                colorScheme={"metaxot"}
-                size="sm"
-                textTransform={"capitalize"}
-              >
-                {t("common.send")}
-              </Button>
-            </VStack>
+            <FooterDropEmail />
           </Box>
           <Wrap
             pt={"4"}
