@@ -24,7 +24,7 @@ export const Footer = () => {
         <SimpleGrid
           columns={{ base: 1, md: 2 }}
           spacing={"12"}
-          px={"4"}
+          px={{ base: "4", md: "0" }}
           py={"14"}
         >
           <Box maxW={"sm"} mx={{ base: "auto", md: 0 }}>
