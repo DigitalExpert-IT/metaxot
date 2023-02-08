@@ -43,23 +43,8 @@ export const NavbarItemList: React.FC<NavItemProps> = props => {
                         <Text _groupHover={{ color: "valhalla.100" }}>
                           {t(`common.navigation.${obj.title}`)}
                         </Text>
-                        <Flex
-                          flex={1}
-                          align={"center"}
-                          justify={"flex-end"}
-                          transition="all .3s ease"
-                          transform="translateX(-10px)"
-                          _groupHover={{
-                            opacity: "100%",
-                            transform: "translateX(0)",
-                          }}
-                        >
-                          <Icon
-                            w={5}
-                            h={5}
-                            color="valhalla.500"
-                            as={ChevronRightIcon}
-                          />
+                        <Flex {...styles.dropCarret}>
+                          <Icon {...styles.dropIcon} as={ChevronRightIcon} />
                         </Flex>
                       </Stack>
                     </Link>

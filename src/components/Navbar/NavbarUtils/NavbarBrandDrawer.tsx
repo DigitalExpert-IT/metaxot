@@ -31,11 +31,8 @@ export const NavbarBrandDrawer: React.FC<NavbarBrandDrawerProps> = props => {
         logo="/assets/logo/metaxot.svg"
       />
       <IconButton
-        fontSize="xl"
-        variant="ghost"
-        aria-label="open-menu"
+        {...styles.drawerBurger}
         icon={<GiHamburgerMenu />}
-        display={{ base: "flex", md: "flex", lg: "none" }}
         onClick={isOpen ? onClose : onOpen}
       />
       <Link href="/">
