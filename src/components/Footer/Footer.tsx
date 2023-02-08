@@ -49,14 +49,12 @@ export const Footer = () => {
             </VStack>
           </Box>
           <Wrap
-            ml={"8"}
             pt={"4"}
-            px={{ base: "4", lg: "0" }}
-            justify={{ base: "center", md: "end" }}
-            alignItems={"start"}
+            justify={{ base: "space-between", md: "end" }}
             spacing={8}
             w={"full"}
             mx={{ base: "auto", md: 0 }}
+            maxW={{ base: "sm", lg: "full" }}
           >
             {FOOTER_NAVIGATION.map((row, i) => (
               <FooterNav key={i} data={row} />

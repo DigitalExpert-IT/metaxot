@@ -1,4 +1,4 @@
-import { Text, VStack } from "@chakra-ui/react";
+import { Stack, Text, VStack } from "@chakra-ui/react";
 import { FooterNavigation } from "constant/footer";
 import Link from "next/link";
 import React from "react";
@@ -10,11 +10,7 @@ export type Props = {
 export const FooterNav = (props: Props) => {
   const { label, children } = props.data;
   return (
-    <VStack
-      w={{ base: "full", xs: "24", lg: "max-content" }}
-      maxW={"24"}
-      align={"start"}
-    >
+    <Stack w={{ base: "full", xs: "24", lg: "max-content" }} maxW={"24"}>
       <Text fontSize={"md"} fontWeight={"semibold"}>
         {label}
       </Text>
@@ -25,6 +21,6 @@ export const FooterNav = (props: Props) => {
           </Link>
         ))}
       </VStack>
-    </VStack>
+    </Stack>
   );
 };
