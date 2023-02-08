@@ -8,11 +8,12 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { INavigation } from "constant/navigation";
 import { ChevronRightIcon } from "@chakra-ui/icons";
+import { ThemeContext } from "./NavbarMain";
 
 interface NavItemProps {
   data: INavigation[];
@@ -21,7 +22,7 @@ interface NavItemProps {
 export const NavbarItemList: React.FC<NavItemProps> = props => {
   const { data } = props;
   const { t } = useTranslation();
-
+  const styles = useContext(ThemeContext);
   return (
     <>
       {data.map((item, idx) => (
@@ -34,41 +35,24 @@ export const NavbarItemList: React.FC<NavItemProps> = props => {
             </PopoverTrigger>
 
             {item.children && (
-              <PopoverContent
-                p="4"
-                maxW="xs"
-                border="0"
-                rounded="xl"
-                bg="gray.800"
-                boxShadow="xl"
-              >
+              <PopoverContent {...styles.dropDownList}>
                 <Stack>
                   {item.children.map((obj, id) => (
                     <Link key={id} href={obj.link}>
-                      <Stack
-                        p="2"
-                        role="group"
-                        rounded="md"
-                        align="center"
-                        direction="row"
-                        _hover={{ bg: "brand.300" }}
-                      >
-                        <Text
-                          transition="all .3s ease"
-                          _groupHover={{ color: "valhalla.100" }}
-                        >
+                      <Stack {...styles.dropDownItem}>
+                        <Text _groupHover={{ color: "valhalla.100" }}>
                           {t(`common.navigation.${obj.title}`)}
                         </Text>
                         <Flex
                           flex={1}
                           align={"center"}
                           justify={"flex-end"}
+                          transition="all .3s ease"
+                          transform="translateX(-10px)"
                           _groupHover={{
                             opacity: "100%",
                             transform: "translateX(0)",
                           }}
-                          transition="all .3s ease"
-                          transform="translateX(-10px)"
                         >
                           <Icon
                             w={5}

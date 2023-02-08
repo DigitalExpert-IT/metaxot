@@ -9,6 +9,8 @@ import Link from "next/link";
 import { INavigation } from "constant";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { DrawerMobileNav } from "components/Drawer";
+import { useContext } from "react";
+import { ThemeContext } from "./NavbarMain";
 
 interface NavbarBrandDrawerProps extends StackProps {
   isOpen: boolean;
@@ -19,14 +21,9 @@ interface NavbarBrandDrawerProps extends StackProps {
 
 export const NavbarBrandDrawer: React.FC<NavbarBrandDrawerProps> = props => {
   const { isOpen, onClose, onOpen, data, ...rest } = props;
+  const styles = useContext(ThemeContext);
   return (
-    <Stack
-      direction="row"
-      align="center"
-      flex={1}
-      justify="space-between"
-      {...rest}
-    >
+    <Stack {...styles.drawer} {...rest}>
       <DrawerMobileNav
         data={props.data}
         isOpen={props.isOpen}
