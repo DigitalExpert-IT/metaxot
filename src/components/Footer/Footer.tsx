@@ -40,6 +40,7 @@ export const Footer = () => {
           <Wrap
             ml={"8"}
             pt={"4"}
+            px={{ base: "4", lg: "0" }}
             justify={{ base: "center", md: "end" }}
             alignItems={"start"}
             spacing={8}
