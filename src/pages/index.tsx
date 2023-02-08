@@ -1,7 +1,12 @@
 import { LayoutMain } from "components";
+import { SectionHeader } from "components/pages";
 
 function Home() {
-  return <LayoutMain>new page start from here</LayoutMain>;
+  return (
+    <LayoutMain>
+      <SectionHeader />
+    </LayoutMain>
+  );
 }
 
 export default Home;
