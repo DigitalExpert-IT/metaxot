@@ -16,7 +16,7 @@ export const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <Box bg={"gray.700"}>
+    <Box bg={"whiteAlpha.300"}>
       <Container maxW="container.xl">
         <SimpleGrid
           columns={{ base: 1, md: 2 }}
