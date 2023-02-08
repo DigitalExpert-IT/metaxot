@@ -11,7 +11,8 @@ export const FooterNav = (props: Props) => {
   const { label, children } = props.data;
   return (
     <VStack
-      w={{ base: "max-content", xs: "24", lg: "max-content" }}
+      w={{ base: "full", xs: "24", lg: "max-content" }}
+      maxW={"24"}
       align={"start"}
     >
       <Text fontSize={"md"} fontWeight={"semibold"}>
