@@ -33,8 +33,19 @@ export const Footer = () => {
             </Text>
             <VStack spacing={4} align={"start"} mt={"4"}>
               <Text>{t("common.footer.dropYourEmail")}</Text>
-              <Input type={"email"} variant={"outline"} />
-              <Button colorScheme={"metaxot"}>{t("common.send")}</Button>
+              <Input
+                type={"email"}
+                variant={"outline"}
+                size="sm"
+                rounded="xl"
+              />
+              <Button
+                colorScheme={"metaxot"}
+                size="sm"
+                textTransform={"capitalize"}
+              >
+                {t("common.send")}
+              </Button>
             </VStack>
           </Box>
           <Wrap
