@@ -4,5 +4,12 @@
     "landSale": "Land Sale",
     "roadMap": "Road Map",
     "download": "Download"
-  }
+  },
+  "footer": {
+    "dropYourEmail": "Drop your email for further information.",
+    "allRightsReserved": "All Rights Reserved."
+  },
+  "land": "land",
+  "send": "send",
+  "extras": "extras"
 }
