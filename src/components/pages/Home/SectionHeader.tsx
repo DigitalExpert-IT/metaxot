@@ -43,7 +43,7 @@ export const SectionHeader = () => {
           src="/assets/illustration/masking_circle.svg"
           position="relative"
           bg="black"
-        ></Image>
+        />
       </Stack>
     </HStack>
   );
