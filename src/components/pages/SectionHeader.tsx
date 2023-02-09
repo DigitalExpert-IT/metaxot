@@ -37,11 +37,11 @@ export const SectionHeader = () => {
       <Stack display={{ lg: "flex", md: "none", base: "none" }}>
         <Image
           zIndex={2}
-          bg="black"
           rounded={"full"}
-          position="relative"
           alt="masking-circle"
           src="/assets/illustration/masking_circle.svg"
+          position="relative"
+          bg="black"
         ></Image>
       </Stack>
     </HStack>
