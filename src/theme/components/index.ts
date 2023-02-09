@@ -40,6 +40,7 @@ import { tagTheme } from "./tag";
 import { textareaTheme } from "./textarea";
 import { tooltipTheme } from "./tooltip";
 import { textTheme } from "./text";
+import { navbarTheme } from "./navbar";
 
 export { accordionTheme as Accordion } from "./accordion";
 export { alertTheme as Alert } from "./alert";
@@ -81,6 +82,7 @@ export { tabsTheme as Tabs } from "./tabs";
 export { tagTheme as Tag } from "./tag";
 export { textareaTheme as Textarea } from "./textarea";
 export { tooltipTheme as Tooltip } from "./tooltip";
+export { navbarTheme as Navbar } from "./navbar";
 
 export const components = {
   Text: textTheme,
@@ -125,4 +127,5 @@ export const components = {
   Textarea: textareaTheme,
   Tooltip: tooltipTheme,
   Card: cardTheme,
+  Navbar: navbarTheme,
 } as const;
