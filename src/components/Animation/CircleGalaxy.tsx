@@ -1,5 +1,5 @@
-import { Box, keyframes } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import { Box, keyframes } from "@chakra-ui/react";
 
 const animationKeyframes = keyframes`
   0% { background-color:purple; z-index:2;}
@@ -14,8 +14,8 @@ const animationKeyframes2 = keyframes`
 `;
 
 const animation = `${animationKeyframes} 10s ease-in-out infinite`;
-const animation2 = `${animationKeyframes2} 10s ease-in-out infinite`;
 const animation3 = `${animationKeyframes} 5s ease-in-out infinite`;
+const animation2 = `${animationKeyframes2} 10s ease-in-out infinite`;
 
 export const CircleGalaxy = () => {
   return (

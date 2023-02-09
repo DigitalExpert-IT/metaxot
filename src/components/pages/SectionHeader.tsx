@@ -1,17 +1,16 @@
 import {
   Box,
-  Button,
-  Heading,
-  HStack,
+  Text,
   Image,
   Stack,
-  Text,
+  Button,
+  HStack,
+  Heading,
 } from "@chakra-ui/react";
+import { Trans } from "react-i18next";
 import { CircleGalaxy } from "components/Animation";
-import { useTranslation, Trans } from "react-i18next";
 
 export const SectionHeader = () => {
-  const { t } = useTranslation();
   return (
     <HStack justifyContent="space-between" alignItems={"center"}>
       <CircleGalaxy />
@@ -21,14 +20,14 @@ export const SectionHeader = () => {
           lineHeight={{ md: "4.5rem", base: "1" }}
         >
           <Trans
-            i18nKey={"pages.home.header.title"}
             components={{ br: <br /> }}
+            i18nKey={"pages.home.header.title"}
           />
         </Heading>
         <Text>
           <Trans
-            i18nKey={"pages.home.header.subtitle"}
             components={{ br: <br /> }}
+            i18nKey={"pages.home.header.subtitle"}
           />
         </Text>
         <Box>
@@ -37,12 +36,12 @@ export const SectionHeader = () => {
       </Stack>
       <Stack display={{ lg: "flex", md: "none", base: "none" }}>
         <Image
+          zIndex={2}
           bg="black"
           rounded={"full"}
-          src="/assets/illustration/masking_circle.svg"
-          alt="masking-circle"
-          zIndex={2}
           position="relative"
+          alt="masking-circle"
+          src="/assets/illustration/masking_circle.svg"
         ></Image>
       </Stack>
     </HStack>
