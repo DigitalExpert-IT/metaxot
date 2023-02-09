@@ -1,12 +1,8 @@
 {
   "home": {
     "header": {
-      "title": [
-        "DISCOVER ",
-        "METAVERSE ",
-        "FIND OPPORTUNITY"
-      ],
-      "subtitle": "Set all opportunity to become good in future through new technology in every part of life."
+      "title": "DISCOVER <br/> METAVERSE <br/> FIND OPPORTUNITY",
+      "subtitle": "Set all opportunity to become good in future through <br /> new technology in every part of life."
     }
   }
 }
