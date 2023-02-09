@@ -13,7 +13,7 @@ export const SectionHeader = () => {
   return (
     <HStack>
       <CircleGalaxy />
-      <Stack spacing={8} zIndex="3">
+      <Stack spacing={8} zIndex="4">
         <Heading size="3xl" lineHeight="4.5rem">
           DISCOVER <br /> METAVERSE <br /> FIND OPPORTUNITY
         </Heading>
@@ -33,7 +33,6 @@ export const SectionHeader = () => {
           alt="masking-circle"
           zIndex={2}
           position="relative"
-          // left="8vw"
         ></Image>
       </Stack>
     </HStack>
