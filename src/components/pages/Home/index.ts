@@ -1,1 +1,1 @@
-export * from "./SectionMissionCard";
+export * from "./SectionHeader";

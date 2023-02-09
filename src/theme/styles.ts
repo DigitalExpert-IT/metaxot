@@ -9,6 +9,7 @@ export const styles: Styles = {
       transitionProperty: "background-color",
       transitionDuration: "normal",
       lineHeight: "base",
+      overflowX: "hidden",
     },
     "*::placeholder": {
       color: "chakra-placeholder-color",

@@ -1,10 +1,10 @@
 import { LayoutMain } from "components";
-import { SectionMissionCard } from "components/pages/Home";
+import { SectionHeader } from "components/pages";
 
 function Home() {
   return (
     <LayoutMain>
-      <SectionMissionCard />
+      <SectionHeader />
     </LayoutMain>
   );
 }
