@@ -8,18 +8,25 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { CircleGalaxy } from "components/Animation";
+import { useTranslation, Trans } from "react-i18next";
 
 export const SectionHeader = () => {
+  const { t } = useTranslation();
   return (
     <HStack justifyContent="space-between">
       <CircleGalaxy />
       <Stack spacing={8} zIndex="4">
         <Heading size="3xl" lineHeight="4.5rem">
-          DISCOVER <br /> METAVERSE <br /> FIND OPPORTUNITY
+          <Trans
+            i18nKey={"pages.home.header.title"}
+            components={{ br: <br /> }}
+          />
         </Heading>
         <Text>
-          Set all opportunity to become good in future through <br /> new
-          technology in every part of life.
+          <Trans
+            i18nKey={"pages.home.header.subtitle"}
+            components={{ br: <br /> }}
+          />
         </Text>
         <Box>
           <Button colorScheme="metaxot">Download Metaxot</Button>

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const animationKeyframes = keyframes`
   0% { background-color:purple; z-index:2;}
-  50% { transform: rotate(270deg); width: 500px; background-color:teal; z-index:1; }
+  50% { transform: rotate(270deg) scaleX(0.7); background-color:teal; z-index:1; }
   100% { background-color:purple; z-index:2; }
 `;
 
