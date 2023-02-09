@@ -3,7 +3,7 @@ import { Navbar } from "components";
 import { Footer } from "components/Footer";
 import React from "react";
 
-interface LayoutMainProps extends BoxProps { }
+interface LayoutMainProps extends BoxProps {}
 
 export const LayoutMain: React.FC<LayoutMainProps> = props => {
   return (
