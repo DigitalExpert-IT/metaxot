@@ -11,15 +11,15 @@ import { CircleGalaxy } from "components/Animation";
 
 export const SectionHeader = () => {
   return (
-    <HStack>
+    <HStack justifyContent="space-between">
       <CircleGalaxy />
       <Stack spacing={8} zIndex="4">
         <Heading size="3xl" lineHeight="4.5rem">
           DISCOVER <br /> METAVERSE <br /> FIND OPPORTUNITY
         </Heading>
         <Text>
-          Set all opportunity to become good in future through new technology in
-          every part of life.
+          Set all opportunity to become good in future through <br /> new
+          technology in every part of life.
         </Text>
         <Box>
           <Button colorScheme="metaxot">Download Metaxot</Button>

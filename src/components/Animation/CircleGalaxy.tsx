@@ -19,7 +19,7 @@ const animation3 = `${animationKeyframes} 5s ease-in-out infinite`;
 
 export const CircleGalaxy = () => {
   return (
-    <Box position={"absolute"} right="25vw">
+    <Box position={"absolute"} right="13vw">
       <Box
         w="352px"
         h="352px"
