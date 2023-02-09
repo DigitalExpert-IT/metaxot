@@ -14,8 +14,8 @@ const animationKeyframes2 = keyframes`
 `;
 
 const animation = `${animationKeyframes} 10s ease-in-out infinite`;
-const animation3 = `${animationKeyframes} 5s ease-in-out infinite`;
-const animation2 = `${animationKeyframes2} 10s ease-in-out infinite`;
+const animation3 = `${animationKeyframes} 20s ease-in-out infinite`;
+const animation2 = `${animationKeyframes2} 5s ease-in-out infinite`;
 
 export const CircleGalaxy = () => {
   return (
