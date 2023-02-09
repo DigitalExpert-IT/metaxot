@@ -1,7 +1,12 @@
 import { LayoutMain } from "components";
+import { SectionMissionCard } from "components/pages/Home";
 
 function Home() {
-  return <LayoutMain>new page start from here</LayoutMain>;
+  return (
+    <LayoutMain>
+      <SectionMissionCard />
+    </LayoutMain>
+  );
 }
 
 export default Home;
