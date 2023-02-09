@@ -85,10 +85,10 @@ const variantOutline = definePartsStyle(props => {
   return {
     field: {
       border: "1px solid",
-      borderColor: "inherit",
+      borderColor: "white",
       bg: "inherit",
       _hover: {
-        borderColor: mode("gray.300", "whiteAlpha.400")(props),
+        borderColor: mode("gray.300", "whiteAlpha.600")(props),
       },
       _readOnly: {
         boxShadow: "none !important",
