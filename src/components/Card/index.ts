@@ -1,1 +1,1 @@
-export * from "./CardMissionPromotion"
+export * from "./CardMissionPresentation"

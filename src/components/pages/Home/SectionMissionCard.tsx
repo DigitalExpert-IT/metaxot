@@ -1,64 +1,52 @@
-import { Box, Card, Heading, HStack, SimpleGrid, Text, VStack } from "@chakra-ui/react";
-import { CardMissionPromotion } from "components/Card";
+import { Card, Heading, SimpleGrid } from "@chakra-ui/react";
+import { CardMissionPresentation } from "components/Card";
+import {
+  CARD_MISSION_PRESENTATION,
+  CARD_MISSION_PROMOTION,
+} from "constant/pages/home";
 import React from "react";
 
 export const SectionMissionCard = () => {
   return (
     <Card
-      my={"20"}
+      mt={"36"}
+      mb={"20"}
       mx={"auto"}
       bg={"transparent"}
-      rounded={"2xl"}
+      rounded={"5xl"}
       overflow={"hidden"}
       maxW={{ base: "md", lg: "full" }}
     >
-      <Card bg={"whiteAlpha.300"} rounded={"none"} px={{ base: "4", xs: "8", sm: "16" }}>
-        <SimpleGrid columns={{ base: 0, lg: 3 }} gap={"5"} >
-          <VStack pt={"28"} pb={"16"} mx={"auto"} alignItems={"start"} w={"max-content"}>
-            <Heading mb={"4"} fontSize={"5xl"} fontWeight={"extrabold"}>
-              5,3 B+
-            </Heading>
-            <Text>Internet User</Text>
-          </VStack>
-          <VStack pt={"28"} pb={"16"} mx={"auto"} alignItems={"start"} w={"max-content"}>
-            <Heading mb={"4"} fontSize={"5xl"} fontWeight={"extrabold"}>
-              + 6 %
-            </Heading>
-            <Text>Internet User <br />Growth</Text>
-          </VStack>
-          <VStack pt={"28"} pb={"16"} mx={"auto"} alignItems={"start"} w={"max-content"}>
-            <Heading mb={"4"} fontSize={"5xl"} fontWeight={"extrabold"}>
-              $ 804 B
-            </Heading>
-            <Text>Value Of Existing <br />Digital Product</Text>
-          </VStack>
+      <Card
+        bg={"whiteAlpha.300"}
+        rounded={"none"}
+        px={{ base: "4", xs: "8", sm: "16" }}
+      >
+        <SimpleGrid columns={{ base: 0, lg: 3 }} gap={"5"}>
+          {CARD_MISSION_PRESENTATION.map((data, i) => (
+            <CardMissionPresentation key={i} subtitle={data.subtitle}>
+              <Heading mb={"4"} fontSize={"5xl"} fontWeight={"extrabold"}>
+                {data.title}
+              </Heading>
+            </CardMissionPresentation>
+          ))}
         </SimpleGrid>
       </Card>
-      <SimpleGrid columns={{ base: 0, lg: 3 }} gap={"1"} mt={"1"} >
-        <Card bg={"whiteAlpha.300"} rounded={"none"} px={{ base: "4", xs: "8", sm: "16" }}>
-          <VStack pt={"28"} pb={"16"} mx={"auto"} alignItems={"start"}>
-            <Heading mb={"4"} fontSize={"2xl"} fontWeight={"extrabold"}>
-              Big Opportunity
-            </Heading>
-            <Text>Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui.</Text>
-          </VStack>
-        </Card>
-        <Card bg={"whiteAlpha.300"} rounded={"none"} px={{ base: "4", xs: "8", sm: "16" }}>
-          <VStack pt={"28"} pb={"16"} mx={"auto"} alignItems={"start"}>
-            <Heading mb={"4"} fontSize={"2xl"} fontWeight={"extrabold"}>
-              Future Value
-            </Heading>
-            <Text>Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui.</Text>
-          </VStack>
-        </Card>
-        <Card bg={"whiteAlpha.300"} rounded={"none"} px={{ base: "4", xs: "8", sm: "16" }}>
-          <VStack pt={"28"} pb={"16"} mx={"auto"} alignItems={"start"}>
-            <Heading mb={"4"} fontSize={"2xl"} fontWeight={"extrabold"}>
-              New Technology
-            </Heading>
-            <Text>Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui.</Text>
-          </VStack>
-        </Card>
+      <SimpleGrid columns={{ base: 0, lg: 3 }} gap={"1"} mt={"1"}>
+        {CARD_MISSION_PROMOTION.map((data, i) => (
+          <Card
+            key={i}
+            bg={"whiteAlpha.300"}
+            rounded={"none"}
+            px={{ base: "4", xs: "8", sm: "16" }}
+          >
+            <CardMissionPresentation subtitle={data.subtitle}>
+              <Heading mb={"4"} fontSize={"2xl"} fontWeight={"extrabold"}>
+                {data.title}
+              </Heading>
+            </CardMissionPresentation>
+          </Card>
+        ))}
       </SimpleGrid>
     </Card>
   );
