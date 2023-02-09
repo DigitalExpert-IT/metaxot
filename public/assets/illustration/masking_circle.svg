@@ -1,0 +1,20 @@
+<svg width="440" height="440" viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_6_30" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="440" height="440">
+<circle cx="220" cy="220" r="220" fill="black"/>
+</mask>
+<g mask="url(#mask0_6_30)">
+<circle opacity="0.4" cx="277" cy="270" r="263.5" stroke="white"/>
+<circle opacity="0.4" cx="297" cy="290" r="263.5" stroke="white"/>
+<circle opacity="0.4" cx="317" cy="320" r="263.5" stroke="white"/>
+<circle opacity="0.4" cx="337" cy="350" r="263.5" stroke="white"/>
+<circle opacity="0.4" cx="357" cy="380" r="263.5" stroke="white"/>
+<circle opacity="0.4" cx="377" cy="410" r="263.5" stroke="white"/>
+<circle opacity="0.4" cx="387" cy="440" r="263.5" stroke="white"/>
+<circle opacity="0.4" cx="397" cy="470" r="263.5" stroke="white"/>
+<circle opacity="0.4" cx="407" cy="500" r="263.5" stroke="white"/>
+<circle opacity="0.4" cx="417" cy="530" r="263.5" stroke="white"/>
+<circle opacity="0.4" cx="427" cy="560" r="263.5" stroke="white"/>
+<circle opacity="0.4" cx="437" cy="590" r="263.5" stroke="white"/>
+<circle opacity="0.4" cx="447" cy="620" r="263.5" stroke="white"/>
+</g>
+</svg>

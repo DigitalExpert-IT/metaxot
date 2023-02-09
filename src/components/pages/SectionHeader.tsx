@@ -1,17 +1,41 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  HStack,
+  Image,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+import { CircleGalaxy } from "components/Animation";
 
 export const SectionHeader = () => {
   return (
-    <Box>
-      <Heading>
-        DISCOVER <br /> METAVERSE <br /> FIND OPPORTUNITY
-      </Heading>
-      <Text>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-        aliquid deleniti fuga, earum impedit unde id autem alias voluptatum
-        fugiat laboriosam, nobis, sapiente voluptatibus aliquam in laudantium
-        omnis possimus ratione!
-      </Text>
-    </Box>
+    <HStack>
+      <CircleGalaxy />
+      <Stack spacing={8} zIndex="3">
+        <Heading size="3xl" lineHeight="4.5rem">
+          DISCOVER <br /> METAVERSE <br /> FIND OPPORTUNITY
+        </Heading>
+        <Text>
+          Set all opportunity to become good in future through new technology in
+          every part of life.
+        </Text>
+        <Box>
+          <Button colorScheme="metaxot">Download Metaxot</Button>
+        </Box>
+      </Stack>
+      <Stack display={{ lg: "flex", md: "none", base: "none" }}>
+        <Image
+          bg="black"
+          rounded={"full"}
+          src="/assets/illustration/masking_circle.svg"
+          alt="masking-circle"
+          zIndex={2}
+          position="relative"
+          // left="8vw"
+        ></Image>
+      </Stack>
+    </HStack>
   );
 };
