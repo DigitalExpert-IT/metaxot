@@ -18,6 +18,7 @@ export const SectionHeader = () => {
         <Heading
           size={{ md: "3xl", base: "2xl" }}
           lineHeight={{ md: "4.5rem", base: "1" }}
+          fontWeight="600"
         >
           <Trans
             components={{ br: <br /> }}
