@@ -8,7 +8,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { Trans } from "react-i18next";
-import { CircleGalaxy } from "components/Animation";
+import { CircleGalaxy } from "components";
 
 export const SectionHeader = () => {
   return (
