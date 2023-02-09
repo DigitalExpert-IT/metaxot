@@ -13,10 +13,13 @@ import { useTranslation, Trans } from "react-i18next";
 export const SectionHeader = () => {
   const { t } = useTranslation();
   return (
-    <HStack justifyContent="space-between">
+    <HStack justifyContent="space-between" alignItems={"center"}>
       <CircleGalaxy />
       <Stack spacing={8} zIndex="4">
-        <Heading size="3xl" lineHeight="4.5rem">
+        <Heading
+          size={{ md: "3xl", base: "2xl" }}
+          lineHeight={{ md: "4.5rem", base: "1" }}
+        >
           <Trans
             i18nKey={"pages.home.header.title"}
             components={{ br: <br /> }}

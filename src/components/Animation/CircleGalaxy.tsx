@@ -28,7 +28,7 @@ export const CircleGalaxy = () => {
         filter={"blur(150px)"}
         position="relative"
         top="20rem"
-        left="10rem"
+        left="5rem"
         zIndex={2}
         animation={animation}
         as={motion.div}
