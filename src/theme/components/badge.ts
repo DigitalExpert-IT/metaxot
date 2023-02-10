@@ -32,6 +32,23 @@ const variantGradient = defineStyle(props => {
   };
 });
 
+const variantMetaxot = defineStyle(props => {
+  const { colorScheme: c, theme } = props;
+  const dark = transparentize(`${c}.500`, 0.6)(theme);
+  return {
+    [$bg.variable]: `colors.${c}.500`,
+    [$fg.variable]: `colors.white`,
+    _dark: {
+      [$bg.variable]: dark,
+      [$fg.variable]: `colors.whiteAlpha.800`,
+    },
+    bg: $bg.reference,
+    color: $fg.reference,
+    rounded: "full",
+    py: "1",
+  };
+});
+
 const variantSolid = defineStyle(props => {
   const { colorScheme: c, theme } = props;
   const dark = transparentize(`${c}.500`, 0.6)(theme);
@@ -80,13 +97,14 @@ const variants = {
   subtle: variantSubtle,
   outline: variantOutline,
   gradient: variantGradient,
+  metaxot: variantMetaxot,
 };
 
 export const badgeTheme = defineStyleConfig({
   baseStyle,
   variants,
   defaultProps: {
-    variant: "gradient",
-    colorScheme: "purple",
+    variant: "metaxot",
+    colorScheme: "gray",
   },
 });

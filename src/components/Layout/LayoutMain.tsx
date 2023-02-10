@@ -1,11 +1,9 @@
-import { Box, BoxProps, Container } from "@chakra-ui/react";
+import React from "react";
 import { Navbar } from "components";
 import { Footer } from "components/Footer";
-import React from "react";
+import { Box, BoxProps, Container } from "@chakra-ui/react";
 
-interface LayoutMainProps extends BoxProps { }
-
-export const LayoutMain: React.FC<LayoutMainProps> = props => {
+export const LayoutMain: React.FC<BoxProps> = props => {
   return (
     <Box>
       <Navbar />
