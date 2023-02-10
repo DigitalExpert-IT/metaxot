@@ -9,7 +9,7 @@ type Props = StackProps & {
 export const CardMissionPresentation = (props: Props) => {
   const { subtitle, ...rest } = props;
   return (
-    <Stack pt={"28"} pb={"16"} mx={"auto"} alignItems={"start"} {...rest}>
+    <Stack pt={"28"} pb={"16"} mx={"auto"} {...rest}>
       {props.children}
       <Text>
         <Trans components={{ br: <br /> }} i18nKey={subtitle} />

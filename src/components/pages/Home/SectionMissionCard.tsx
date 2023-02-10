@@ -27,7 +27,7 @@ export const SectionMissionCard = () => {
       >
         <SimpleGrid columns={{ base: 0, lg: 3 }} gap={"5"}>
           {CARD_MISSION_PRESENTATION.map((data, i) => (
-            <CardMissionPresentation key={i} subtitle={data.subtitle}>
+            <CardMissionPresentation key={i} subtitle={data.subtitle} textAlign={{ base: "center", lg: "start" }}>
               <Heading mb={"4"} fontSize={"5xl"} fontWeight={"extrabold"}>
                 {data.title}
               </Heading>
