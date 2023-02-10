@@ -1,10 +1,15 @@
 import { LayoutMain } from "components";
-import { SectionHeader, SectionAboutUs } from "components/pages";
+import {
+  SectionHeader,
+  SectionMissionCard,
+  SectionAboutUs,
+} from "components/pages";
 
 function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
+      <SectionMissionCard />
       <SectionAboutUs />
     </LayoutMain>
   );
