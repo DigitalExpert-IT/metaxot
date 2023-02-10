@@ -1,3 +1,5 @@
 export * from "./SectionHeader";
-export * from "./SectionAboutUs";
 export * from "./SectionGalery";
+export * from "./SectionMissionCard";
+export * from "./SectionAboutUs";
+

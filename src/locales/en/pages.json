@@ -21,6 +21,15 @@
       "title": "METAXOT VIDEO",
       "subtitle": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui. Lorem ipsum dolor sit amet. ",
       "viewAll": "View All"
+      },
+    "missionCard": {
+      "internetUser": "Internet User",
+      "internetUserGrowth": "Internet User <br />Growth",
+      "valueOfExistingDigitalProduct": "Value Of Existing <br />Digital Product",
+      "bigOpportunity": "Big Opportunity",
+      "futureValue": "Big Opportunity",
+      "newTechnology": "Big Opportunity",
+      "lorem": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui."
     }
   }
 }
