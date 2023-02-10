@@ -5,8 +5,11 @@ import {
   CARD_MISSION_PROMOTION,
 } from "constant/pages/home";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export const SectionMissionCard = () => {
+  const { t } = useTranslation();
+
   return (
     <Card
       mt={"36"}
@@ -42,7 +45,7 @@ export const SectionMissionCard = () => {
           >
             <CardMissionPresentation subtitle={data.subtitle}>
               <Heading mb={"4"} fontSize={"2xl"} fontWeight={"extrabold"}>
-                {data.title}
+                {t(data.title)}
               </Heading>
             </CardMissionPresentation>
           </Card>

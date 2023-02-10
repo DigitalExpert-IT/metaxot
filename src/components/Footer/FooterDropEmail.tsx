@@ -1,4 +1,11 @@
-import { Button, FormControl, Input, Stack, Text, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  Input,
+  Stack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";

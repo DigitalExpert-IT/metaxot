@@ -3,6 +3,15 @@
     "header": {
       "title": "DISCOVER <br/> METAVERSE <br/> FIND OPPORTUNITY",
       "subtitle": "Set all opportunity to become good in future through <br /> new technology in every part of life."
+    },
+    "missionCard": {
+      "internetUser": "Internet User",
+      "internetUserGrowth": "Internet User <br />Growth",
+      "valueOfExistingDigitalProduct": "Value Of Existing <br />Digital Product",
+      "bigOpportunity": "Big Opportunity",
+      "futureValue": "Big Opportunity",
+      "newTechnology": "Big Opportunity",
+      "lorem": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui."
     }
   }
 }

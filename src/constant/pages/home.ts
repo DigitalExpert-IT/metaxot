@@ -1,23 +1,23 @@
 export const CARD_MISSION_PRESENTATION = [
-  { title: "5,3 B+", subtitle: "Internet User" },
-  { title: "+ 6 %", subtitle: "Internet User <br />Growth" },
-  { title: "$ 804 B", subtitle: "Value Of Existing <br />Digital Product" },
+  { title: "5,3 B+", subtitle: "pages.home.missionCard.internetUser" },
+  { title: "+ 6 %", subtitle: "pages.home.missionCard.internetUserGrowth" },
+  {
+    title: "$ 804 B",
+    subtitle: "pages.home.missionCard.valueOfExistingDigitalProduct",
+  },
 ];
 
 export const CARD_MISSION_PROMOTION = [
   {
-    title: "Big Opportunity",
-    subtitle:
-      "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui.",
+    title: "pages.home.missionCard.bigOpportunity",
+    subtitle: "pages.home.missionCard.lorem",
   },
   {
-    title: "Future Value",
-    subtitle:
-      "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui.",
+    title: "pages.home.missionCard.futureValue",
+    subtitle: "pages.home.missionCard.lorem",
   },
   {
-    title: "New Technology",
-    subtitle:
-      "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui.",
+    title: "pages.home.missionCard.newTechnology",
+    subtitle: "pages.home.missionCard.lorem",
   },
 ];
