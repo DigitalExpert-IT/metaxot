@@ -3,6 +3,24 @@
     "header": {
       "title": "DISCOVER <br/> METAVERSE <br/> FIND OPPORTUNITY",
       "subtitle": "Set all opportunity to become good in future through <br /> new technology in every part of life."
+    },
+    "aboutUs": {
+      "section": "ABOUT US",
+      "title": "METAXOT IS FUTURE",
+      "subtitle": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beataequi.",
+      "badge": {
+        "decentralize": "Decentralize",
+        "imagnation": "Imagnation",
+        "futureWorld": "Future World",
+        "funLife": "Fun Life",
+        "playToEarn": "Play To Earn"
+      }
+    },
+    "galery": {
+      "section": "GALERY",
+      "title": "METAXOT VIDEO",
+      "subtitle": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui. Lorem ipsum dolor sit amet. ",
+      "viewAll": "View All"
     }
   }
 }

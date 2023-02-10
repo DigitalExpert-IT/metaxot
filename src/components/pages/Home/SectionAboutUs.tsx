@@ -1,52 +1,30 @@
-import {
-  Badge,
-  Box,
-  Center,
-  Heading,
-  Image,
-  Stack,
-  Text,
-  Wrap,
-  WrapItem,
-} from "@chakra-ui/react";
+import { BADGE_CONTENT } from "constant";
+import { useTranslation } from "react-i18next";
+import { Badge, Heading, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { SectionBody, SectionFooter, SectionMain } from "components/Section";
 
 export const SectionAboutUs = () => {
+  const { t } = useTranslation();
   return (
-    <Stack py={16} direction={{ lg: "row", md: "column", base: "column" }}>
-      <Image src="/assets/content/mars.png" alt="image" rounded="3xl"></Image>
-      <Stack
-        flex={1}
-        pl={{ lg: "10", md: "0" }}
-        spacing={{ lg: "6", md: "4", base: "2" }}
-      >
+    <SectionMain image="/assets/content/mars.png">
+      <SectionBody>
         <Text fontSize={{ lg: "2xl", base: "xl" }} color="yellowMetaxot.500">
-          ABOUT US
+          {t("pages.home.aboutUs.section")}
         </Text>
         <Heading fontSize={{ lg: "5xl", base: "3xl" }}>
-          METAXOT <br /> IS FUTURE
+          {t("pages.home.aboutUs.title")}
         </Heading>
-        <Text fontSize="sm">
-          Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus
-          voluptas qui sapiente libero. Est cumque beatae qui.
-        </Text>
+        <Text fontSize="sm">{t("pages.home.aboutUs.subtitle")}</Text>
+      </SectionBody>
+      <SectionFooter>
         <Wrap>
-          <WrapItem>
-            <Badge>Decentralize</Badge>
-          </WrapItem>
-          <WrapItem>
-            <Badge>Imagnation</Badge>
-          </WrapItem>
-          <WrapItem>
-            <Badge>Future World</Badge>
-          </WrapItem>
-          <WrapItem>
-            <Badge>Fun Life</Badge>
-          </WrapItem>
-          <WrapItem>
-            <Badge>Play To Earn</Badge>
-          </WrapItem>
+          {BADGE_CONTENT.map((content, idx) => (
+            <WrapItem key={idx}>
+              <Badge>{t(`pages.home.aboutUs.badge.${content}`)}</Badge>
+            </WrapItem>
+          ))}
         </Wrap>
-      </Stack>
-    </Stack>
+      </SectionFooter>
+    </SectionMain>
   );
 };
