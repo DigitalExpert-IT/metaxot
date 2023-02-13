@@ -26,7 +26,7 @@ export const CardPresentation = (props: Props) => {
       pb={"16"}
       mx={"auto"}
       px={{ base: "4", md: "8", lg: "12" }}
-      rounded={"5xl"}
+      rounded={"3xl"}
       spacing={{ base: 2, md: 4, lg: 6 }}
       bgGradient={"linear(to-tl, blackAlpha.500, whiteAlpha.400)"}
       {...rest}
