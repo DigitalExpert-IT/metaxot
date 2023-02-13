@@ -1,6 +1,7 @@
-import { Box, Card, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { CardPresentation } from "components/Card";
 import { SectionBody } from "components/Section";
+import { KEY_FEATURES } from "constant/pages/home";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -14,10 +15,10 @@ export const SectionKeyFeature = () => {
           fontSize={{ lg: "2xl", base: "xl" }}
           color="yellowMetaxot.500"
         >
-          KEY FEATURES
+          {t("pages.home.keyFetures.title")}
         </Text>
         <Heading textAlign={"center"} fontSize={{ lg: "5xl", base: "3xl" }}>
-          ESSENTIAL OF METAXOT
+          {t("pages.home.keyFetures.subtitle")}
         </Heading>
         <SimpleGrid
           columns={{ base: 1, lg: 3 }}
@@ -27,21 +28,13 @@ export const SectionKeyFeature = () => {
           textAlign={"center"}
           maxW={{ base: "sm", lg: "full" }}
         >
-          <CardPresentation subtitle="pages.home.missionCard.lorem">
-            <Heading fontSize={"2xl"} fontWeight={"extrabold"}>
-              Leisure Life
-            </Heading>
-          </CardPresentation>
-          <CardPresentation subtitle="pages.home.missionCard.lorem">
-            <Heading fontSize={"2xl"} fontWeight={"extrabold"}>
-              Recuring Income
-            </Heading>
-          </CardPresentation>
-          <CardPresentation subtitle="pages.home.missionCard.lorem">
-            <Heading fontSize={"2xl"} fontWeight={"extrabold"}>
-              WEB 3 Support
-            </Heading>
-          </CardPresentation>
+          {KEY_FEATURES.map((data, i) => (
+            <CardPresentation key={i} subtitle={data.subtitle}>
+              <Heading fontSize={"2xl"} fontWeight={"extrabold"}>
+                {t(data.title)}
+              </Heading>
+            </CardPresentation>
+          ))}
         </SimpleGrid>
       </SectionBody>
     </Stack>

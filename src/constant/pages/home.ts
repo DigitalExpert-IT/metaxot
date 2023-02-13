@@ -21,3 +21,18 @@ export const CARD_MISSION_PROMOTION = [
     subtitle: "pages.home.missionCard.lorem",
   },
 ];
+
+export const KEY_FEATURES = [
+  {
+    title: "pages.home.keyFetures.leisureLife",
+    subtitle: "pages.home.keyFetures.lorem",
+  },
+  {
+    title: "pages.home.keyFetures.recuringIncome",
+    subtitle: "pages.home.keyFetures.lorem",
+  },
+  {
+    title: "pages.home.keyFetures.WEB3Support",
+    subtitle: "pages.home.keyFetures.lorem",
+  },
+];
