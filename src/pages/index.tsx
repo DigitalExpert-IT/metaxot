@@ -1,9 +1,10 @@
 import { LayoutMain } from "components";
 import {
+  SectionGalery,
   SectionHeader,
-  SectionMissionCard,
   SectionAboutUs,
   SectionKeyFeature,
+  SectionMissionCard,
 } from "components/pages";
 
 function Home() {
@@ -13,6 +14,7 @@ function Home() {
       <SectionMissionCard />
       <SectionAboutUs />
       <SectionKeyFeature />
+      <SectionGalery />
     </LayoutMain>
   );
 }
