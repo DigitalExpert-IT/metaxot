@@ -29,7 +29,14 @@ export const SectionKeyFeature = () => {
           maxW={{ base: "sm", lg: "full" }}
         >
           {KEY_FEATURES.map((data, i) => (
-            <CardPresentation key={i} subtitle={data.subtitle}>
+            <CardPresentation
+              key={i}
+              subtitle={data.subtitle}
+              px={{ base: "4", md: "8", lg: "12" }}
+              rounded={"3xl"}
+              spacing={{ base: 2, md: 4, lg: 6 }}
+              bgGradient={"linear(to-tl, blackAlpha.500, whiteAlpha.400)"}
+            >
               <Heading fontSize={"2xl"} fontWeight={"extrabold"}>
                 {t(data.title)}
               </Heading>
