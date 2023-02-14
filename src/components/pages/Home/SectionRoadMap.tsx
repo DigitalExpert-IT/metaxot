@@ -1,4 +1,5 @@
 import { Box, Heading, Stack, Text } from "@chakra-ui/react";
+import { TimeLine } from "components/Section";
 
 export const SectionRoadmap = () => {
   const left = {
@@ -6,13 +7,13 @@ export const SectionRoadmap = () => {
       content: '" "',
       height: 0,
       position: "absolute",
-      top: "22px",
+      top: 8,
       width: 0,
       zIndex: 1,
-      right: "30px",
-      border: "medium solid white",
-      borderWidth: "10px 0 10px 10px",
-      borderColor: "transparent transparent transparent white",
+      right: "5rem",
+      borderWidth: 3,
+      borderColor: "yellowMetaxot.500",
+      transform: "scaleX(24.5)",
     },
     after: {
       content: '" "',
@@ -21,10 +22,10 @@ export const SectionRoadmap = () => {
       height: "25px",
       backgroundColor: "white",
       border: "4px solid #FF9F55",
-      top: "15px",
+      top: 5,
       borderRadius: "50%",
       zIndex: "1",
-      right: "-9px",
+      right: 0,
     },
   };
   const right = {
@@ -32,13 +33,13 @@ export const SectionRoadmap = () => {
       content: '" "',
       height: 0,
       position: "absolute",
-      top: "22px",
+      top: "7",
       width: 0,
       zIndex: 1,
-      left: "30px",
-      border: "medium solid white",
-      borderWidth: "10px 10px 10px 0",
-      borderColor: "transparent white transparent transparent",
+      right: -55,
+      borderWidth: 3,
+      borderColor: "yellowMetaxot.500",
+      transform: "scaleX(24.5)",
     },
     after: {
       content: '" "',
@@ -47,10 +48,10 @@ export const SectionRoadmap = () => {
       height: "25px",
       backgroundColor: "white",
       border: "4px solid #FF9F55",
-      top: "15px",
+      top: 5,
       borderRadius: "50%",
-      zIndex: 1,
-      left: "-16px",
+      zIndex: "1",
+      right: 0,
     },
   };
   return (
@@ -62,33 +63,32 @@ export const SectionRoadmap = () => {
         <Heading fontSize={{ lg: "5xl", base: "3xl" }}>PROJECT ROADMAP</Heading>
       </Stack>
 
-      <Stack position="relative" bg="red.500" margin="0 auto">
+      {/* <Stack position="relative" margin="0 auto" py={100}>
         <Stack
-          padding="10px 40px"
+          px={16}
           position="relative"
           width="50%"
-          _before={left.before}
-          _after={left.after}
           left={"0"}
+          _after={{
+            content: "' '",
+            borderRight: "solid",
+            borderRightColor: "yellowMetaxot.500",
+            borderRightWidth: "5px",
+            w: 10,
+            h: 10,
+            transform: "scaleY(5.5)",
+            left: "calc(100% + 0.9rem)",
+            position: "relative",
+          }}
         >
-          <Stack bg={"white"} color="black">
+          <Stack _before={left.before} _after={left.after}>
             <Text>2017 - 2018</Text>
             <Text>The Idea Of Metaxot is Born</Text>
           </Stack>
         </Stack>
-        <Stack
-          padding="10px 40px"
-          position="relative"
-          width="50%"
-          left={"50%"}
-          _before={right.before}
-          _after={right.after}
-        >
-          <Stack bg="red.200" color="gray.800">
-            <Text>2017 - 2018</Text>
-            <Text>The Idea Of Metaxot is Born</Text>
-          </Stack>
-        </Stack>
+      </Stack> */}
+      <Stack>
+        <TimeLine />
       </Stack>
     </Stack>
   );
