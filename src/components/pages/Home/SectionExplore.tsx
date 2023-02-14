@@ -1,16 +1,10 @@
-import {
-  Box,
-  Button,
-  Heading,
-  Image,
-  Stack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import { SectionBody, SectionFooter } from "components/Section";
+import { Box, Button, Heading, Stack, Text, VStack } from "@chakra-ui/react";
+import { BackgroundExploreLand } from "components/Background";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export const SectionExplore = () => {
+  const { t } = useTranslation();
   return (
     <Box
       mx={"auto"}
@@ -19,18 +13,7 @@ export const SectionExplore = () => {
       position={"relative"}
       maxW={{ base: "sm", lg: "full" }}
     >
-      <Image
-        w={"full"}
-        src={"/assets/images/ExploreLand.png"}
-        alt={"ExploreLand"}
-        display={{ base: "none", lg: "block" }}
-      />
-      <Image
-        w={"full"}
-        src={"/assets/images/ExploreLandMobile.png"}
-        alt={"ExploreLand"}
-        display={{ base: "block", lg: "none" }}
-      />
+      <BackgroundExploreLand />
       <VStack
         position={"absolute"}
         top={{ base: "30%", lg: 0 }}
@@ -42,28 +25,22 @@ export const SectionExplore = () => {
         w={{ base: "full", lg: "50%" }}
       >
         <Box maxW={{ base: "full", lg: "md" }} pr={{ lg: "4" }}>
-          <Stack spacing={{ xl: "4", lg: "0", base: "2" }}>
+          <Stack spacing={{ xl: "4", lg: "0", base: "2" }} color={"black"}>
             <Text
               fontSize={{ lg: "2xl", base: "xl" }}
               color="yellowMetaxot.500"
             >
-              EXPLORE
+              {t("pages.home.keyFetures.title")}
             </Text>
-            <Heading
-              fontSize={{ lg: "4xl", base: "2xl" }}
-              fontWeight={"black"}
-              color={"black"}
-            >
-              GET YOUR METAXOT LAND
+            <Heading fontSize={{ lg: "4xl", base: "2xl" }} fontWeight={"black"}>
+              {t("pages.home.keyFetures.subtitle")}
             </Heading>
             <Text fontSize="sm" textAlign={"justify"}>
-              Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus
-              voluptas qui sapiente libero. Est cumque beatae qui. Lorem ipsum
-              dolor sit amet.
+              {t("pages.home.keyFetures.lorem")}
             </Text>
           </Stack>
           <Box mt={"4"}>
-            <Button colorScheme={"metaxot"}>Buy Land</Button>
+            <Button colorScheme={"metaxot"}>{t("common.buyLand")}</Button>
           </Box>
         </Box>
       </VStack>
