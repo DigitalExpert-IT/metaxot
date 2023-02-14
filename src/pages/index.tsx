@@ -5,6 +5,7 @@ import {
   SectionAboutUs,
   SectionKeyFeature,
   SectionMissionCard,
+  SectionExplore,
 } from "components/pages";
 
 function Home() {
@@ -15,6 +16,7 @@ function Home() {
       <SectionAboutUs />
       <SectionKeyFeature />
       <SectionGalery />
+      <SectionExplore />
     </LayoutMain>
   );
 }
