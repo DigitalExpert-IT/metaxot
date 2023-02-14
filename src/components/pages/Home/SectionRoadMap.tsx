@@ -87,7 +87,7 @@ export const SectionRoadmap = () => {
           </Stack>
         </Stack>
       </Stack> */}
-      <Stack>
+      <Stack py="16">
         <TimeLine />
       </Stack>
     </Stack>
