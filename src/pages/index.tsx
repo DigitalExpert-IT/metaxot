@@ -3,6 +3,7 @@ import {
   SectionGalery,
   SectionHeader,
   SectionAboutUs,
+  SectionKeyFeature,
   SectionMissionCard,
   SectionExplore,
 } from "components/pages";
@@ -13,6 +14,7 @@ function Home() {
       <SectionHeader />
       <SectionMissionCard />
       <SectionAboutUs />
+      <SectionKeyFeature />
       <SectionGalery />
       <SectionExplore />
     </LayoutMain>

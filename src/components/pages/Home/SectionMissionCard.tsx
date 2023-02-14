@@ -1,5 +1,5 @@
 import { Card, Heading, SimpleGrid } from "@chakra-ui/react";
-import { CardMissionPresentation } from "components/Card";
+import { CardPresentation } from "components/Card";
 import {
   CARD_MISSION_PRESENTATION,
   CARD_MISSION_PROMOTION,
@@ -27,11 +27,11 @@ export const SectionMissionCard = () => {
       >
         <SimpleGrid columns={{ base: 0, lg: 3 }} gap={"5"}>
           {CARD_MISSION_PRESENTATION.map((data, i) => (
-            <CardMissionPresentation key={i} subtitle={data.subtitle} textAlign={{ base: "center", lg: "start" }}>
+            <CardPresentation key={i} subtitle={data.subtitle} textAlign={{ base: "center", lg: "start" }}>
               <Heading mb={"4"} fontSize={"5xl"} fontWeight={"extrabold"}>
                 {data.title}
               </Heading>
-            </CardMissionPresentation>
+            </CardPresentation>
           ))}
         </SimpleGrid>
       </Card>
@@ -43,11 +43,11 @@ export const SectionMissionCard = () => {
             rounded={"none"}
             px={{ base: "4", xs: "8", sm: "16" }}
           >
-            <CardMissionPresentation subtitle={data.subtitle}>
+            <CardPresentation subtitle={data.subtitle}>
               <Heading mb={"4"} fontSize={"2xl"} fontWeight={"extrabold"}>
                 {t(data.title)}
               </Heading>
-            </CardMissionPresentation>
+            </CardPresentation>
           </Card>
         ))}
       </SimpleGrid>
