@@ -36,7 +36,7 @@ export const SectioCollection = () => {
               {t("pages.home.collection.description")}
             </Text>
           </Stack>
-          <Box mt={{ base: "4", lg: "6" }}>
+          <Box pt={{ base: "4", lg: "6" }}>
             <Button colorScheme={"metaxot"}>{t("common.browse")}</Button>
           </Box>
         </Stack>
