@@ -1,94 +1,45 @@
-import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import { TimeLine } from "components/Section";
+import { Heading, Image, Stack, Text } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 
 export const SectionRoadmap = () => {
-  const left = {
-    before: {
-      content: '" "',
-      height: 0,
-      position: "absolute",
-      top: 8,
-      width: 0,
-      zIndex: 1,
-      right: "5rem",
-      borderWidth: 3,
-      borderColor: "yellowMetaxot.500",
-      transform: "scaleX(24.5)",
-    },
-    after: {
-      content: '" "',
-      position: "absolute",
-      width: "25px",
-      height: "25px",
-      backgroundColor: "white",
-      border: "4px solid #FF9F55",
-      top: 5,
-      borderRadius: "50%",
-      zIndex: "1",
-      right: 0,
-    },
-  };
-  const right = {
-    before: {
-      content: '" "',
-      height: 0,
-      position: "absolute",
-      top: "7",
-      width: 0,
-      zIndex: 1,
-      right: -55,
-      borderWidth: 3,
-      borderColor: "yellowMetaxot.500",
-      transform: "scaleX(24.5)",
-    },
-    after: {
-      content: '" "',
-      position: "absolute",
-      width: "25px",
-      height: "25px",
-      backgroundColor: "white",
-      border: "4px solid #FF9F55",
-      top: 5,
-      borderRadius: "50%",
-      zIndex: "1",
-      right: 0,
-    },
-  };
+  const { t } = useTranslation();
   return (
-    <Stack py="8">
-      <Stack textAlign="center">
+    <Stack pt="8" pb="20">
+      <Image
+        src="/assets/images/particles.png"
+        w="full"
+        h="1200"
+        left={0}
+        position="absolute"
+        display={{ base: "none", xl: "block" }}
+        zIndex={1}
+        objectFit="cover"
+        style={{
+          WebkitMaskImage:
+            "radial-gradient(circle, rgb(0 0 0) 0%, rgb(0 0 0) 0%, rgb(255 255 255 / 0%) 75%)",
+        }}
+        opacity="0.8"
+      ></Image>
+      <Stack textAlign="center" zIndex={3} py="15">
         <Text fontSize={{ lg: "2xl", base: "xl" }} color="yellowMetaxot.500">
-          ACHIEVEMENT AND GOALS
+          {t("pages.home.achievementAndGoals.title")}
         </Text>
-        <Heading fontSize={{ lg: "5xl", base: "3xl" }}>PROJECT ROADMAP</Heading>
+        <Heading fontSize={{ lg: "5xl", base: "3xl" }}>
+          {t("pages.home.achievementAndGoals.subtitle")}
+        </Heading>
       </Stack>
-
-      {/* <Stack position="relative" margin="0 auto" py={100}>
-        <Stack
-          px={16}
-          position="relative"
-          width="50%"
-          left={"0"}
-          _after={{
-            content: "' '",
-            borderRight: "solid",
-            borderRightColor: "yellowMetaxot.500",
-            borderRightWidth: "5px",
-            w: 10,
-            h: 10,
-            transform: "scaleY(5.5)",
-            left: "calc(100% + 0.9rem)",
-            position: "relative",
+      <Stack py="16" zIndex={3}>
+        <TimeLine
+          q1={t("pages.home.achievementAndGoals.roadMap.2017")}
+          q2={t("pages.home.achievementAndGoals.roadMap.2019")}
+          q3={{
+            title: t("pages.home.achievementAndGoals.roadMap.2020.title"),
+            concept: t("pages.home.achievementAndGoals.roadMap.2020.concept"),
           }}
-        >
-          <Stack _before={left.before} _after={left.after}>
-            <Text>2017 - 2018</Text>
-            <Text>The Idea Of Metaxot is Born</Text>
-          </Stack>
-        </Stack>
-      </Stack> */}
-      <Stack py="16">
-        <TimeLine />
+          q4={t("pages.home.achievementAndGoals.roadMap.2022")}
+          q5={t("pages.home.achievementAndGoals.roadMap.2023")}
+        />
       </Stack>
     </Stack>
   );

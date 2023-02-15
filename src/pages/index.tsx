@@ -2,11 +2,11 @@ import { LayoutMain } from "components";
 import {
   SectionGalery,
   SectionHeader,
+  SectionRoadmap,
+  SectionExplore,
   SectionAboutUs,
   SectionKeyFeature,
   SectionMissionCard,
-  SectionRoadmap,
-  SectionExplore,
 } from "components/pages";
 
 function Home() {
