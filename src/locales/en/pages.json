@@ -42,7 +42,12 @@
     "explore": {
       "title": "EXPLORE",
       "subtitle": "GET YOUR METAXOT LAND",
-      "lorem": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui. Lorem ipsum dolor sit amet."
+      "description": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui. Lorem ipsum dolor sit amet."
+    },
+    "collection": {
+      "title": "COLLECTION",
+      "subtitle": "SELL AND BUY NFT",
+      "description": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui. Lorem ipsum dolor sit amet."
     }
   }
 }

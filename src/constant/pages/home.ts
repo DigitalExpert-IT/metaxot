@@ -36,3 +36,10 @@ export const KEY_FEATURES = [
     subtitle: "pages.home.keyFetures.lorem",
   },
 ];
+
+export const IMAGE_COLLECTION = [
+  { src: "/assets/images/collection/collection1.png", alt: "collection1" },
+  { src: "/assets/images/collection/collection2.png", alt: "collection2" },
+  { src: "/assets/images/collection/collection3.png", alt: "collection3" },
+  { src: "/assets/images/collection/collection4.png", alt: "collection4" },
+]
