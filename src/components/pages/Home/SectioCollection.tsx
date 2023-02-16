@@ -7,7 +7,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { WidgetCardImage } from "components/Widget";
+import { WidgetCollection, WidgetCardImage } from "components/Widget";
 import { IMAGE_COLLECTION } from "constant/pages/home";
 import { useTranslation } from "react-i18next";
 
@@ -21,7 +21,12 @@ export const SectioCollection = () => {
       my={"20"}
     >
       <GridItem colSpan={1}>
-        <Stack h={"full"} justifyContent={"center"} maxW={{ base: "full", lg: "xs" }} pr={{ lg: "4" }}>
+        <Stack
+          h={"full"}
+          pr={{ lg: "4" }}
+          justifyContent={"center"}
+          maxW={{ base: "full", lg: "xs" }}
+        >
           <Stack spacing={{ xl: "6", lg: "4", base: "2" }}>
             <Text
               fontSize={{ lg: "2xl", base: "xl" }}
@@ -41,12 +46,12 @@ export const SectioCollection = () => {
           </Box>
         </Stack>
       </GridItem>
-      <GridItem colSpan={2} overflow={"auto"}>
-        <Stack direction='row' w={"max-content"} spacing={4} mx={{ base: 0, md: 4 }}>
+      <GridItem colSpan={2} overflowX={"auto"}>
+        <WidgetCollection>
           {IMAGE_COLLECTION.map((data, idx) => (
             <WidgetCardImage key={idx} data={data} />
           ))}
-        </Stack>
+        </WidgetCollection>
       </GridItem>
     </Grid>
   );
