@@ -30,13 +30,13 @@ export const SectionExplore = () => {
               fontSize={{ lg: "2xl", base: "xl" }}
               color="yellowMetaxot.500"
             >
-              {t("pages.home.keyFetures.title")}
+              {t("pages.home.explore.title")}
             </Text>
             <Heading fontSize={{ lg: "4xl", base: "2xl" }} fontWeight={"black"}>
-              {t("pages.home.keyFetures.subtitle")}
+              {t("pages.home.explore.subtitle")}
             </Heading>
             <Text fontSize="sm" textAlign={"justify"}>
-              {t("pages.home.keyFetures.lorem")}
+              {t("pages.home.explore.description")}
             </Text>
           </Stack>
           <Box mt={"4"}>

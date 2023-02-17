@@ -3,10 +3,11 @@ import {
   SectionGalery,
   SectionHeader,
   SectionRoadmap,
-  SectionExplore,
   SectionAboutUs,
   SectionKeyFeature,
   SectionMissionCard,
+  SectionExplore,
+  SectioCollection,
 } from "components/pages";
 
 function Home() {
@@ -19,6 +20,7 @@ function Home() {
       <SectionGalery />
       <SectionRoadmap />
       <SectionExplore />
+      <SectioCollection />
     </LayoutMain>
   );
 }

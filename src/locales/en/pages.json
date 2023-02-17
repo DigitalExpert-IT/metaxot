@@ -57,6 +57,11 @@
         "2022": "2022 <span>MVP</span>",
         "2023": "2023 <span>Product Release</span>"
       }
+    },
+    "collection": {
+      "title": "COLLECTION",
+      "subtitle": "SELL AND BUY NFT",
+      "description": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui. Lorem ipsum dolor sit amet."
     }
   }
 }
