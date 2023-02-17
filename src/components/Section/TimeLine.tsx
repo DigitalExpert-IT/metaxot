@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import { Trans } from "react-i18next";
 
-interface TimeLineProps {
+export interface TimeLineProps {
   q1: string;
   q2: string;
   q3: {

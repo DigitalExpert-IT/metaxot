@@ -1,4 +1,4 @@
-import { TimeLine } from "components/Section";
+import { MobileTimeLine, TimeLine } from "components/Section";
 import { Heading, Image, Stack, Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
@@ -20,6 +20,7 @@ export const SectionRoadmap = () => {
             "radial-gradient(circle, rgb(0 0 0) 0%, rgb(0 0 0) 0%, rgb(255 255 255 / 0%) 75%)",
         }}
         opacity="0.8"
+        alt="roadmap"
       ></Image>
       <Stack textAlign="center" zIndex={3} py="15">
         <Text fontSize={{ lg: "2xl", base: "xl" }} color="yellowMetaxot.500">
@@ -40,6 +41,7 @@ export const SectionRoadmap = () => {
           q4={t("pages.home.achievementAndGoals.roadMap.2022")}
           q5={t("pages.home.achievementAndGoals.roadMap.2023")}
         />
+        <MobileTimeLine />
       </Stack>
     </Stack>
   );
