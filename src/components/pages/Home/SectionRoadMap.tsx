@@ -1,6 +1,6 @@
+import { useTranslation } from "react-i18next";
 import { MobileTimeLine, TimeLine } from "components/Section";
 import { Heading, Image, Stack, Text } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
 
 export const SectionRoadmap = () => {
   const { t } = useTranslation();
@@ -30,7 +30,12 @@ export const SectionRoadmap = () => {
           {t("pages.home.achievementAndGoals.subtitle")}
         </Heading>
       </Stack>
-      <Stack py="16" zIndex={3}>
+      <Stack
+        zIndex={3}
+        alignItems="center"
+        py="8"
+        display={{ sm: "flex", base: "none" }}
+      >
         <TimeLine
           q1={t("pages.home.achievementAndGoals.roadMap.2017")}
           q2={t("pages.home.achievementAndGoals.roadMap.2019")}
@@ -41,7 +46,18 @@ export const SectionRoadmap = () => {
           q4={t("pages.home.achievementAndGoals.roadMap.2022")}
           q5={t("pages.home.achievementAndGoals.roadMap.2023")}
         />
-        <MobileTimeLine />
+      </Stack>
+      <Stack display={{ sm: "none", base: "flex" }} alignItems="center">
+        <MobileTimeLine
+          q1={t("pages.home.achievementAndGoals.roadMap.2017")}
+          q2={t("pages.home.achievementAndGoals.roadMap.2019")}
+          q3={{
+            title: t("pages.home.achievementAndGoals.roadMap.2020.title"),
+            concept: t("pages.home.achievementAndGoals.roadMap.2020.concept"),
+          }}
+          q4={t("pages.home.achievementAndGoals.roadMap.2022")}
+          q5={t("pages.home.achievementAndGoals.roadMap.2023")}
+        />
       </Stack>
     </Stack>
   );
