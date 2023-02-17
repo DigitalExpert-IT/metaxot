@@ -42,4 +42,23 @@ export const IMAGE_COLLECTION = [
   { src: "/assets/images/collection/collection2.png", alt: "collection2" },
   { src: "/assets/images/collection/collection3.png", alt: "collection3" },
   { src: "/assets/images/collection/collection4.png", alt: "collection4" },
-]
+];
+
+export const FAQS = [
+  {
+    questions: "pages.home.faqs.whatIsMetaxot",
+    answers: "pages.home.faqs.lorem",
+  },
+  {
+    questions: "pages.home.faqs.howICanPlayMetaxot",
+    answers: "pages.home.faqs.lorem",
+  },
+  {
+    questions: "pages.home.faqs.isMetaxotSecure",
+    answers: "pages.home.faqs.lorem",
+  },
+  {
+    questions: "pages.home.faqs.isMetaxotGovermentProperty",
+    answers: "pages.home.faqs.lorem",
+  }
+];

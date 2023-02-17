@@ -7,6 +7,7 @@ import {
   SectionMissionCard,
   SectionExplore,
   SectioCollection,
+  SectionFaqs,
 } from "components/pages";
 
 function Home() {
@@ -19,6 +20,7 @@ function Home() {
       <SectionGalery />
       <SectionExplore />
       <SectioCollection />
+      <SectionFaqs />
     </LayoutMain>
   );
 }

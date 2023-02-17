@@ -5,3 +5,4 @@ export * from "./SectionAboutUs";
 export * from "./SectionKeyFeature";
 export * from "./SectionExplore";
 export * from "./SectioCollection";
+export * from "./SectionFaqs";
