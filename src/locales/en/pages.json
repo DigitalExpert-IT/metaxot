@@ -21,7 +21,7 @@
       "title": "METAXOT VIDEO",
       "subtitle": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui. Lorem ipsum dolor sit amet. ",
       "viewAll": "View All"
-      },
+    },
     "missionCard": {
       "internetUser": "Internet User",
       "internetUserGrowth": "Internet User <br />Growth",
@@ -42,7 +42,21 @@
     "explore": {
       "title": "EXPLORE",
       "subtitle": "GET YOUR METAXOT LAND",
-      "description": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui. Lorem ipsum dolor sit amet."
+      "lorem": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui. Lorem ipsum dolor sit amet."
+    },
+    "achievementAndGoals": {
+      "title": "ACHIEVEMENT AND GOALS",
+      "subtitle": "PROJECT ROADMAP",
+      "roadMap": {
+        "2017": "2017 - 2018 <span>The Idea Of Metaxot is Born</span>",
+        "2019": "2019 <span>The Founding of Metaxot</span>",
+        "2020": {
+          "title": "Q1 2020 <span>Final Concept of Metaxot</span>",
+          "concept": "The concept of metaxot already found <span>and ready to deploy as a software.</span>"
+        },
+        "2022": "2022 <span>MVP</span>",
+        "2023": "2023 <span>Product Release</span>"
+      }
     },
     "collection": {
       "title": "COLLECTION",

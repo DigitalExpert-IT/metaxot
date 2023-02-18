@@ -22,7 +22,7 @@ export const SectionMain: React.FC<SectionProps> = props => {
       <Image src={props.image} alt="image" rounded="3xl"></Image>
       <Stack
         flex={1}
-        pl={{ lg: "10", md: "0" }}
+        pl={variants === "reverse" ? {} : { lg: "10", md: "0" }}
         spacing={{ lg: "6", md: "4", base: "2" }}
       >
         {props.children}
