@@ -7,3 +7,4 @@ export * from "./SectionKeyFeature";
 export * from "./SectionExplore";
 export * from "./SectionCollection";
 export * from "./SectionFaqs";
+export * from "./SectionCrew";

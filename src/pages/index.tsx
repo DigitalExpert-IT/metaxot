@@ -9,6 +9,7 @@ import {
   SectionExplore,
   SectionCollection,
   SectionFaqs,
+  SectionCrew,
 } from "components/pages";
 
 function Home() {
@@ -23,6 +24,7 @@ function Home() {
       <SectionExplore />
       <SectionCollection />
       <SectionFaqs />
+      <SectionCrew />
     </LayoutMain>
   );
 }
