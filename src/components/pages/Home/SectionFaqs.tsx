@@ -17,7 +17,7 @@ export const SectionFaqs = () => {
       <Heading textAlign={"center"} fontSize={{ lg: "5xl", base: "3xl" }}>
         {t("pages.home.faqs.subtitle")}
       </Heading>
-      <Box w={"full"} pt={"10"} maxW={"6xl"} mx={"auto"} minH={"lg"}>
+      <Box w={"full"} pt={"10"} maxW={"6xl"} mx={"auto"}>
         <Stack spacing={{ lg: "6", md: "4", base: "2" }}>
           {FAQS.map((data, idx) => (
             <CardFaq

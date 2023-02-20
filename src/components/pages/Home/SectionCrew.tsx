@@ -1,4 +1,6 @@
-import { Box, Heading, Stack, Text } from "@chakra-ui/react"
+import { Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { CardCrew } from "components/Card";
+import { CREW_LINE_UP } from "constant/pages/home";
 import { useTranslation } from "react-i18next";
 
 export const SectionCrew = () => {
@@ -15,7 +17,24 @@ export const SectionCrew = () => {
       <Heading textAlign={"center"} fontSize={{ lg: "5xl", base: "3xl" }}>
         {t("pages.home.crew.subtitle")}
       </Heading>
-      <Box w={"full"} pt={"10"} maxW={"6xl"} mx={"auto"} minH={"lg"}></Box>
+      <SimpleGrid
+        columns={{ base: 1, lg: 2 }}
+        spacing={10}
+        placeItems={"center"}
+        w={"full"}
+        pt={"10"}
+        px={"2"}
+        overflow={"hidden"}
+      >
+        {CREW_LINE_UP.map((row, idx) => (
+          <CardCrew
+            key={idx}
+            name={row.name}
+            title={row.title}
+            description={row.description}
+          />
+        ))}
+      </SimpleGrid>
     </Stack>
-  )
-}
+  );
+};
