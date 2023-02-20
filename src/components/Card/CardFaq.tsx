@@ -29,11 +29,11 @@ export const CardFaq = (props: TProps) => {
     >
       <HStack
         py={"8"}
-        px={"10"}
+        px={{ base: "6", md: "10" }}
         justify={"space-between"}
         bg={isOpen ? "yellowMetaxot.500" : ""}
       >
-        <Text>{t(`${questions}`)}</Text>
+        <Text fontSize={{ base: "sm", md: "md" }}>{t(`${questions}`)}</Text>
         <Text>{isOpen ? "-" : "+"}</Text>
       </HStack>
       <Collapse in={isOpen ? true : false} animateOpacity>
