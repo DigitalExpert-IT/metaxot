@@ -2,6 +2,7 @@ import { LayoutMain } from "components";
 import {
   SectionGalery,
   SectionHeader,
+  SectionRoadmap,
   SectionAboutUs,
   SectionKeyFeature,
   SectionMissionCard,
@@ -18,6 +19,7 @@ function Home() {
       <SectionAboutUs />
       <SectionKeyFeature />
       <SectionGalery />
+      <SectionRoadmap />
       <SectionExplore />
       <SectioCollection />
       <SectionFaqs />
