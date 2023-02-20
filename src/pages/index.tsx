@@ -8,6 +8,7 @@ import {
   SectionMissionCard,
   SectionExplore,
   SectioCollection,
+  SectionFaqs,
 } from "components/pages";
 
 function Home() {
@@ -21,6 +22,7 @@ function Home() {
       <SectionRoadmap />
       <SectionExplore />
       <SectioCollection />
+      <SectionFaqs />
     </LayoutMain>
   );
 }

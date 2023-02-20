@@ -1,6 +1,5 @@
-import { BADGE_CONTENT } from "constant";
 import { useTranslation } from "react-i18next";
-import { Badge, Button, Heading, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { Button, Heading, Text } from "@chakra-ui/react";
 import { SectionBody, SectionFooter, SectionMain } from "components/Section";
 
 export const SectionGalery = () => {

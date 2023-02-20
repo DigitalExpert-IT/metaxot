@@ -62,6 +62,15 @@
       "title": "COLLECTION",
       "subtitle": "SELL AND BUY NFT",
       "description": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui. Lorem ipsum dolor sit amet."
+    },
+    "faqs": {
+      "title": "FAQS",
+      "subtitle": "FREQUENTLY ASKED QUESTIONS",
+      "whatIsMetaxot": "WHAT IS METAXOT ?",
+      "howICanPlayMetaxot": "HOW I CAN PLAY METAXOT ?",
+      "isMetaxotSecure": "IS METAXOT SECURE ?",
+      "isMetaxotGovermentProperty": "IS METAXOT GOVERMENT PROPERTY ?",
+      "lorem": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui molestias doloribus nam cumque voluptate id tempora corporis et necessitatibus rerum nam officiis saepe"
     }
   }
 }
