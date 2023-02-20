@@ -11,7 +11,7 @@ import { WidgetCollection, WidgetCardImage } from "components/Widget";
 import { IMAGE_COLLECTION } from "constant/pages/home";
 import { useTranslation } from "react-i18next";
 
-export const SectioCollection = () => {
+export const SectionCollection = () => {
   const { t } = useTranslation();
   return (
     <Grid

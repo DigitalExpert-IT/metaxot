@@ -5,5 +5,6 @@ export * from "./SectionAboutUs";
 export * from "./SectionRoadMap";
 export * from "./SectionKeyFeature";
 export * from "./SectionExplore";
-export * from "./SectioCollection";
+export * from "./SectionCollection";
 export * from "./SectionFaqs";
+export * from "./SectionCrew";

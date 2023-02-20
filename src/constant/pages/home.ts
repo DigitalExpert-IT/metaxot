@@ -60,5 +60,32 @@ export const FAQS = [
   {
     questions: "pages.home.faqs.isMetaxotGovermentProperty",
     answers: "pages.home.faqs.lorem",
-  }
+  },
+];
+
+export const CREW_LINE_UP = [
+  {
+    name: "KING",
+    title: "Advisor",
+    description:
+      "“ Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. “",
+  },
+  {
+    name: "RAE",
+    title: "Human Resource",
+    description:
+      "“ Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. “",
+  },
+  {
+    name: "REY GATES",
+    title: "CTO",
+    description:
+      "“ Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. “",
+  },
+  {
+    name: "MR. SAN",
+    title: "BLOCKCHAIN DEV",
+    description:
+      "“ Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. “",
+  },
 ];

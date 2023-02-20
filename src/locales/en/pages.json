@@ -71,6 +71,10 @@
       "isMetaxotSecure": "IS METAXOT SECURE ?",
       "isMetaxotGovermentProperty": "IS METAXOT GOVERMENT PROPERTY ?",
       "lorem": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui molestias doloribus nam cumque voluptate id tempora corporis et necessitatibus rerum nam officiis saepe"
+    },
+    "crew": {
+      "title": "CREW",
+      "subtitle": "METAXOT LINE UP"
     }
   }
 }
