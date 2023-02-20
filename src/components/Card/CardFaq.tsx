@@ -1,27 +1,22 @@
-import {
-  Card,
-  CardProps,
-  Collapse,
-  HStack,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Card, CardProps, Collapse, HStack, Text } from "@chakra-ui/react";
+import { MouseEventHandler } from "react";
 import { useTranslation } from "react-i18next";
 
 type TProps = CardProps & {
   questions?: string;
   answers?: string;
+  isOpen?: boolean;
+  onClick?: MouseEventHandler | undefined;
 };
 
 export const CardFaq = (props: TProps) => {
-  const { questions, answers, ...rest } = props;
-  const { isOpen, onToggle } = useDisclosure();
+  const { questions, answers, isOpen, onClick, ...rest } = props;
   const { t } = useTranslation();
 
   return (
     <Card
       overflow={"hidden"}
-      onClick={onToggle}
+      onClick={onClick}
       cursor={"pointer"}
       bg={"whiteAlpha.300"}
       rounded={"3xl"}
@@ -36,7 +31,7 @@ export const CardFaq = (props: TProps) => {
         <Text fontSize={{ base: "sm", md: "md" }}>{t(`${questions}`)}</Text>
         <Text>{isOpen ? "-" : "+"}</Text>
       </HStack>
-      <Collapse in={isOpen ? true : false} animateOpacity>
+      <Collapse in={isOpen} animateOpacity>
         <Text py={"8"} px={"10"} fontSize={"sm"}>
           {t(`${answers}`)}
         </Text>
