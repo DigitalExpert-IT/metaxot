@@ -6,7 +6,6 @@ import {
   Heading,
   ListItem,
   ListItemProps,
-  useMultiStyleConfig,
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { RoadmapListContext } from "./RoadmapList";
