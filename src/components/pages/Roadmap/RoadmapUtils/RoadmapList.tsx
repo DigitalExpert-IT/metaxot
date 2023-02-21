@@ -7,6 +7,7 @@ export const RoadmapList: React.FC<ListProps> = props => {
       w="40vh"
       position="relative"
       h="100vh"
+      marginY="10"
       _before={{
         content: "''",
         display: "block",

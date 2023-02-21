@@ -4,7 +4,7 @@ import { RoadmapList, RoadmapListItem } from "./RoadmapUtils";
 
 export const RoadmapTimeLine = () => {
   return (
-    <Stack justifyContent="center" alignItems="center" my="10" spacing={5}>
+    <Stack justifyContent="center" alignItems="center" my="20" spacing={5}>
       <Heading fontSize="2xl" as="h2">
         PRE-ALPHA RELEASE
       </Heading>
