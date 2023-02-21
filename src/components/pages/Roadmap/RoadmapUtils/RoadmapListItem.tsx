@@ -1,19 +1,22 @@
 import {
   Box,
-  Heading,
+  Text,
   Image,
+  Stack,
+  Heading,
   ListItem,
   ListItemProps,
-  Stack,
-  Text,
 } from "@chakra-ui/react";
 
 interface RoadmapListItemProps extends ListItemProps {
   mode: string | "left" | "right";
+  title?: string;
+  content?: string;
+  quartal?: string;
 }
 
 export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
-  const { mode, ...rest } = props;
+  const { title, content, quartal, mode, ...rest } = props;
   const left = {
     parent: "-20vw",
     date: "-25vw",
@@ -40,12 +43,8 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
           top="35%"
           left="0"
         ></Image>
-        <Heading fontSize="xl">Conduct Market</Heading>
-        <Text>
-          Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus
-          voluptas qui sapiente libero. Est cumque beatae qui molestias
-          doloribus.
-        </Text>
+        <Heading fontSize="xl">{title}</Heading>
+        <Text>{content}</Text>
       </Stack>
       <Box
         position="absolute"
@@ -53,8 +52,15 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
         left={mode === "right" ? right.date : {}}
         bottom="9vh"
       >
-        <Text>2019, July Q1</Text>
+        <Text>{quartal}</Text>
       </Box>
     </ListItem>
   );
+};
+
+RoadmapListItem.defaultProps = {
+  title: "Title Road Map",
+  content:
+    " Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
+  quartal: "2019, July Q1",
 };
