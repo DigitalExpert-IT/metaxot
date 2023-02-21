@@ -32,7 +32,7 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
       listStyleType="none"
       {...rest}
     >
-      <Stack pl="20" spacing="1rem" pb="9" pt="4">
+      <Stack pl="20" spacing="1rem" pb="9" pt="4" pr="4">
         <Image
           src="/assets/illustration/timelineVect.svg"
           alt="roadmap"
