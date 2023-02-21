@@ -11,9 +11,9 @@ export const RoadmapTimeLine = () => {
       <RoadmapDate />
       <RoadmapList>
         <RoadmapListItem mode="left" />
-        <RoadmapListItem mode="right" top="25%" />
-        <RoadmapListItem mode="left" top="50%" />
-        <RoadmapListItem mode="right" top="75%" />
+        <RoadmapListItem mode="right" top="5%" />
+        <RoadmapListItem mode="left" top="10%" />
+        <RoadmapListItem mode="right" top="20%" />
       </RoadmapList>
     </Stack>
   );

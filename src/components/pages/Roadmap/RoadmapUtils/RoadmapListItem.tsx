@@ -27,7 +27,7 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
   };
   return (
     <ListItem
-      position="absolute"
+      position="relative"
       left={mode === "right" ? right.parent : left.parent}
       w={"25vw"}
       bgGradient="linear(130deg, whiteAlpha.500, transparent)"
@@ -35,7 +35,7 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
       listStyleType="none"
       {...rest}
     >
-      <Stack pl="20" spacing="1rem" pb="9" pt="4" pr="4">
+      <Stack pl="20" spacing="1rem" pb="9" pt="4" pr="4" mt="1rem">
         <Image
           src="/assets/illustration/timelineVect.svg"
           alt="roadmap"
