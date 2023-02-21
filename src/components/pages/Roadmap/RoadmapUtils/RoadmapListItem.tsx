@@ -6,7 +6,6 @@ import {
   Heading,
   ListItem,
   ListItemProps,
-  useStyles,
   useMultiStyleConfig,
 } from "@chakra-ui/react";
 import { useContext } from "react";
@@ -22,7 +21,6 @@ interface RoadmapListItemProps extends ListItemProps {
 export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
   const { title, content, quartal, mode, ...rest } = props;
   const styles = useContext(RoadmapListContext);
-  const style = useMultiStyleConfig("RoadmapListItem", {});
   const left = {
     parent: "-20vw",
     date: "-25vw",
@@ -52,9 +50,8 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
       <Box
         right={mode === "right" ? {} : left.date}
         left={mode === "right" ? right.date : {}}
-        // position="absolute"
-        // bottom="9vh"
-        __css={style.quartal}
+        position="absolute"
+        bottom="9vh"
       >
         <Text>{quartal}</Text>
       </Box>
