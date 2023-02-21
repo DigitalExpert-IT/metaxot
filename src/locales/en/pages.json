@@ -76,5 +76,30 @@
       "title": "CREW",
       "subtitle": "METAXOT LINE UP"
     }
+  },
+  "download": {
+    "header": "THE LIFE BEGIN",
+    "systemRequirements": "System Requirements",
+    "andOtherVersion": "and Other Version",
+    "minimum": {
+      "title": "Minimum",
+      "detail": "Processor : Intel Core i5-10310U <br/> Installed RAM : 8 GB <br/> Memory Space : 256 GB"
+    },
+    "recommended": {
+      "title": "Recommended",
+      "detail": "Processor : AMD Ryzen 7 3700 U <br/> 8 GB Memory Space <br/> Memory Space : 512 GB"
+    },
+    "multiPlatform": {
+      "title": "MULTI PLATFORM",
+      "description": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui molestias doloribus."
+    },
+    "playForFree": {
+      "title": "PLAY FOR FREE",
+      "description": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui molestias doloribus."
+    },
+    "fullyFeatured": {
+      "title": "FULLY FEATURED",
+      "description": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui molestias doloribus."
+    }
   }
 }
