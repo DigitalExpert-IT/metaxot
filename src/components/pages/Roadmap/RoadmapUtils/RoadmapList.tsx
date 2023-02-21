@@ -7,9 +7,13 @@ import {
 import { createContext } from "react";
 export const RoadmapListContext = createContext<any>({});
 
-export const RoadmapList: React.FC<ListProps> = props => {
-  const { children, ...rest } = props;
-  const style = useMultiStyleConfig("RoadmapList");
+interface RoadmapListProps extends ListProps {
+  variant: string;
+}
+
+export const RoadmapList: React.FC<RoadmapListProps> = props => {
+  const { variant, children, ...rest } = props;
+  const style = useMultiStyleConfig("RoadmapList", { variant });
   return (
     <UnorderedList __css={style.main} {...rest}>
       <RoadmapListContext.Provider value={style}>

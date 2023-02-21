@@ -7,24 +7,7 @@ const { defineMultiStyleConfig } = createMultiStyleConfigHelpers([
 ]);
 
 export const roadmapListTheme = defineMultiStyleConfig({
-  baseStyle: {
-    main: {
-      position: "relative",
-      _before: {
-        content: "''",
-        display: "block",
-        position: "absolute",
-        bg: "whiteAlpha.800",
-      },
-    },
-    item: {
-      position: "relative",
-      w: "25vw",
-      bgGradient: "linear(130deg, whiteAlpha.500, transparent)",
-      rounded: "lg",
-      listStyleType: "none",
-    },
-  },
+  baseStyle: {},
   sizes: {
     base: {},
     sm: {},
@@ -43,9 +26,45 @@ export const roadmapListTheme = defineMultiStyleConfig({
     lg: {},
   },
   variants: {
-    dekstop: {},
+    dekstop: {
+      main: {
+        position: "relative",
+        _before: {
+          content: "''",
+          display: "block",
+          position: "absolute",
+          bg: "whiteAlpha.800",
+        },
+      },
+      item: {
+        position: "relative",
+        w: "25vw",
+        bgGradient: "linear(130deg, whiteAlpha.500, transparent)",
+        rounded: "lg",
+        listStyleType: "none",
+      },
+    },
+    mobile: {
+      main: {
+        position: "relative",
+        _before: {
+          content: "''",
+          display: "block",
+          position: "absolute",
+          bg: "whiteAlpha.800",
+          left: "-5",
+        },
+      },
+      item: {
+        w: "100%",
+        bgGradient: "linear(130deg, whiteAlpha.500, transparent)",
+        rounded: "lg",
+        listStyleType: "none",
+      },
+    },
   },
   defaultProps: {
+    variant: "dekstop",
     size: "md",
   },
 });
