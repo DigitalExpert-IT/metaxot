@@ -73,7 +73,7 @@ export const SectionSystem = () => {
         </SimpleGrid>
       </Collapse>
       <Select
-        maxW={"md"}
+        maxW={"xs"}
         rounded={"xl"}
         bg={"whiteAlpha.200"}
         placeholder={`MacOs, Linux  ${t("pages.download.andOtherVersion")}`}
