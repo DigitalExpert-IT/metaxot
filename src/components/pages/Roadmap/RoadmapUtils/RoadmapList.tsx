@@ -10,11 +10,11 @@ export const RoadmapList: React.FC<ListProps> = props => {
       _before={{
         content: "''",
         display: "block",
-        w: "1",
+        w: "1px",
         h: "100vh",
         position: "absolute",
         right: "50%",
-        bg: "white",
+        bg: "whiteAlpha.800",
       }}
       {...rest}
     >
