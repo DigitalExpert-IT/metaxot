@@ -7,14 +7,44 @@ const { defineMultiStyleConfig } = createMultiStyleConfigHelpers([
 ]);
 
 export const roadmapListTheme = defineMultiStyleConfig({
-  baseStyle: {},
+  baseStyle: {
+    main: {
+      position: "relative",
+      _before: {
+        content: "''",
+        display: "block",
+        position: "absolute",
+        bg: "whiteAlpha.800",
+      },
+    },
+    item: {
+      position: "relative",
+      w: "25vw",
+      bgGradient: "linear(130deg, whiteAlpha.500, transparent)",
+      rounded: "lg",
+      listStyleType: "none",
+    },
+  },
   sizes: {
     base: {},
     sm: {},
-    md: {},
+    md: {
+      main: {
+        w: "40vh",
+        h: "100vh",
+        marginY: "10",
+        _before: {
+          w: "1px",
+          h: "100vh",
+          right: "50%",
+        },
+      },
+    },
     lg: {},
   },
-  variants: {},
+  variants: {
+    dekstop: {},
+  },
   defaultProps: {
     size: "md",
   },

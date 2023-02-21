@@ -6,7 +6,10 @@ import {
   Heading,
   ListItem,
   ListItemProps,
+  useStyles,
 } from "@chakra-ui/react";
+import { useContext } from "react";
+import { RoadmapListContext } from "./RoadmapList";
 
 interface RoadmapListItemProps extends ListItemProps {
   mode: string | "left" | "right";
@@ -17,6 +20,7 @@ interface RoadmapListItemProps extends ListItemProps {
 
 export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
   const { title, content, quartal, mode, ...rest } = props;
+  const styles = useContext(RoadmapListContext);
   const left = {
     parent: "-20vw",
     date: "-25vw",
@@ -27,29 +31,25 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
   };
   return (
     <ListItem
-      position="relative"
       left={mode === "right" ? right.parent : left.parent}
-      w={"25vw"}
-      bgGradient="linear(130deg, whiteAlpha.500, transparent)"
-      rounded="lg"
-      listStyleType="none"
+      {...styles.item}
       {...rest}
     >
       <Stack pl="20" spacing="1rem" pb="9" pt="4" pr="4" mt="1rem">
         <Image
-          src="/assets/illustration/timelineVect.svg"
+          left="0"
+          top="35%"
           alt="roadmap"
           position="absolute"
-          top="35%"
-          left="0"
+          src="/assets/illustration/timelineVect.svg"
         ></Image>
         <Heading fontSize="xl">{title}</Heading>
         <Text>{content}</Text>
       </Stack>
       <Box
-        position="absolute"
         right={mode === "right" ? {} : left.date}
         left={mode === "right" ? right.date : {}}
+        position="absolute"
         bottom="9vh"
       >
         <Text>{quartal}</Text>
