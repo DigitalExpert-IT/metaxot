@@ -7,9 +7,7 @@ import {
 import { createContext } from "react";
 export const RoadmapListContext = createContext<any>({});
 
-interface RoadmapListProps extends ListProps {
-  variant: string;
-}
+interface RoadmapListProps extends ListProps {}
 
 export const RoadmapList: React.FC<RoadmapListProps> = props => {
   const { variant, children, ...rest } = props;

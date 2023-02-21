@@ -42,7 +42,6 @@ import { tooltipTheme } from "./tooltip";
 import { textTheme } from "./text";
 import { navbarTheme } from "./navbar";
 import { roadmapListTheme } from "./roadmapList";
-import { roadmapListItemTheme } from "./roadmapListitem";
 
 export { accordionTheme as Accordion } from "./accordion";
 export { alertTheme as Alert } from "./alert";
@@ -86,7 +85,6 @@ export { textareaTheme as Textarea } from "./textarea";
 export { tooltipTheme as Tooltip } from "./tooltip";
 export { navbarTheme as Navbar } from "./navbar";
 export { roadmapListTheme as RoadmapList } from "./roadmapList";
-export { roadmapListItemTheme as RoadmapListItem } from "./roadmapListitem";
 
 export const components = {
   Text: textTheme,
@@ -133,5 +131,4 @@ export const components = {
   Card: cardTheme,
   Navbar: navbarTheme,
   RoadmapList: roadmapListTheme,
-  RoadmapListItem: roadmapListItemTheme,
 } as const;

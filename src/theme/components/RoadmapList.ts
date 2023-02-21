@@ -7,22 +7,22 @@ const { defineMultiStyleConfig } = createMultiStyleConfigHelpers([
 ]);
 
 export const roadmapListTheme = defineMultiStyleConfig({
-  baseStyle: {},
+  baseStyle: {
+    main: {
+      w: "40vh",
+      h: "100vh",
+      marginY: "10",
+      _before: {
+        w: "1px",
+        h: "100vh",
+        right: "50%",
+      },
+    },
+  },
   sizes: {
     base: {},
     sm: {},
-    md: {
-      main: {
-        w: "40vh",
-        h: "100vh",
-        marginY: "10",
-        _before: {
-          w: "1px",
-          h: "100vh",
-          right: "50%",
-        },
-      },
-    },
+    md: {},
     lg: {},
   },
   variants: {
@@ -63,8 +63,5 @@ export const roadmapListTheme = defineMultiStyleConfig({
       },
     },
   },
-  defaultProps: {
-    variant: "dekstop",
-    size: "md",
-  },
+  defaultProps: {},
 });
