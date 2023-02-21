@@ -28,7 +28,7 @@ export const NAVIGATION: Array<INavigation> = [
   },
   {
     name: "roadMap",
-    href: "/road-map",
+    href: "/roadmap",
   },
   {
     name: "download",
