@@ -22,11 +22,11 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
   const styles = useContext(RoadmapListContext);
   const left = {
     parent: "-20vw",
-    date: { lg: "-25vw", base: "10" },
+    date: { lg: "-25vw", base: "0" },
   };
   const right = {
     parent: "20vw",
-    date: { lg: "-25vw", base: "-10" },
+    date: { lg: "-25vw", base: "0" },
   };
 
   return (
