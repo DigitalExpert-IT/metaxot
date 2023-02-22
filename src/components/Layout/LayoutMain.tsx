@@ -12,11 +12,11 @@ export const LayoutMain: React.FC<LayoutMainProps> = props => {
   const { title } = props;
   return (
     <Box>
-      {title ? (
+      {title && (
         <Head>
           <title>{title}</title>
         </Head>
-      ) : null}
+      )}
       <Navbar />
       <Container pt={{ base: "20", md: "40" }} maxW="container.xl">
         {props.children}
