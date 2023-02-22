@@ -21,7 +21,7 @@ const Roadmap = () => {
       >
         IMPLEMENTATION
       </Box>
-      <RoadmapHeader zIndex="10" position="relative" />
+      <RoadmapHeader zIndex="2" position="relative" />
       <RoadmapTimeLine />
     </LayoutMain>
   );
