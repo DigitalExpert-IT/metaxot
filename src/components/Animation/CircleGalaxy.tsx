@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Box, keyframes } from "@chakra-ui/react";
+import { Box, BoxProps, keyframes } from "@chakra-ui/react";
 
 const animationKeyframes = keyframes`
   0% { background-color:purple; z-index:2;}
@@ -17,9 +17,10 @@ const animation = `${animationKeyframes} 10s ease-in-out infinite`;
 const animation3 = `${animationKeyframes} 20s ease-in-out infinite`;
 const animation2 = `${animationKeyframes2} 5s ease-in-out infinite`;
 
-export const CircleGalaxy = () => {
+export const CircleGalaxy = (props?: BoxProps) => {
+  const { ...rest } = props
   return (
-    <Box position={"absolute"} right="13vw">
+    <Box position={"absolute"} right="13vw" {...rest}>
       <Box
         w="352px"
         h="352px"

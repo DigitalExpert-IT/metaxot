@@ -77,6 +77,30 @@
       "subtitle": "METAXOT LINE UP"
     }
   },
+  "landSale": {
+    "header": {
+      "title": "GET INVOLVED FOR THE FUTURE <br /> OWN METAXOT LAND",
+      "subtitle": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui molestias doloribus."
+    },
+    "smallLand": {
+      "label": "SMALL LAND",
+      "features": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+      "location": "Island A",
+      "section": "Section A, Secti on B"
+    },
+    "mediumLand": {
+      "label": "MEDIUM LAND",
+      "features": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+      "location": "Island A",
+      "section": "Section A, Secti on B"
+    },
+    "largeLand": {
+      "label": "LARGE LAND",
+      "features": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+      "location": "Island A",
+      "section": "Section A, Secti on B"
+    }
+  },
   "download": {
     "header": "THE LIFE BEGIN",
     "systemRequirements": "System Requirements",
