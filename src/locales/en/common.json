@@ -9,10 +9,16 @@
     "dropYourEmail": "Drop your email for further information.",
     "allRightsReserved": "All Rights Reserved."
   },
+  "available": "Available",
   "browse": "Browse",
   "buyLand": "Buy Land",
+  "checkOnMap": "Check On Map",
   "download": "Download",
+  "features": "Features",
   "land": "land",
+  "location": "Location",
+  "lotLeft": "Lot Left",
   "send": "send",
+  "section": "Section",
   "extras": "extras"
 }

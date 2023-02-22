@@ -1,12 +1,5 @@
-import {
-  Box,
-  Button,
-  Card,
-  Heading,
-  SimpleGrid,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Heading, Stack } from "@chakra-ui/react";
+import { ButtonShadow } from "components/Button";
 import { useTranslation } from "react-i18next";
 
 export const SectionHeader = () => {
@@ -19,9 +12,7 @@ export const SectionHeader = () => {
           {t("pages.download.header")}
         </Heading>
       </Box>
-      <Button colorScheme={"yellowMetaxot"} boxShadow={"yellow"}>
-        {t("common.download")} Metaxot
-      </Button>
+      <ButtonShadow>{t("common.download")} Metaxot</ButtonShadow>
     </Stack>
   );
 };
