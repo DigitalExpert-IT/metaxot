@@ -72,8 +72,7 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
 };
 
 RoadmapListItem.defaultProps = {
-  title: "Title Road Map",
-  content:
-    " Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
+  title: "Need Title",
+  content: "need content",
   quartal: "2019, July Q1",
 };

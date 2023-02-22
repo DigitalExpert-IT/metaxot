@@ -52,6 +52,6 @@ export const RoadmapDate: React.FC<RoadmapDateProps> = props => {
   );
 };
 RoadmapDate.defaultProps = {
-  days: "12<span>Days</span>",
-  month: "2<span>Month</span>",
+  days: "Need<span>Days</span>",
+  month: "Need<span>Month</span>",
 };
