@@ -9,7 +9,7 @@ export const RoadmapTimeLine = () => {
         PRE-ALPHA RELEASE
       </Heading>
       <RoadmapDate />
-      <RoadmapList variant={"dekstop"}>
+      <RoadmapList>
         <RoadmapListItem mode="left" />
         <RoadmapListItem mode="right" top="5%" />
         <RoadmapListItem mode="left" top="10%" />

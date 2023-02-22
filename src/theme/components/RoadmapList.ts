@@ -9,14 +9,28 @@ const { defineMultiStyleConfig } = createMultiStyleConfigHelpers([
 export const roadmapListTheme = defineMultiStyleConfig({
   baseStyle: {
     main: {
-      w: "40vh",
+      w: { lg: "25vw", base: "100%" },
+      transition: "ease-in 0.2s",
       h: "100vh",
-      marginY: "10",
+      pl: "10",
+      marginY: { lg: "10", base: "0" },
+      position: "relative",
       _before: {
+        content: "''",
+        display: "block",
+        position: "absolute",
+        bg: "whiteAlpha.800",
         w: "1px",
-        h: "100vh",
-        right: "50%",
+        h: { lg: "100vh", base: "67vh" },
+        right: { lg: "50%", base: "calc(100% - 1rem)" },
       },
+    },
+    item: {
+      position: { lg: "relative", base: "unset" },
+      w: { lg: "25vw", base: "100%" },
+      bgGradient: "linear(130deg, whiteAlpha.500, transparent)",
+      rounded: "lg",
+      listStyleType: "none",
     },
   },
   sizes: {
@@ -27,22 +41,8 @@ export const roadmapListTheme = defineMultiStyleConfig({
   },
   variants: {
     dekstop: {
-      main: {
-        position: "relative",
-        _before: {
-          content: "''",
-          display: "block",
-          position: "absolute",
-          bg: "whiteAlpha.800",
-        },
-      },
-      item: {
-        position: "relative",
-        w: "25vw",
-        bgGradient: "linear(130deg, whiteAlpha.500, transparent)",
-        rounded: "lg",
-        listStyleType: "none",
-      },
+      main: {},
+      item: {},
     },
     mobile: {
       main: {
