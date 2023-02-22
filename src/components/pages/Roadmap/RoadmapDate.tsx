@@ -1,4 +1,4 @@
-import { Box, Spacer, Stack, Text } from "@chakra-ui/react";
+import { Box, Spacer, Stack } from "@chakra-ui/react";
 import { Trans } from "react-i18next";
 interface RoadmapDateProps {
   month?: string;

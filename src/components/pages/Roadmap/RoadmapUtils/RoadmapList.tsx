@@ -1,12 +1,11 @@
 import {
-  createStylesContext,
   ListProps,
   UnorderedList,
   useMultiStyleConfig,
 } from "@chakra-ui/react";
 import { createContext } from "react";
-export const RoadmapListContext = createContext<any>({});
 
+export const RoadmapListContext = createContext<any>({});
 interface RoadmapListProps extends ListProps {}
 
 export const RoadmapList: React.FC<RoadmapListProps> = props => {

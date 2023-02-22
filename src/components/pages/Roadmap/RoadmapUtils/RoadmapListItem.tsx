@@ -11,10 +11,10 @@ import { useContext } from "react";
 import { RoadmapListContext } from "./RoadmapList";
 
 interface RoadmapListItemProps extends ListItemProps {
-  mode: string | "left" | "right";
   title?: string;
   content?: string;
   quartal?: string;
+  mode: string | "left" | "right";
 }
 
 export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
@@ -36,34 +36,34 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
       {...rest}
     >
       <Stack
-        pl={{ lg: "20", base: "10" }}
-        spacing="1rem"
         pb="9"
         pt="4"
         pr="4"
         mt="1rem"
+        spacing="1rem"
+        pl={{ lg: "20", base: "10" }}
       >
         <Image
           left="0"
-          top={{ lg: "35%", base: "none" }}
           alt="roadmap"
           position={"absolute"}
-          src="/assets/illustration/timelineVect.svg"
+          top={{ lg: "35%", base: "none" }}
           display={{ lg: "block", base: "none" }}
+          src="/assets/illustration/timelineVect.svg"
         ></Image>
         <Heading fontSize="xl">{title}</Heading>
         <Text>{content}</Text>
       </Stack>
       <Box
-        right={mode === "right" ? {} : left.date}
+        p="1"
+        maxW="8rem"
+        rounded="xl"
+        bg={{ lg: "none", base: "gray.100" }}
         left={mode === "right" ? right.date : {}}
+        right={mode === "right" ? {} : left.date}
+        color={{ lg: "gray.100", base: "gray.800" }}
         position={{ lg: "absolute", base: "relative" }}
         bottom={{ lg: "9vh", md: "11rem", sm: "14rem", base: "18rem" }}
-        bg={{ lg: "none", base: "gray.100" }}
-        color={{ lg: "gray.100", base: "gray.800" }}
-        rounded="xl"
-        maxW="8rem"
-        p="1"
       >
         <Text>{quartal}</Text>
       </Box>
