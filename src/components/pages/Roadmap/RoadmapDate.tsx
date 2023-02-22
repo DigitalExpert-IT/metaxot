@@ -24,7 +24,7 @@ export const RoadmapDate: React.FC<RoadmapDateProps> = props => {
             components={{
               span: <Spacer fontSize="md" fontWeight="normal"></Spacer>,
             }}
-          ></Trans>
+          />
         </Box>
       </Box>
       <Box display="flex" alignItems={"center"}>
@@ -45,7 +45,7 @@ export const RoadmapDate: React.FC<RoadmapDateProps> = props => {
             components={{
               span: <Spacer fontSize="md" fontWeight="normal"></Spacer>,
             }}
-          ></Trans>
+          />
         </Box>
       </Box>
     </Stack>
