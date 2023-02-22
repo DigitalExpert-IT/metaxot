@@ -2,7 +2,7 @@ import { RoadmapDate } from "./RoadmapDate";
 import { useTranslation } from "react-i18next";
 import { Heading, Stack } from "@chakra-ui/react";
 import { RoadmapList, RoadmapListItem } from "./RoadmapUtils";
-import { useTranslation } from "react-i18next";
+
 export const RoadmapTimeLine = () => {
   const { t } = useTranslation();
   return (
@@ -22,37 +22,22 @@ export const RoadmapTimeLine = () => {
           quartal={t("pages.roadmap.preRelease.roadmap.q1.quartal")!}
         />
         <RoadmapListItem
-<<<<<<< HEAD
           top="5%"
           mode="right"
-=======
-          mode="right"
-          top="5%"
->>>>>>> 0c1135b (update)
           title={t("pages.roadmap.preRelease.roadmap.q2.title")!}
           content={t("pages.roadmap.preRelease.roadmap.q2.content")!}
           quartal={t("pages.roadmap.preRelease.roadmap.q2.quartal")!}
         />
         <RoadmapListItem
-<<<<<<< HEAD
           top="10%"
           mode="left"
-=======
-          mode="left"
-          top="10%"
->>>>>>> 0c1135b (update)
           title={t("pages.roadmap.preRelease.roadmap.q3.title")!}
           content={t("pages.roadmap.preRelease.roadmap.q3.content")!}
           quartal={t("pages.roadmap.preRelease.roadmap.q3.quartal")!}
         />
         <RoadmapListItem
-<<<<<<< HEAD
           top="20%"
           mode="right"
-=======
-          mode="right"
-          top="20%"
->>>>>>> 0c1135b (update)
           title={t("pages.roadmap.preRelease.roadmap.q4.title")!}
           content={t("pages.roadmap.preRelease.roadmap.q4.content")!}
           quartal={t("pages.roadmap.preRelease.roadmap.q4.quartal")!}
