@@ -22,11 +22,11 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
   const styles = useContext(RoadmapListContext);
   const left = {
     parent: "-20vw",
-    date: "-25vw",
+    date: { lg: "-25vw", base: "0" },
   };
   const right = {
     parent: "20vw",
-    date: "-25vw",
+    date: { lg: "-25vw", base: "0" },
   };
 
   return (
@@ -35,7 +35,14 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
       {...styles.item}
       {...rest}
     >
-      <Stack pl="20" spacing="1rem" pb="9" pt="4" pr="4" mt="1rem">
+      <Stack
+        pl={{ lg: "20", base: "10" }}
+        spacing="1rem"
+        pb="9"
+        pt="4"
+        pr="4"
+        mt="1rem"
+      >
         <Image
           left="0"
           top="35%"
@@ -49,7 +56,7 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
       <Box
         right={mode === "right" ? {} : left.date}
         left={mode === "right" ? right.date : {}}
-        position="absolute"
+        position={{ lg: "absolute", base: "relative" }}
         bottom="9vh"
       >
         <Text>{quartal}</Text>
