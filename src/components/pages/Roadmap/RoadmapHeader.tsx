@@ -1,5 +1,5 @@
-import { Box, Heading, Stack, StackProps, Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { Box, Heading, Stack, StackProps, Text } from "@chakra-ui/react";
 
 export const RoadmapHeader: React.FC<StackProps> = props => {
   const { t } = useTranslation();

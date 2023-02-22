@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import { LayoutMain, RoadmapTimeLine } from "components";
 import { RoadmapHeader } from "components";
+import { LayoutMain, RoadmapTimeLine } from "components";
 
 const Roadmap = () => {
   return (

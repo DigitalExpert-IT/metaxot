@@ -83,8 +83,8 @@
     "preRelease":{
       "title":"PRE-ALPHA RELEASE",
       "roadmap":{
-        "month":"2 Month",
-        "days":"12 Days",
+        "month":"2 <span>Month</span>",
+        "days":"12 <span>Days</span>",
         "q1":{
           "title": "Title Road Map",
             "content":" Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",

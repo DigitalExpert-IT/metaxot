@@ -9,7 +9,10 @@ export const RoadmapTimeLine = () => {
       <Heading fontSize="2xl" as="h2">
         {t("pages.roadmap.preRelease.title")}
       </Heading>
-      <RoadmapDate />
+      <RoadmapDate
+        days={t("pages.roadmap.preRelease.roadmap.days")!}
+        month={t("pages.roadmap.preRelease.roadmap.month")!}
+      />
       <RoadmapList>
         <RoadmapListItem
           mode="left"
