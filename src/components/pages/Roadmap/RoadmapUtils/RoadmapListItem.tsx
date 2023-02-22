@@ -22,11 +22,11 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
   const styles = useContext(RoadmapListContext);
   const left = {
     parent: "-20vw",
-    date: { lg: "-25vw", base: "0" },
+    date: { lg: "-25vw", base: "10" },
   };
   const right = {
     parent: "20vw",
-    date: { lg: "-25vw", base: "0" },
+    date: { lg: "-25vw", base: "-10" },
   };
 
   return (
@@ -45,10 +45,11 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
       >
         <Image
           left="0"
-          top="35%"
+          top={{ lg: "35%", base: "none" }}
           alt="roadmap"
-          position="absolute"
+          position={"absolute"}
           src="/assets/illustration/timelineVect.svg"
+          display={{ lg: "block", base: "none" }}
         ></Image>
         <Heading fontSize="xl">{title}</Heading>
         <Text>{content}</Text>
@@ -57,7 +58,12 @@ export const RoadmapListItem: React.FC<RoadmapListItemProps> = props => {
         right={mode === "right" ? {} : left.date}
         left={mode === "right" ? right.date : {}}
         position={{ lg: "absolute", base: "relative" }}
-        bottom="9vh"
+        bottom={{ lg: "9vh", md: "11rem", sm: "14rem", base: "18rem" }}
+        bg={{ lg: "none", base: "gray.100" }}
+        color={{ lg: "gray.100", base: "gray.800" }}
+        rounded="xl"
+        maxW="8rem"
+        p="1"
       >
         <Text>{quartal}</Text>
       </Box>
