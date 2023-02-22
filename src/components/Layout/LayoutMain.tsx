@@ -14,7 +14,7 @@ export const LayoutMain: React.FC<LayoutMainProps> = props => {
     <Box>
       {title && (
         <Head>
-          <title>{title}</title>
+          <title>{title} - Metaxot </title>
         </Head>
       )}
       <Navbar />
