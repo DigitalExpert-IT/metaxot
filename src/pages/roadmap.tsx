@@ -4,7 +4,7 @@ import { LayoutMain, RoadmapTimeLine } from "components";
 
 const Roadmap = () => {
   return (
-    <LayoutMain>
+    <LayoutMain title="Roadmap">
       <Box
         fontSize="9xl"
         as="div"
