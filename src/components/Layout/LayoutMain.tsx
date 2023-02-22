@@ -5,7 +5,7 @@ import { Box, BoxProps, Container } from "@chakra-ui/react";
 import Head from "next/head";
 
 interface LayoutMainProps extends BoxProps {
-  title: string;
+  title?: string;
 }
 
 export const LayoutMain: React.FC<LayoutMainProps> = props => {
