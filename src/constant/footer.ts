@@ -8,32 +8,32 @@ export const FOOTER_NAVIGATION: Array<FooterNavigation> = [
   {
     label: "LAND",
     children: [
-      { name: "Buy", href: "/buy" },
-      { name: "Sell", href: "/sell" },
+      { name: "Buy", href: "#" },
+      { name: "Sell", href: "#" },
     ],
   },
   {
     label: "ROADMAP",
     children: [
-      { name: "PDF", href: "/pdf" },
-      { name: "Share", href: "/share" },
+      { name: "PDF", href: "#" },
+      { name: "Share", href: "#" },
     ],
   },
   {
     label: "DOWNLOAD",
     children: [
-      { name: "For PC", href: "/download-pc" },
-      { name: "For Android", href: "/download-android" },
-      { name: "For IOS", href: "/download-ios" },
-      { name: "For VR", href: "/download-vr" },
+      { name: "For PC", href: "#" },
+      { name: "For Android", href: "#" },
+      { name: "For IOS", href: "#" },
+      { name: "For VR", href: "#" },
     ],
   },
   {
     label: "EXTRAS",
     children: [
-      { name: "About Us", href: "/about-us" },
-      { name: "Private", href: "/privacy" },
-      { name: "Terms", href: "/terms" },
+      { name: "About Us", href: "#" },
+      { name: "Private", href: "#" },
+      { name: "Terms", href: "#" },
     ],
   },
 ];
