@@ -11,10 +11,11 @@ const Roadmap = () => {
         textAlign="center"
         w="full"
         left="0"
-        top={"20"}
+        top={120}
         fontWeight="bold"
         position="absolute"
-        bgGradient="linear(to-b, whiteAlpha.200, transparent)"
+        opacity="0.5"
+        bgGradient="linear(to-b, whiteAlpha.100, transparent)"
         bgClip="text"
         zIndex="1"
         // wait wait hold on this is not title, it just background
