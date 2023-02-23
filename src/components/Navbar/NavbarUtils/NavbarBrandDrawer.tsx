@@ -36,9 +36,7 @@ export const NavbarBrandDrawer: React.FC<NavbarBrandDrawerProps> = props => {
         onClick={isOpen ? onClose : onOpen}
       />
       <Link href="/">
-        <AspectRatio w="120px" h="20px" ratio={1}>
-          <Image src={"/assets/logo/metaxot.svg"} alt="logo-image" />
-        </AspectRatio>
+        <Image src={"/assets/logo/metaxot.svg"} alt="logo-image" />
       </Link>
     </Stack>
   );

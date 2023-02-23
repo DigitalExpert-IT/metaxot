@@ -10,30 +10,30 @@ export const CARD_MISSION_PRESENTATION = [
 export const CARD_MISSION_PROMOTION = [
   {
     title: "pages.home.missionCard.bigOpportunity",
-    subtitle: "pages.home.missionCard.lorem",
+    subtitle: "pages.home.missionCard.subtitle",
   },
   {
     title: "pages.home.missionCard.futureValue",
-    subtitle: "pages.home.missionCard.lorem",
+    subtitle: "pages.home.missionCard.subtitle",
   },
   {
     title: "pages.home.missionCard.newTechnology",
-    subtitle: "pages.home.missionCard.lorem",
+    subtitle: "pages.home.missionCard.subtitle",
   },
 ];
 
 export const KEY_FEATURES = [
   {
     title: "pages.home.keyFetures.leisureLife",
-    subtitle: "pages.home.keyFetures.lorem",
+    subtitle: "pages.home.keyFetures.description",
   },
   {
     title: "pages.home.keyFetures.recuringIncome",
-    subtitle: "pages.home.keyFetures.lorem",
+    subtitle: "pages.home.keyFetures.description",
   },
   {
     title: "pages.home.keyFetures.WEB3Support",
-    subtitle: "pages.home.keyFetures.lorem",
+    subtitle: "pages.home.keyFetures.description",
   },
 ];
 
@@ -47,19 +47,19 @@ export const IMAGE_COLLECTION = [
 export const FAQS = [
   {
     questions: "pages.home.faqs.whatIsMetaxot",
-    answers: "pages.home.faqs.lorem",
+    answers: "pages.home.faqs.answers",
   },
   {
     questions: "pages.home.faqs.howICanPlayMetaxot",
-    answers: "pages.home.faqs.lorem",
+    answers: "pages.home.faqs.answers",
   },
   {
     questions: "pages.home.faqs.isMetaxotSecure",
-    answers: "pages.home.faqs.lorem",
+    answers: "pages.home.faqs.answers",
   },
   {
     questions: "pages.home.faqs.isMetaxotGovermentProperty",
-    answers: "pages.home.faqs.lorem",
+    answers: "pages.home.faqs.answers",
   },
 ];
 
