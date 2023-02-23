@@ -77,6 +77,30 @@
       "subtitle": "METAXOT LINE UP"
     }
   },
+  "landSale": {
+    "header": {
+      "title": "GET INVOLVED FOR THE FUTURE <br /> OWN METAXOT LAND",
+      "subtitle": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui molestias doloribus."
+    },
+    "smallLand": {
+      "label": "SMALL LAND",
+      "features": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+      "location": "Island A",
+      "section": "Section A, Secti on B"
+    },
+    "mediumLand": {
+      "label": "MEDIUM LAND",
+      "features": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+      "location": "Island A",
+      "section": "Section A, Secti on B"
+    },
+    "largeLand": {
+      "label": "LARGE LAND",
+      "features": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+      "location": "Island A",
+      "section": "Section A, Secti on B"
+    }
+  },
   "download": {
     "header": "THE LIFE BEGIN",
     "systemRequirements": "System Requirements",
@@ -100,6 +124,37 @@
     "fullyFeatured": {
       "title": "FULLY FEATURED",
       "description": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui molestias doloribus."
+    }
+  },
+  "roadmap":{
+    "title":"ROADMAP",
+    "content":"Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui molestias doloribus.",
+    "preRelease":{
+      "title":"PRE-ALPHA RELEASE",
+      "roadmap":{
+        "month":"2 <span>Month</span>",
+        "days":"12 <span>Days</span>",
+        "q1":{
+          "title": "Title Road Map",
+            "content":" Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
+            "quartal": "2019, July Q1"
+        },
+        "q2":{
+          "title": "Title Road Map",
+            "content":" Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
+            "quartal": "2021, Q2"
+        },
+        "q3":{
+          "title": "Title Road Map",
+            "content":" Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
+            "quartal": "2022, Q3"
+        },
+        "q4":{
+          "title": "Title Road Map",
+            "content":" Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
+            "quartal": "2021, Q4"
+        }
+      }
     }
   }
 }
