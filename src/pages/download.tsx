@@ -8,7 +8,7 @@ import {
 } from "components/pages/Download";
 function Download() {
   return (
-    <LayoutMain>
+    <LayoutMain title="Download">
       <BackgroundPageDownload />
       <SectionHeader />
       <SectionSystem />

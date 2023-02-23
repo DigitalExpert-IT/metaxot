@@ -36,6 +36,7 @@ export const NavbarMain: React.FC<NavbarMainProps> = props => {
     <Box
       as="nav"
       __css={styles.main}
+      transition={scrolled ? "0.5s" : "none"}
       boxShadow={scrolled ? "dark-lg" : "none"}
       bg={isOpen ? "gray.800" : scrolled ? "gray.800" : "transparent"}
       {...rest}
