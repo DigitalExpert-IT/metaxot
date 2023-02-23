@@ -7,7 +7,7 @@ import { t } from "i18next";
 import { Trans } from "react-i18next";
 function LandSale() {
   return (
-    <LayoutMain title="landsale">
+    <LayoutMain title="Landsale">
       <Stack position={"relative"} maxW={"xs"} ml={"60%"} zIndex={"hide"}>
         <CircleGalaxy top={0} mt={"-30rem"} />
       </Stack>
