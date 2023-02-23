@@ -19,7 +19,6 @@ export const navbarTheme = defineMultiStyleConfig({
     main: {
       zIndex: 5,
       pos: "fixed",
-      transition: "0.5s",
     },
     body: {
       alignItems: "center",
