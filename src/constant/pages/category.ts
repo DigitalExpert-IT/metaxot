@@ -1,6 +1,6 @@
 export const CATEGORY = [
-  {name:"all"},
-  {name:"caracters"},
-  {name:"lands"},
-  {name:"materials"}
-]
+  { name: "all", isActive: true },
+  { name: "caracters", isActive: false },
+  { name: "lands", isActive: false },
+  { name: "materials", isActive: false },
+];
