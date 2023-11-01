@@ -34,4 +34,8 @@ export const NAVIGATION: Array<INavigation> = [
     name: "download",
     href: "/download",
   },
+  {
+    name:"market",
+    href:"/market"
+  }
 ];

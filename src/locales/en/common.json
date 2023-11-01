@@ -3,7 +3,8 @@
     "home": "Home",
     "landSale": "Land Sale",
     "roadMap": "Road Map",
-    "download": "Download"
+    "download": "Download",
+    "market":"Market"
   },
   "footer": {
     "dropYourEmail": "Drop your email for further information.",
