@@ -1,6 +1,4 @@
 import {
-  Heading,
-  HStack,
   Stack,
   Text,
   UnorderedList,
@@ -25,6 +23,7 @@ function Market() {
       return { ...ctg, isActive: false };
     });
   }, [isActive]);
+
   const items = useMemo(() => {
     return new Array(10).fill(null).map((_, i) => {
       return i;

@@ -1,8 +1,19 @@
-import { Box, Button, Image, Progress, Stack, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Image,
+  Progress,
+  Stack,
+  Text,
+  Modal,
+  useDisclosure,
+  ModalBody,
+  ModalOverlay,
+  ModalContent,
+} from "@chakra-ui/react";
 import { CircleGalaxy, LayoutMain } from "components";
-import { useRouter } from "next/router";
 
 const Detail = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <LayoutMain title="Market">
       <Stack position={"relative"} maxW={"xs"} ml={"60%"} zIndex={"hide"}>
@@ -10,7 +21,13 @@ const Detail = () => {
       </Stack>
       <Stack pb="24">
         <Stack direction={"row"} spacing="5">
-          <Stack flex={1} spacing="0" rounded={"lg"} overflow="hidden">
+          <Stack
+            flex={1}
+            spacing="0"
+            rounded={"lg"}
+            overflow="hidden"
+            onClick={onOpen}
+          >
             <Image
               src="https://th.bing.com/th/id/OIG.Wz9RM4AS.VbkbTbfHSYO?pid=ImgGn"
               alt="caracter"
@@ -65,6 +82,17 @@ const Detail = () => {
           </Stack>
         </Stack>
       </Stack>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalBody p="0" rounded={"lg"} overflow="hidden">
+            <Image
+              src="https://th.bing.com/th/id/OIG.Wz9RM4AS.VbkbTbfHSYO?pid=ImgGn"
+              alt="caracter"
+            ></Image>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </LayoutMain>
   );
 };
