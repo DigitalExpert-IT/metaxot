@@ -156,5 +156,13 @@
         }
       }
     }
+  },
+  "market":{
+    "category":{
+      "all":"All",
+      "caracters":"Caracter",
+      "lands":"Land",
+      "materials":"Materials"
+    }
   }
 }
