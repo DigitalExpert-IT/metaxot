@@ -25,7 +25,7 @@ function Market() {
   }, [isActive]);
 
   const items = useMemo(() => {
-    return new Array(10).fill(null).map((_, i) => {
+    return new Array(6).fill(null).map((_, i) => {
       return i;
     });
   }, []);
@@ -60,13 +60,18 @@ function Market() {
         })}
       </Stack>
       <Stack py="2">
-        <Wrap>
+        <Wrap spacing={"5"}>
           {items.map(e => {
             return (
               <WrapItem
-                w={{ md: "23%", base: "47%" }}
+                w={{ md: "23%", base: "43%" }}
                 key={e}
                 onClick={() => route.push(`/market/${e}`)}
+                cursor="pointer"
+                _hover={{
+                  transform: "scale(1.01) ",
+                  transition: "0.1s",
+                }}
               >
                 <Stack bg="whiteAlpha.300" rounded="lg" overflow="hidden">
                   <Image

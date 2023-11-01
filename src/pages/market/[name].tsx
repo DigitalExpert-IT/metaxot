@@ -20,17 +20,12 @@ const Detail = () => {
         <CircleGalaxy top={0} mt={"-30rem"} />
       </Stack>
       <Stack pb="24">
-        <Stack direction={"row"} spacing="5">
-          <Stack
-            flex={1}
-            spacing="0"
-            rounded={"lg"}
-            overflow="hidden"
-            onClick={onOpen}
-          >
+        <Stack direction={{ md: "row", base: "column" }} spacing="5">
+          <Stack flex={1} spacing="0" overflow="hidden" onClick={onOpen}>
             <Image
               src="https://th.bing.com/th/id/OIG.Wz9RM4AS.VbkbTbfHSYO?pid=ImgGn"
               alt="caracter"
+              rounded={"lg"}
             ></Image>
           </Stack>
           <Stack flex={2} justify="space-between">
