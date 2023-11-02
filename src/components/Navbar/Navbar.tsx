@@ -9,8 +9,10 @@ import React, { useEffect, useState } from "react";
 import { NAVIGATION } from "constant";
 import { Flex, useDisclosure } from "@chakra-ui/react";
 import { ConnectWallet, darkTheme } from "@thirdweb-dev/react";
+import { useTranslation } from "react-i18next";
 
 export const Navbar = () => {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [host, setHost] = useState("");
   useEffect(() => {
@@ -45,8 +47,8 @@ export const Navbar = () => {
                 primaryButtonText: "#FFFF",
               },
             })}
-            btnTitle={"Connect Wallet"}
-            modalTitle={"Supported Wallet"}
+            btnTitle={t("common.connectWallet") ?? ""}
+            modalTitle={t("common.supportWallet") ?? ""}
             modalSize={"wide"}
             welcomeScreen={{
               img: {

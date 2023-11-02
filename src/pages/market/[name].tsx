@@ -11,8 +11,10 @@ import {
   ModalContent,
 } from "@chakra-ui/react";
 import { CircleGalaxy, LayoutMain } from "components";
+import { useTranslation } from "react-i18next";
 
 const Detail = () => {
+  const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <LayoutMain title="Market">
@@ -73,7 +75,7 @@ const Detail = () => {
             </Stack>
             <Text>owned by 0x000sdkjd934j934</Text>
             <Text>30 XPC</Text>
-            <Button>Buy</Button>
+            <Button>{t("common.buy")}</Button>
           </Stack>
         </Stack>
       </Stack>
