@@ -23,6 +23,8 @@
     "@metamask/detect-provider": "^2.0.0",
     "@tanstack/react-query": "^4.20.4",
     "@tanstack/react-table": "^8.7.4",
+    "@thirdweb-dev/chains": "^0.1.57",
+    "@thirdweb-dev/react": "^4.1.1",
     "@types/node": "18.11.10",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",

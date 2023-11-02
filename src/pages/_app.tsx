@@ -21,16 +21,33 @@ const queryClient = new QueryClient({
     },
   },
 });
+import {
+  ThirdwebProvider,
+  metamaskWallet,
+  phantomWallet,
+  trustWallet,
+} from "@thirdweb-dev/react";
+import { getActiveChain } from "lib/chain";
+
+const targetChain = getActiveChain();
+const CLIENT_ID = process.env.NEXT_PUBLIC_THIRDWEB || "0";
 
 export default function App(props: AppProps) {
   return (
-    <ChakraProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <NiceModal.Provider>
-          <Main {...props} />
-        </NiceModal.Provider>
-      </QueryClientProvider>
-    </ChakraProvider>
+    <ThirdwebProvider
+      supportedChains={[targetChain]}
+      supportedWallets={[metamaskWallet(), trustWallet(), phantomWallet()]}
+      activeChain={targetChain}
+      clientId={CLIENT_ID}
+    >
+      <ChakraProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <NiceModal.Provider>
+            <Main {...props} />
+          </NiceModal.Provider>
+        </QueryClientProvider>
+      </ChakraProvider>
+    </ThirdwebProvider>
   );
 }
 
