@@ -1,6 +1,6 @@
 {
   "name": "metaxot",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -42,7 +42,7 @@
     "immer": "^9.0.16",
     "keccak": "^3.0.2",
     "lodash": "^4.17.21",
-    "metaxot-contract": "^1.0.0",
+    "metaxot-contract": "^1.1.0",
     "next": "13.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
