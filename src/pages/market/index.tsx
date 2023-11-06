@@ -12,9 +12,12 @@ import { CATEGORY } from "constant/pages/category";
 import { t } from "i18next";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
+import { usePreMint } from "hooks/market/useListPreMint";
+import { prettyBn } from "utils";
 
 export const Market = () => {
   const [isActive, setIsActive] = useState<number>(0);
+  const { data } = usePreMint();
 
   const nomarilizer = useMemo(() => {
     return CATEGORY.map((ctg, i) => {
@@ -26,7 +29,7 @@ export const Market = () => {
   }, [isActive]);
 
   const items = useMemo(() => {
-    return new Array(6).fill(null).map((_, i) => {
+    return new Array(5).fill(null).map((_, i) => {
       return i;
     });
   }, []);
@@ -61,33 +64,38 @@ export const Market = () => {
         })}
       </Stack>
       <Stack py="2">
-        <Wrap spacing={"5"}>
-          {items.map(e => {
-            return (
-              <WrapItem
-                w={{ md: "23%", base: "43%" }}
-                key={e}
-                onClick={() => route.push(`/market/${e}`)}
-                cursor="pointer"
-                _hover={{
-                  transform: "scale(1.01) ",
-                  transition: "0.1s",
-                }}
-              >
-                <Stack bg="whiteAlpha.300" rounded="lg" overflow="hidden">
-                  <Image
-                    src="https://th.bing.com/th/id/OIG.Wz9RM4AS.VbkbTbfHSYO?pid=ImgGn"
-                    alt="caracter"
-                  />
-                  <Stack p="3">
-                    <Text>Name</Text>
-                    <Text>30 XPC</Text>
+        {data === undefined ? (
+          <Text>waiting tresno jalaran soko kulino</Text>
+        ) : (
+          <Wrap spacing={"5"}>
+            {data?.map((e: any, idx: any) => {
+              return (
+                <WrapItem
+                  w={{ md: "23%", base: "43%" }}
+                  key={idx}
+                  onClick={() => route.push(`/market/${e}`)}
+                  cursor="pointer"
+                  _hover={{
+                    transform: "scale(1.01) ",
+                    transition: "0.1s",
+                  }}
+                >
+                  <Stack bg="whiteAlpha.300" rounded="lg" overflow="hidden">
+                    <Image
+                      src="https://th.bing.com/th/id/OIG.Wz9RM4AS.VbkbTbfHSYO?pid=ImgGn"
+                      alt="caracter"
+                    />
+                    <Stack p="3">
+                      <Text isTruncated>uuid: {e.uuid}</Text>
+                      <Text>rent ID: {e.rentId.toNumber()}</Text>
+                      <Text>{prettyBn(e.price, 9)} XPC</Text>
+                    </Stack>
                   </Stack>
-                </Stack>
-              </WrapItem>
-            );
-          })}
-        </Wrap>
+                </WrapItem>
+              );
+            })}
+          </Wrap>
+        )}
       </Stack>
     </LayoutMain>
   );
