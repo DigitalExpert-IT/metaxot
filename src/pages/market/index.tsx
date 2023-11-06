@@ -12,7 +12,8 @@ import { CATEGORY } from "constant/pages/category";
 import { t } from "i18next";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
-function Market() {
+
+export const Market = () => {
   const [isActive, setIsActive] = useState<number>(0);
 
   const nomarilizer = useMemo(() => {
@@ -90,6 +91,6 @@ function Market() {
       </Stack>
     </LayoutMain>
   );
-}
+};
 
 export default Market;

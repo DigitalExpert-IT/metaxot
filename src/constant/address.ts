@@ -3,5 +3,13 @@ export const MARKET_CONTRACT = {
 };
 
 export const XPC_CONTRACT = {
-  "0x29a": "",
+  "0x29a": "0xDb9D0642d618b8F888Db3d419CB8Ce6E25909830",
+};
+
+export const MATERIAL_NFT = {
+  "0x29a": "0x5000A3d76D181BC51f53727DBb75dF8d85a7F1f5",
+};
+
+export const MNFT = {
+  "0x29a": "0xf7CFDF75dCADc8e4624878CEce1894Aeb64e1529",
 };

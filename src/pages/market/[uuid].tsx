@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 const Detail = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <LayoutMain title="Market">
       <Stack position={"relative"} maxW={"xs"} ml={"60%"} zIndex={"hide"}>
@@ -42,7 +43,6 @@ const Detail = () => {
               borderColor="whiteAlpha.400"
               direction={"row"}
               py="2"
-              // justify="space-between"
             >
               <Stack flex={1} p="5">
                 <Text>Rarity</Text>
