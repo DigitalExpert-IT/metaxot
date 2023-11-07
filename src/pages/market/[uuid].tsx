@@ -26,14 +26,14 @@ const Detail = () => {
         <Stack direction={{ md: "row", base: "column" }} spacing="5">
           <Stack flex={1} spacing="0" overflow="hidden" onClick={onOpen}>
             <Image
-              src="https://th.bing.com/th/id/OIG.Wz9RM4AS.VbkbTbfHSYO?pid=ImgGn"
+              src="https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063"
               alt="caracter"
               rounded={"lg"}
             ></Image>
           </Stack>
           <Stack flex={2} justify="space-between">
             <Text fontSize={"2xl"} fontWeight="600">
-              Miciko Mustain
+              Medium Lot
             </Text>
             <Stack
               bg="whiteAlpha.300"
@@ -84,7 +84,7 @@ const Detail = () => {
         <ModalContent>
           <ModalBody p="0" rounded={"lg"} overflow="hidden">
             <Image
-              src="https://th.bing.com/th/id/OIG.Wz9RM4AS.VbkbTbfHSYO?pid=ImgGn"
+              src="https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063"
               alt="caracter"
             ></Image>
           </ModalBody>

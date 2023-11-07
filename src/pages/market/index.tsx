@@ -73,7 +73,7 @@ export const Market = () => {
                 <WrapItem
                   w={{ md: "23%", base: "43%" }}
                   key={idx}
-                  onClick={() => route.push(`/market/${e}`)}
+                  onClick={() => route.push(`/market/${e.uuid}`)}
                   cursor="pointer"
                   _hover={{
                     transform: "scale(1.01) ",
@@ -82,7 +82,7 @@ export const Market = () => {
                 >
                   <Stack bg="whiteAlpha.300" rounded="lg" overflow="hidden">
                     <Image
-                      src="https://th.bing.com/th/id/OIG.Wz9RM4AS.VbkbTbfHSYO?pid=ImgGn"
+                      src="https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063"
                       alt="caracter"
                     />
                     <Stack p="3">
