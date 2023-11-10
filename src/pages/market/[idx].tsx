@@ -11,11 +11,43 @@ import {
   ModalContent,
 } from "@chakra-ui/react";
 import { CircleGalaxy, LayoutMain } from "components";
+import { useBuyPreMint } from "hooks/market/useBuyPreMint";
 import { useTranslation } from "react-i18next";
+import { useXpcContract } from "hooks/xpc/useXpcContract";
+import { useAddress, useContractWrite } from "@thirdweb-dev/react";
+import { useRouter } from "next/router";
+import { MARKET_CONTRACT } from "constant/address";
+import { useEffect } from "react";
+import { toBn } from "evm-bn";
+const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID ?? "0x29a";
 
 const Detail = () => {
+  const buy = useBuyPreMint();
+  const xpc = useXpcContract();
+  const address = useAddress();
+  const xpcApprove = useContractWrite(xpc.contract, "approve");
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter();
+
+  useEffect(() => {}, []);
+
+  const buyAsync = async () => {
+    const allowance = await xpc.contract?.call("allowance", [
+      address,
+      MARKET_CONTRACT[CHAIN_ID as "0x29a"],
+    ]);
+    if (allowance.gt()) {
+      const approve = await xpcApprove.mutateAsync({
+        args: [MARKET_CONTRACT[CHAIN_ID as "0x29a"], toBn("1000")],
+      });
+    }
+    // if (approve.receipt.status === 1) {
+    await buy.mutateAsync({
+      args: [Number(router.query.idx)],
+    });
+    // }
+  };
 
   return (
     <LayoutMain title="Market">
@@ -75,7 +107,7 @@ const Detail = () => {
             </Stack>
             <Text>owned by 0x000sdkjd934j934</Text>
             <Text>30 XPC</Text>
-            <Button>{t("common.buy")}</Button>
+            <Button onClick={buyAsync}>{t("common.buy")}</Button>
           </Stack>
         </Stack>
       </Stack>

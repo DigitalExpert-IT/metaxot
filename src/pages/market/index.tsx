@@ -27,12 +27,6 @@ export const Market = () => {
       return { ...ctg, isActive: false };
     });
   }, [isActive]);
-
-  const items = useMemo(() => {
-    return new Array(5).fill(null).map((_, i) => {
-      return i;
-    });
-  }, []);
   const route = useRouter();
 
   return (
@@ -68,12 +62,12 @@ export const Market = () => {
           <Text>waiting tresno jalaran soko kulino</Text>
         ) : (
           <Wrap spacing={"5"}>
-            {data?.map((e: any, idx: any) => {
+            {data?.map((e: any, idx: number) => {
               return (
                 <WrapItem
                   w={{ md: "23%", base: "43%" }}
                   key={idx}
-                  onClick={() => route.push(`/market/${e.uuid}`)}
+                  onClick={() => route.push(`/market/${idx}`)}
                   cursor="pointer"
                   _hover={{
                     transform: "scale(1.01) ",
