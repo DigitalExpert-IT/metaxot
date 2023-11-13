@@ -6,18 +6,20 @@ import {
   Wrap,
   WrapItem,
   Image,
+  Icon,
 } from "@chakra-ui/react";
 import { LayoutMain, CircleGalaxy } from "components";
 import { CATEGORY } from "constant/pages/category";
+import { useListPreMintQuery } from "hooks/market";
 import { t } from "i18next";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
-import { usePreMint } from "hooks/market/useListPreMint";
 import { prettyBn } from "utils";
+import { BsPinMapFill } from "react-icons/bs";
 
 export const Market = () => {
   const [isActive, setIsActive] = useState<number>(0);
-  const { data } = usePreMint();
+  const { data } = useListPreMintQuery();
 
   const nomarilizer = useMemo(() => {
     return CATEGORY.map((ctg, i) => {
@@ -75,14 +77,40 @@ export const Market = () => {
                   }}
                 >
                   <Stack bg="whiteAlpha.300" rounded="lg" overflow="hidden">
-                    <Image
-                      src="https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063"
-                      alt="caracter"
-                    />
+                    <Image src={e.picture} alt="caracter" />
                     <Stack p="3">
-                      <Text isTruncated>uuid: {e.uuid}</Text>
-                      <Text>rent ID: {e.rentId.toNumber()}</Text>
-                      <Text>{prettyBn(e.price, 9)} XPC</Text>
+                      <Text fontSize={"xl"}>{e.name}</Text>
+                      <Stack direction={"row"} justify="space-between">
+                        <Stack>
+                          <Text color={"whiteAlpha.700"} fontSize="xs">
+                            Latitude
+                          </Text>
+                          <span
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Icon
+                              as={BsPinMapFill}
+                              mr="1"
+                              fontSize={"xs"}
+                            ></Icon>
+                            <Text noOfLines={1} w="20" fontSize={"xs"}>
+                              {e.latitude}
+                              {e.longitude}
+                            </Text>
+                          </span>
+                        </Stack>
+                        <Stack>
+                          <Text color={"whiteAlpha.700"} fontSize="xs">
+                            Price
+                          </Text>
+                          <Text fontWeight={"800"}>
+                            {prettyBn(e.price, 9)} XPC
+                          </Text>
+                        </Stack>
+                      </Stack>
                     </Stack>
                   </Stack>
                 </WrapItem>
