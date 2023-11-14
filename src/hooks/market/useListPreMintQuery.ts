@@ -20,6 +20,7 @@ export const useListPreMintQuery = () => {
       const detail = DUMMY_JSON.find(j => j.uuid === e.uuid);
       return { ...e, ...detail };
     });
+    return () =>{};
   }, [data]);
 
   return {

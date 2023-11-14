@@ -1,5 +1,5 @@
 export const MARKET_CONTRACT = {
-  "0x29a": "0x86da68bDbe3B1562C83618Cd05dC00085024Ea73",
+  "0x29a": "0xE2b7ca705a27b553e0E803a4B9fae4F7E29C64E5",
 };
 
 export const XPC_CONTRACT = {
@@ -7,9 +7,9 @@ export const XPC_CONTRACT = {
 };
 
 export const MATERIAL_NFT = {
-  "0x29a": "0x5000A3d76D181BC51f53727DBb75dF8d85a7F1f5",
+  "0x29a": "0xc3b94067c25D8c7774548e9F81045eD2c5e408a9",
 };
 
 export const MNFT = {
-  "0x29a": "0x0d48F8Fc74E709f7904b1cC79a60eB0cfdD8e9Fc",
+  "0x29a": "0xcc5407836dD52A3578211aB54E8184CA57EcE77d",
 };

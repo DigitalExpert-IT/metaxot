@@ -16,11 +16,11 @@ import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import { prettyBn } from "utils";
 import { BsPinMapFill } from "react-icons/bs";
+import { useMarketContract } from "hooks/market/useMarketContract";
 
 export const Market = () => {
   const [isActive, setIsActive] = useState<number>(0);
   const { data } = useListPreMintQuery();
-
   const nomarilizer = useMemo(() => {
     return CATEGORY.map((ctg, i) => {
       if (isActive === i) {
@@ -31,6 +31,7 @@ export const Market = () => {
   }, [isActive]);
   const route = useRouter();
 
+  console.log(data);
   return (
     <LayoutMain title="Market">
       <Stack position={"relative"} maxW={"xs"} ml={"60%"} zIndex={"hide"}>
