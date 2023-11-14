@@ -83,27 +83,6 @@ export const Market = () => {
                       <Stack direction={"row"} justify="space-between">
                         <Stack>
                           <Text color={"whiteAlpha.700"} fontSize="xs">
-                            Latitude
-                          </Text>
-                          <span
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Icon
-                              as={BsPinMapFill}
-                              mr="1"
-                              fontSize={"xs"}
-                            ></Icon>
-                            <Text noOfLines={1} w="20" fontSize={"xs"}>
-                              {e.latitude}
-                              {e.longitude}
-                            </Text>
-                          </span>
-                        </Stack>
-                        <Stack>
-                          <Text color={"whiteAlpha.700"} fontSize="xs">
                             Price
                           </Text>
                           <Text fontWeight={"800"}>

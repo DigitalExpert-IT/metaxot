@@ -1,39 +1,29 @@
 import { useMarketContract } from "./useMarketContract";
 import { useContractRead } from "@thirdweb-dev/react";
 import { Market } from "metaxot-contract/typechain-types";
-import Axios from "axios";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
+import { DUMMY_JSON } from "constant/dummyResAPI";
 
 type GetListedPremintNftSales = Awaited<
-  ReturnType<Market["getListedPremintNftSales"]>
+  ReturnType<Market["getListedPreMintNftSales"]>
 >;
 
 export const useListPreMintQuery = () => {
-  const [nftWithDetail, setNftWithDetail] = useState<any[]>([]);
   const marketContract = useMarketContract();
   const { data, ...rest } = useContractRead(
     marketContract.contract,
-    "getListedPremintNftSales"
+    "getListedPreMintNftSales"
   );
-  const fetchData = async () => {
-    if (!data) return;
-    const promises = data.map(async (e: any) => {
-      const AxiosResponse = await Axios.get(
-        `api/market/list/pre-mint/${e.uuid}`
-      );
-      return { ...e, ...AxiosResponse.data };
-    });
-    const nftList = await Promise.all(promises);
-    setNftWithDetail(nftList);
-  };
 
-  useEffect(() => {
-    fetchData();
-    return () => {};
+  const normalize = useMemo(() => {
+    return data?.map((e: any) => {
+      const detail = DUMMY_JSON.find(j => j.uuid === e.uuid);
+      return { ...e, ...detail };
+    });
   }, [data]);
 
   return {
-    data: nftWithDetail as undefined | GetListedPremintNftSales,
+    data: normalize as undefined | GetListedPremintNftSales,
     ...rest,
   };
 };
