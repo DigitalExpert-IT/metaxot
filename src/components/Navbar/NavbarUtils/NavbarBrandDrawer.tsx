@@ -10,7 +10,7 @@ import { useContext } from "react";
 import { INavigation } from "constant";
 import { ThemeContext } from "./NavbarMain";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { DrawerMobileNav } from "components/Drawer";
+import { DrawerMobileNav } from "./DrawerMobileNav";
 
 interface NavbarBrandDrawerProps extends StackProps {
   isOpen: boolean;
