@@ -17,6 +17,7 @@ import { useMemo, useState } from "react";
 import { prettyBn } from "utils";
 import { BsPinMapFill } from "react-icons/bs";
 import { useMarketContract } from "hooks/market/useMarketContract";
+import { useWallet } from "@thirdweb-dev/react";
 
 export const Market = () => {
   const [isActive, setIsActive] = useState<number>(0);
@@ -30,8 +31,6 @@ export const Market = () => {
     });
   }, [isActive]);
   const route = useRouter();
-
-  console.log(data);
   return (
     <LayoutMain title="Market">
       <Stack position={"relative"} maxW={"xs"} ml={"60%"} zIndex={"hide"}>

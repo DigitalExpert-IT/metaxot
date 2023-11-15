@@ -18,6 +18,11 @@ export const useBuyPreMintMutation = () => {
   );
 
   const handleBuy = async (id: number, price: BigNumber) => {
+    if (address === ZERO_ADDRESS) {
+      throw {
+        code: "NotConnect",
+      };
+    }
     const allowance = await xpc.contract?.call("allowance", [
       address,
       market.contract?.getAddress(),

@@ -19,11 +19,13 @@ import { ZERO_ADDRESS } from "constant/dummyResAPI";
 import { shortenAddress } from "utils";
 import { useAsyncCall } from "hooks/useAsyncCall";
 import { detail } from "./[idx]";
+import { useWallet } from "@thirdweb-dev/react";
 
 export const Detail = () => {
   const [detailNft, setDetailNft] = useState<detail | undefined | any>({});
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
+  const wallet = useWallet();
 
   const { data } = useListPreMintQuery();
   const { mutateAsync } = useBuyPreMintMutation();
@@ -43,13 +45,19 @@ export const Detail = () => {
     setDetailNft(data?.at(+router?.query?.idx ?? 0));
   }, [data]);
   return (
-    <LayoutMain title="Market">
+    <LayoutMain title={detailNft.name}>
       <Stack position={"relative"} maxW={"xs"} ml={"60%"} zIndex={"hide"}>
         <CircleGalaxy top={0} mt={"-30rem"} />
       </Stack>
       <Stack pb="24">
         <Stack direction={{ md: "row", base: "column" }} spacing="5">
-          <Stack flex={1} spacing="0" overflow="hidden" onClick={onOpen}>
+          <Stack
+            flex={1}
+            spacing="0"
+            overflow="hidden"
+            cursor={"pointer"}
+            onClick={onOpen}
+          >
             <Image
               // src="https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063"
               src={detailNft?.picture}
@@ -93,7 +101,8 @@ export const Detail = () => {
                     return;
                   return <Text key={i}>{String(e)}</Text>;
                 })}
-                {/* <Text>Rare</Text>
+                {/* 
+                <Text>Rare</Text>
             <Text>Arcer</Text>
             <Stack direction={"row"} alignItems="center">
               <Progress flex={1} hasStripe value={64} />
@@ -118,7 +127,7 @@ export const Detail = () => {
               </Text>
             </Stack>
             <Button onClick={buy} isLoading={isLoading}>
-              {t("common.buy")}
+              {wallet ? t("common.buy") : t("common.connectWallet")}
             </Button>
           </Stack>
         </Stack>
@@ -127,10 +136,7 @@ export const Detail = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalBody p="0" rounded={"lg"} overflow="hidden">
-            <Image
-              src="https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063"
-              alt="caracter"
-            ></Image>
+            <Image src={detailNft.picture} alt={detailNft.picture}></Image>
           </ModalBody>
         </ModalContent>
       </Modal>
