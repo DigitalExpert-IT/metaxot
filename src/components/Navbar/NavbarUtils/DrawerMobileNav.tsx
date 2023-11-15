@@ -29,6 +29,15 @@ interface MobileDrawerProps {
   logo: string;
 }
 
+/**
+ * Note...!!!
+ * drawerMobileNav here only on drawer
+ * if u expect navbar thunneeling to drawer u wrong
+ * if u add button or something in navbar
+ * make sure check the navbar drawer to..!! XD
+ *
+ */
+
 export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
   const { isOpen, onClose, data, logo } = props;
   const { isOpen: openChild, onToggle } = useDisclosure();
