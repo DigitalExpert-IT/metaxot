@@ -21,12 +21,15 @@ const chain = process.env.NEXT_PUBLIC_CHAIN_ID;
 export const NFTs = () => {
   const address = useAddress();
   const { contract } = useContract(MNFT[chain as "0x29a"]);
-  const { data: NFTsData, isLoading: isLoadingNFTs } = useOwnedNFTs(
-    contract,
-    address
-  );
+  const {
+    data: NFTsData,
+    isLoading: isLoadingNFTs,
+    isFetching,
+  } = useOwnedNFTs(contract, address);
 
   const { data: NFTBalance } = useNFTBalance(contract, address, 1);
+
+  console.log(isLoadingNFTs);
 
   if (isLoadingNFTs) {
     return (
@@ -55,34 +58,34 @@ export const NFTs = () => {
               <Text color="whiteAlpha.400">You Don&apos;t Have NFT . . . </Text>
             )}
             {NFTsData?.map((e, i) => (
-              <WrapItem
-                key={i}
-                w={{ xl: "20%", base: "40%" }}
-                rounded="md"
-                overflow="hidden"
-              >
-                <Stack bg="whiteAlpha.100">
+              <WrapItem key={i} rounded="md" overflow="hidden">
+                <Stack bg="whiteAlpha.100" w={{ md: "30rem" }}>
                   <Image
-                    src="https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063"
+                    src={e.metadata.image ?? ""}
                     alt={String(e.metadata.name)}
+                    objectFit="cover"
                   />
 
-                  <Stack direction="row" p="2">
+                  <Stack direction={{ md: "row", base: "column" }} p="2">
                     <Box>
                       {Object.keys(e.metadata).map((j, k) => (
-                        <Text key={k} fontSize="xs">
+                        <Text key={k} fontSize="xs" noOfLines={1}>
                           {j}
                         </Text>
                       ))}
                     </Box>
                     <Box>
-                      {Object.values(e.metadata).map((j: any | string, k) => {
-                        return (
-                          <Text key={k} fontSize="xs">
-                            {j.toString()}
-                          </Text>
-                        );
-                      })}
+                      {Object.values(e.metadata)
+                        ? Object.values(e.metadata ?? [])?.map(
+                            (j: any | string, k) => {
+                              return (
+                                <Text key={k} fontSize="xs" noOfLines={1}>
+                                  {j ? j.toString() : "null"}
+                                </Text>
+                              );
+                            }
+                          )
+                        : null}
                     </Box>
                   </Stack>
                 </Stack>
