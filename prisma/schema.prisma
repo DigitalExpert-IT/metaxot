@@ -16,7 +16,10 @@ model ERC721 {
   external_url String
   image        String
   name         String
+  uuid         String?     @default(uuid())
   attributes   Attribute[]
+
+  @@index([id, uuid])
 }
 
 model Attribute {

@@ -1,6 +1,6 @@
 export const DUMMY_JSON = [
   {
-    uuid: "550e8400-e29b-41d4-a716-446655440000",
+    uuid: "9b4a927e-849e-11ee-b962-0242ac120002",
     name: "land",
     latitude: "40.741895",
     longitude: "-73.989308",
@@ -9,7 +9,7 @@ export const DUMMY_JSON = [
     bg: "http://localhost:3000/assets/content/land/bg.png",
   },
   {
-    uuid: "550e8400-e29b-41d4-a716-446655440001",
+    uuid: "d917ab14-849e-11ee-b962-0242ac120002",
     name: "land",
     latitude: "40.741895",
     longitude: "-73.989308",
@@ -18,7 +18,7 @@ export const DUMMY_JSON = [
     bg: "http://localhost:3000/assets/content/land/bg.png",
   },
   {
-    uuid: "550e8400-e29b-41d4-a716-446655450000",
+    uuid: "d917a47a-849e-11ee-b962-0242ac120002",
     name: "land",
     latitude: "40.741895",
     longitude: "-73.989308",
@@ -55,12 +55,10 @@ interface StandartERC721_JSON {
 
 export const DUMMY_STANDART_JSON: StandartERC721_JSON[] = [
   {
-    description:
-      "Friendly OpenSea Creature that enjoys long swims in the ocean.",
-    external_url: "https://openseacreatures.io/3",
-    image:
-      "https://storage.googleapis.com/opensea-prod.appspot.com/puffs/3.png",
-    name: "Dave Starbelly",
+    description: "",
+    external_url: "",
+    image: "",
+    name: "",
     attributes: [],
   },
 ];

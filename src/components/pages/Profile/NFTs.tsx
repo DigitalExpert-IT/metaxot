@@ -27,6 +27,7 @@ export const NFTs = () => {
     contract,
     address
   );
+
   const { data: NFTBalance } = useNFTBalance(contract, address, 1);
 
   if (isLoadingNFTs) {
@@ -66,7 +67,6 @@ export const NFTs = () => {
                   <Image
                     src="https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063"
                     alt={String(e.metadata.name)}
-                    objectFit="cover"
                   />
 
                   <Stack direction="row" p="2">

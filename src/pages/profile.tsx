@@ -16,6 +16,7 @@ import {
   useOwnedNFTs,
   useBalance,
   useNFTBalance,
+  useWallet,
 } from "@thirdweb-dev/react";
 import { MNFT, XPC_CONTRACT } from "constant/address";
 import { Balance, NFTs } from "components/pages/Profile";

@@ -36,7 +36,7 @@ export const useBuyPreMintMutation = () => {
     // need approve or increase if allowance lower than price
     if (allowance.gte(price)) {
       const buy = await buyAsync({
-        args: [0],
+        args: [id],
       });
       return buy.receipt;
     }
