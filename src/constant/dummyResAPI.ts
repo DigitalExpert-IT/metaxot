@@ -38,3 +38,29 @@ export const DUMMY_JSON = [
 ];
 
 export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
+
+interface TraitTypeOption {
+  display_type?: string;
+  trait_type?: string;
+  value?: number | string;
+}
+
+interface StandartERC721_JSON {
+  description: string;
+  external_url: string;
+  image: string;
+  name: string;
+  attributes?: TraitTypeOption[] | undefined;
+}
+
+export const DUMMY_STANDART_JSON: StandartERC721_JSON[] = [
+  {
+    description:
+      "Friendly OpenSea Creature that enjoys long swims in the ocean.",
+    external_url: "https://openseacreatures.io/3",
+    image:
+      "https://storage.googleapis.com/opensea-prod.appspot.com/puffs/3.png",
+    name: "Dave Starbelly",
+    attributes: [],
+  },
+];
