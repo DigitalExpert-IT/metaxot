@@ -1,9 +1,7 @@
 import {
   Box,
-  CircularProgress,
   Heading,
   Image,
-  Spinner,
   Stack,
   Text,
   Wrap,

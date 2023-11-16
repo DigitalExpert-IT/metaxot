@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "ERC721" ADD COLUMN "uudi" TEXT;

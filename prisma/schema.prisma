@@ -11,13 +11,15 @@ datasource db {
 }
 
 model ERC721 {
-  id           Int         @id @default(autoincrement())
-  description  String
-  external_url String
-  image        String
-  name         String
-  uuid         String?     @default(uuid())
-  attributes   Attribute[]
+  id            Int         @id @default(autoincrement())
+  description   String
+  external_url  String
+  image         String
+  name          String
+  uuid          String      @unique @default(uuid())
+  animation_url String?
+  youtube_url   String?
+  attributes    Attribute[]
 
   @@index([id, uuid])
 }

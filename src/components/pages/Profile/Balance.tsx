@@ -1,17 +1,4 @@
-import {
-  Box,
-  Button,
-  Heading,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import { useAddress, useBalance, useWallet } from "@thirdweb-dev/react";
 import { XPC_CONTRACT } from "constant/address";
 
