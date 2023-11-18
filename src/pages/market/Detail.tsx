@@ -57,6 +57,7 @@ export const Detail = () => {
             overflow="hidden"
             cursor={"pointer"}
             onClick={onOpen}
+            justifyContent="center"
           >
             <Image
               // src="https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063"
