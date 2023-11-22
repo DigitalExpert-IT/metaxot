@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   Box,
   Heading,
@@ -15,6 +16,7 @@ import {
   useOwnedNFTs,
 } from "@thirdweb-dev/react";
 import { MNFT } from "constant/address";
+import { DUMMY_JSON } from "constant/dummyResAPI";
 
 const chain = process.env.NEXT_PUBLIC_CHAIN_ID;
 
@@ -28,6 +30,14 @@ export const NFTs = () => {
   } = useOwnedNFTs(contract, address);
 
   const { data: NFTBalance } = useNFTBalance(contract, address, 1);
+
+  const nftWithMetadata = useMemo(() => {
+    return NFTsData?.map((e: any) => {
+      const detail = DUMMY_JSON.find(j => j.uuid === e.uuid);
+      return { ...e, ...detail };
+    });
+    return () => {};
+  }, [NFTsData]);
 
   console.log(isLoadingNFTs);
 
@@ -57,13 +67,19 @@ export const NFTs = () => {
             {!Number(NFTBalance) && (
               <Text color="whiteAlpha.400">You Don&apos;t Have NFT . . . </Text>
             )}
-            {NFTsData?.map((e, i) => (
+            {nftWithMetadata?.map((e, i) => (
               <WrapItem key={i} rounded="md" overflow="hidden">
                 <Stack bg="whiteAlpha.100" w={{ md: "30rem" }}>
-                  <Image
+                  {/* <Image
                     src={e.metadata.image ?? ""}
                     alt={String(e.metadata.name)}
                     objectFit="cover"
+                  /> */}
+
+                  <Image
+                    src={e.picture}
+                    alt="character"
+                    fallbackSrc="https://via.placeholder.com/300"
                   />
 
                   <Stack direction={{ md: "row", base: "column" }} p="2">

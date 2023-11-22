@@ -90,7 +90,7 @@ export const Market = () => {
                 <WrapItem
                   w={{ md: "23%", base: "43%" }}
                   key={idx}
-                  onClick={() => route.push(`/market/${idx}`)}
+                  onClick={() => route.push(`/market/${e.uuid}`)}
                   cursor="pointer"
                   _hover={{
                     transform: "scale(1.01) ",

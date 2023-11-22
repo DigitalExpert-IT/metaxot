@@ -13,13 +13,14 @@ import { CircleGalaxy, LayoutMain } from "components";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { useBuyPreMintMutation, useListPreMintQuery } from "hooks/market";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { fromBn } from "evm-bn";
 import { ZERO_ADDRESS } from "constant/dummyResAPI";
 import { shortenAddress } from "utils";
 import { useAsyncCall } from "hooks/useAsyncCall";
 import { detail } from "./[idx]";
 import { useWallet } from "@thirdweb-dev/react";
+import { DUMMY_JSON } from "constant/dummyResAPI";
 
 export const Detail = () => {
   const [detailNft, setDetailNft] = useState<detail | undefined | any>({});
@@ -30,6 +31,7 @@ export const Detail = () => {
   const { data } = useListPreMintQuery();
   const { mutateAsync } = useBuyPreMintMutation();
   const router = useRouter();
+  const uuid = router.query?.idx;
 
   const handleBuy = async () => {
     await mutateAsync(+router?.query?.idx! ?? 0, detailNft.price);
@@ -40,10 +42,16 @@ export const Detail = () => {
     t("succes.successBuyNft")
   );
 
+  const dataNFT = useMemo(() => {
+    return DUMMY_JSON.find(j => j.uuid === uuid);
+  }, [data, uuid]);
+
   useEffect(() => {
     if (!data || !router.query.idx || !router.isReady) return;
-    setDetailNft(data?.at(+router?.query?.idx ?? 0));
+    setDetailNft(data?.find(e => e["0"] == uuid));
   }, [data]);
+
+  console.log("data NFT", dataNFT, "detailNFT:", detailNft);
   return (
     <LayoutMain title={detailNft.name}>
       <Stack position={"relative"} maxW={"xs"} ml={"60%"} zIndex={"hide"}>
@@ -61,14 +69,14 @@ export const Detail = () => {
           >
             <Image
               // src="https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063"
-              src={detailNft?.picture}
-              alt={detailNft?.name}
+              src={dataNFT?.picture}
+              alt={dataNFT?.name}
               rounded={"lg"}
             ></Image>
           </Stack>
           <Stack flex={2} justify="space-between">
             <Text fontSize={"2xl"} fontWeight="600">
-              Medium Lot
+              {dataNFT?.name}
             </Text>
             <Stack
               bg="whiteAlpha.300"
@@ -100,7 +108,11 @@ export const Detail = () => {
                     e === detailNft.price
                   )
                     return;
-                  return <Text key={i}>{String(e)}</Text>;
+                  return (
+                    <Text key={i} fontSize={i <= 6 ? "xs" : "md"}>
+                      {String(e)}
+                    </Text>
+                  );
                 })}
                 {/* 
                 <Text>Rare</Text>
