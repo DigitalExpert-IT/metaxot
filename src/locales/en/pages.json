@@ -162,7 +162,8 @@
       "all":"All",
       "caracters":"Caracter",
       "lands":"Land",
-      "materials":"Materials"
+      "materials":"Materials",
+      "buildings":"Buildings"
     }
   }
 }

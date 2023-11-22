@@ -1,7 +1,7 @@
 export const DUMMY_JSON = [
   {
-    uuid: "9b4a927e-849e-11ee-b962-0242ac120002",
-    name: "land",
+    uuid: "550e8400-e29b-41d4-a716-446655440000",
+    name: "Land Small",
     latitude: "40.741895",
     longitude: "-73.989308",
     picture:
@@ -9,8 +9,8 @@ export const DUMMY_JSON = [
     bg: "http://localhost:3000/assets/content/land/bg.png",
   },
   {
-    uuid: "d917ab14-849e-11ee-b962-0242ac120002",
-    name: "land",
+    uuid: "550e8400-e29b-41d4-a716-446655440001",
+    name: "Land Medium",
     latitude: "40.741895",
     longitude: "-7223.989308",
     picture:
@@ -18,21 +18,21 @@ export const DUMMY_JSON = [
     bg: "http://localhost:3000/assets/content/land/bg.png",
   },
   {
-    uuid: "d917a47a-849e-11ee-b962-0242ac120002",
-    name: "land",
+    uuid: "550e8400-e29b-41d4-a716-446655450000",
+    name: "Building A",
     latitude: "40.741895",
     longitude: "-103.989308",
     picture:
-      "https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063",
+      "https://ik.imagekit.io/msxxxaegj/metashot/building_nft.png?updatedAt=1700624721435",
     bg: "http://localhost:3000/assets/content/land/bg.png",
   },
   {
     uuid: "550e8400-e29b-41d4-a716-446655450001",
-    name: "land",
+    name: "Building B",
     latitude: "40.741895",
     longitude: "-83.989308",
     picture:
-      "https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063",
+      "https://ik.imagekit.io/msxxxaegj/metashot/building_nft.png?updatedAt=1700624721435",
     bg: "http://localhost:3000/assets/content/land/bg.png",
   },
 ];

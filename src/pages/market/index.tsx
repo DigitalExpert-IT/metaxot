@@ -7,22 +7,23 @@ import {
   WrapItem,
   Image,
   Icon,
+  Box,
 } from "@chakra-ui/react";
 import { LayoutMain, CircleGalaxy } from "components";
 import { CATEGORY } from "constant/pages/category";
-import { useListPreMintQuery } from "hooks/market";
+import {
+  useListPreMintQuery,
+  // useListPreMintQueryByCategory,
+} from "hooks/market";
 import { t } from "i18next";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
-import { prettyBn } from "utils";
-import { BsPinMapFill } from "react-icons/bs";
-import { useMarketContract } from "hooks/market/useMarketContract";
-import { useWallet } from "@thirdweb-dev/react";
 import { fromBn } from "evm-bn";
 
 export const Market = () => {
-  const [isActive, setIsActive] = useState<number>(0);
+  const [isActive, setIsActive] = useState<number>(-1);
   const { data } = useListPreMintQuery();
+  // const { data: categoryItem } = useListPreMintQueryByCategory(isActive);
   const nomarilizer = useMemo(() => {
     return CATEGORY.map((ctg, i) => {
       if (isActive === i) {
@@ -33,7 +34,11 @@ export const Market = () => {
   }, [isActive]);
   const route = useRouter();
 
-  console.log(data);
+  const filteredData = useMemo(() => {
+    if (isActive === -1) return data;
+    return data?.filter(nft => Number(nft.category ?? 0) === isActive);
+  }, [data, isActive]);
+
   return (
     <LayoutMain title="Market">
       <Stack position={"relative"} maxW={"xs"} ml={"60%"} zIndex={"hide"}>
@@ -47,6 +52,15 @@ export const Market = () => {
         listStyleType="none"
         py="2"
       >
+        <ListItem
+          background={isActive == -1 ? "whiteAlpha.300" : ""}
+          p="2"
+          rounded="md"
+          cursor={"pointer"}
+          onClick={() => setIsActive(-1)}
+        >
+          {t(`pages.market.category.all`)}
+        </ListItem>
         {nomarilizer.map((category, i) => {
           return (
             <ListItem
@@ -62,12 +76,16 @@ export const Market = () => {
           );
         })}
       </Stack>
-      <Stack py="2">
+      <Stack py="2" pb={12}>
         {data === undefined ? (
-          <Text>waiting tresno jalaran soko kulino</Text>
+          <Box height={100} textAlign={"center"}>
+            <Text fontWeight={"bold"}>
+              waiting ... tresno jalaran soko kulino
+            </Text>
+          </Box>
         ) : (
           <Wrap spacing={"5"}>
-            {data?.map((e: any, idx: number) => {
+            {filteredData?.map((e: any, idx: number) => {
               return (
                 <WrapItem
                   w={{ md: "23%", base: "43%" }}
@@ -80,7 +98,11 @@ export const Market = () => {
                   }}
                 >
                   <Stack bg="whiteAlpha.300" rounded="lg" overflow="hidden">
-                    <Image src={e.picture} alt="caracter" />
+                    <Image
+                      src={e.picture}
+                      alt="character"
+                      fallbackSrc="https://via.placeholder.com/300"
+                    />
                     <Stack p="3">
                       <Text fontSize={"xl"}>{e.name}</Text>
                       <Stack direction={"row"} justify="space-between">
