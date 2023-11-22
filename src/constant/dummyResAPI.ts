@@ -18,6 +18,15 @@ export const DUMMY_JSON = [
     bg: "http://localhost:3000/assets/content/land/bg.png",
   },
   {
+    uuid: "b7662a69-11c6-4071-8c5d-d0b8b2a1659b",
+    name: "Land Large",
+    latitude: "60.741895",
+    longitude: "-43.989308",
+    picture:
+      "https://ik.imagekit.io/msxxxaegj/metashot/building_nft.png?updatedAt=1700624721435",
+    bg: "http://localhost:3000/assets/content/land/bg.png",
+  },
+  {
     uuid: "550e8400-e29b-41d4-a716-446655450000",
     name: "Building A",
     latitude: "40.741895",
