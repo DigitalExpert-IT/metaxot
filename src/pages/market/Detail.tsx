@@ -24,6 +24,7 @@ import { DUMMY_JSON } from "constant/dummyResAPI";
 
 export const Detail = () => {
   const [detailNft, setDetailNft] = useState<detail | undefined | any>({});
+  const [nftIndex, setNftIndex] = useState<string | any>(-1);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
   const wallet = useWallet();
@@ -34,7 +35,7 @@ export const Detail = () => {
   const uuid = router.query?.idx;
 
   const handleBuy = async () => {
-    await mutateAsync(+router?.query?.idx! ?? 0, detailNft.price);
+    await mutateAsync(nftIndex ?? 0, detailNft.price);
   };
 
   const { exec: buy, isLoading } = useAsyncCall(
@@ -48,7 +49,14 @@ export const Detail = () => {
 
   useEffect(() => {
     if (!data || !router.query.idx || !router.isReady) return;
-    setDetailNft(data?.find(e => e["0"] == uuid));
+    setDetailNft(
+      data?.find((e, index) => {
+        if (e["0"] == uuid) {
+          setNftIndex(index);
+          return true;
+        }
+      })
+    );
   }, [data]);
 
   console.log("data NFT", dataNFT, "detailNFT:", detailNft);

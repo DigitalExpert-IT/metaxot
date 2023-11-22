@@ -33,13 +33,13 @@ export const NFTs = () => {
 
   const nftWithMetadata = useMemo(() => {
     return NFTsData?.map((e: any) => {
-      const detail = DUMMY_JSON.find(j => j.uuid === e.uuid);
+      const detail = DUMMY_JSON.find(j => j.uuid === e["0"]);
       return { ...e, ...detail };
     });
-    return () => {};
   }, [NFTsData]);
 
   console.log(isLoadingNFTs);
+  console.log("NFT data", nftWithMetadata);
 
   if (isLoadingNFTs) {
     return (
