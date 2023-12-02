@@ -30,7 +30,9 @@ export const NavbarItemList: React.FC<NavItemProps> = props => {
           <Popover trigger="hover" placement="bottom-start">
             <PopoverTrigger>
               <Link href={item.href ?? "#"} key={idx}>
-                <Text>{t(`common.navigation.${item.name}`)}</Text>
+                <Text {...styles.navbarItem}>
+                  {t(`common.navigation.${item.name}`)}
+                </Text>
               </Link>
             </PopoverTrigger>
 

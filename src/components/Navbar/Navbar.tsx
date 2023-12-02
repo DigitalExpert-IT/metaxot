@@ -7,19 +7,25 @@ import {
 } from "./NavbarUtils";
 import React, { useEffect, useState } from "react";
 import { NAVIGATION } from "constant";
-import { Flex, useDisclosure } from "@chakra-ui/react";
+import { Button, Flex, useDisclosure, Text } from "@chakra-ui/react";
 import { ConnectWallet, darkTheme } from "@thirdweb-dev/react";
 import { useTranslation } from "react-i18next";
+import LoginModal from "components/AuthModal/LoginModal";
+import NiceModal from "@ebay/nice-modal-react";
+import useAuth from "hooks/metaxotGame/useAuth";
 
 export const Navbar = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [host, setHost] = useState("");
+  const { isAuthenticated, logout } = useAuth();
+
   useEffect(() => {
     if (window.location.host) {
       setHost(window.location.host);
     }
   }, []);
+
   return (
     <NavbarMain isOpen={isOpen}>
       <NavbarBody>
@@ -40,6 +46,15 @@ export const Navbar = () => {
           display={{ base: "none", md: "none", lg: "flex" }}
         >
           {/* <Button colorScheme={"metaxot"}>Connect Wallet</Button> */}
+          {isAuthenticated ? (
+            <Button me={4} onClick={logout}>
+              Logout
+            </Button>
+          ) : (
+            <Button me={4} onClick={() => NiceModal.show(LoginModal)}>
+              Login
+            </Button>
+          )}
           <ConnectWallet
             theme={darkTheme({
               colors: {

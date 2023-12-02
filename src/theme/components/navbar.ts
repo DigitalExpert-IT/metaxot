@@ -8,6 +8,7 @@ const { defineMultiStyleConfig } = createMultiStyleConfigHelpers([
   "drawerBurger",
   "list",
   "listWrapper",
+  "navbarItem",
   "dropDownList",
   "dropDownItem",
   "dropCarret",
@@ -45,6 +46,11 @@ export const navbarTheme = defineMultiStyleConfig({
       textTransform: "capitalize",
       display: { base: "none", md: "none", lg: "flex" },
     },
+    navbarItem: {
+      _hover: {
+        textShadow: "0px 0px 8px white",
+      }
+    },
     dropDownList: {},
     dropDownItem: {
       role: "group",
@@ -74,7 +80,7 @@ export const navbarTheme = defineMultiStyleConfig({
         w: "full",
       },
       listWrapper: {
-        fontSize: "20px",
+        fontSize: "16px",
         fontWeight: "400",
       },
       dropDownList: {
@@ -101,7 +107,7 @@ export const navbarTheme = defineMultiStyleConfig({
   variants: {
     angkor: {
       listWrapper: {
-        fontFamily: "angkor",
+        // fontFamily: "angkor",
       },
       dropIcon: {
         color: "valhalla.500",

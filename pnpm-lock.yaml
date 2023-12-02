@@ -53,6 +53,9 @@ dependencies:
   '@thirdweb-dev/react':
     specifier: ^4.1.1
     version: 4.1.1(@ethersproject/abstract-provider@5.7.0)(@ethersproject/abstract-signer@5.7.0)(@ethersproject/bignumber@5.7.0)(@ethersproject/properties@5.7.0)(@thirdweb-dev/sdk@4.0.10)(@types/react-dom@18.0.9)(@types/react@18.0.25)(ethers@5.7.2)(fastify@4.24.3)(localforage@1.10.0)(next@13.1.2)(react-dom@18.2.0)(react@18.2.0)(typescript@4.9.3)
+  '@types/js-cookie':
+    specifier: ^3.0.6
+    version: 3.0.6
   '@types/node':
     specifier: 18.11.10
     version: 18.11.10
@@ -98,6 +101,9 @@ dependencies:
   immer:
     specifier: ^9.0.16
     version: 9.0.16
+  js-cookie:
+    specifier: ^3.0.5
+    version: 3.0.5
   keccak:
     specifier: ^3.0.2
     version: 3.0.2
@@ -5078,6 +5084,10 @@ packages:
 
   /@types/js-cookie@2.2.7:
     resolution: {integrity: sha512-aLkWa0C0vO5b4Sr798E26QgOkss68Un0bLjs7u9qxzPT5CG+8DuNTffWES58YzJs3hrVAOs1wonycqEBqNJubA==}
+    dev: false
+
+  /@types/js-cookie@3.0.6:
+    resolution: {integrity: sha512-wkw9yd1kEXOPnvEeEV1Go1MmxtBJL0RR79aOTAApecWFVu7w0NNXNqhcWgvw2YgZDYadliXkl14pa3WXw5jlCQ==}
     dev: false
 
   /@types/json5@0.0.29:
@@ -11628,6 +11638,11 @@ packages:
 
   /js-cookie@2.2.1:
     resolution: {integrity: sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==}
+    dev: false
+
+  /js-cookie@3.0.5:
+    resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
+    engines: {node: '>=14'}
     dev: false
 
   /js-sdsl@4.2.0:
