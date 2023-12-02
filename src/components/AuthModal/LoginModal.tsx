@@ -31,9 +31,9 @@ export default NiceModal.create(() => {
   return (
     <Modal isOpen={modal.visible} onClose={handleModalClose}>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>
-          <Text>Login</Text>
+      <ModalContent py={16}>
+        <ModalHeader mb={8}>
+          <Text fontSize={"4xl"}>Login</Text>
           <Text>with game account</Text>
         </ModalHeader>
         <ModalCloseButton />
