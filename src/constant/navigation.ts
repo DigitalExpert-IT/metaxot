@@ -18,25 +18,25 @@ export interface ISocial {
 }
 
 export const NAVIGATION: Array<INavigation> = [
-  {
-    name: "home",
-    href: "/",
-  },
-  {
-    name: "landSale",
-    href: "/land-sale",
-  },
-  {
-    name: "roadMap",
-    href: "/roadmap",
-  },
-  {
-    name: "download",
-    href: "/download",
-  },
+  // {
+  //   name: "home",
+  //   href: "/",
+  // },
+  // {
+  //   name: "landSale",
+  //   href: "/land-sale",
+  // },
+  // {
+  //   name: "roadMap",
+  //   href: "/roadmap",
+  // },
+  // {
+  //   name: "download",
+  //   href: "/download",
+  // },
   {
     name: "market",
-    href: "/market",
+    href: "/",
   },
   {
     name: "profile",

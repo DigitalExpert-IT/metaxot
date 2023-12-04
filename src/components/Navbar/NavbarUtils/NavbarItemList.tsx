@@ -26,7 +26,7 @@ export const NavbarItemList: React.FC<NavItemProps> = props => {
   return (
     <>
       {data.map((item, idx) => (
-        <Box key={idx} w="full">
+        <Box key={idx} w="fit-content" marginX={8}>
           <Popover trigger="hover" placement="bottom-start">
             <PopoverTrigger>
               <Link href={item.href ?? "#"} key={idx}>

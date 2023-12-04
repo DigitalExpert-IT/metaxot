@@ -41,9 +41,10 @@ export const navbarTheme = defineMultiStyleConfig({
       flex: 3,
       align: "center",
       direction: "row",
-      justify: "center",
+      justify: "flex-end",
       textAlign: "center",
       textTransform: "capitalize",
+      marginEnd: 8,
       display: { base: "none", md: "none", lg: "flex" },
     },
     navbarItem: {
