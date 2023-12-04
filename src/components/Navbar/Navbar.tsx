@@ -47,11 +47,15 @@ export const Navbar = () => {
         >
           {/* <Button colorScheme={"metaxot"}>Connect Wallet</Button> */}
           {isAuthenticated ? (
-            <Button me={4} onClick={logout}>
+            <Button me={4} onClick={logout} suppressHydrationWarning>
               Logout
             </Button>
           ) : (
-            <Button me={4} onClick={() => NiceModal.show(LoginModal)}>
+            <Button
+              me={4}
+              onClick={() => NiceModal.show(LoginModal)}
+              suppressHydrationWarning
+            >
               Login
             </Button>
           )}

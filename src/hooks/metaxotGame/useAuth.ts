@@ -2,13 +2,24 @@ import Cookies from "js-cookie";
 import axRef from "./axiosRef";
 import { useAsyncCall } from "hooks/useAsyncCall";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useToast } from "@chakra-ui/react";
 
-export type ILoginForm = {
+export interface ILoginForm {
   email: string;
   password: string;
-};
+}
+
+interface IUserData {
+  uid: string;
+  email: string;
+  emailVerified: boolean;
+  isAnonymous: boolean;
+}
 
 const useAuth = () => {
+  const { t } = useTranslation();
+  const toast = useToast();
   const [token, setToken] = useState<string | null>(
     Cookies.get("token") || null
   );
@@ -41,18 +52,39 @@ const useAuth = () => {
         const { authorizationToken, user } = response.data.result;
         Cookies.set("token", authorizationToken);
         localStorage.setItem("userData", JSON.stringify(user));
+
+        return { successMessage: t("succes.successLogin") };
       } catch (error) {
         throw new Error("Authentication failed");
       }
     }
   );
 
+  const userData = () => {
+    if (typeof window !== "undefined") {
+      const user = localStorage.getItem("userData");
+      if (user) {
+        return JSON.parse(user) as IUserData;
+      }
+    }
+
+    return null;
+  };
+
   const logout = () => {
     Cookies.remove("token");
     localStorage.removeItem("userData");
+
+    toast({ status: "success", description: "Logout Success" });
   };
 
-  return { authenticate, isAuthenticated: !!token, logout, isLoading };
+  return {
+    authenticate,
+    isAuthenticated: !!token,
+    logout,
+    isLoading,
+    userData: userData(),
+  };
 };
 
 export default useAuth;

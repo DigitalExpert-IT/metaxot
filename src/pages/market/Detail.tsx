@@ -21,27 +21,43 @@ import { useAsyncCall } from "hooks/useAsyncCall";
 import { detail } from "./[idx]";
 import { useWallet } from "@thirdweb-dev/react";
 import { DUMMY_JSON } from "constant/dummyResAPI";
+import useMarketApi from "hooks/metaxotGame/useMarketApi";
 
 export const Detail = () => {
   const [detailNft, setDetailNft] = useState<detail | undefined | any>({});
   const [nftIndex, setNftIndex] = useState<string | any>(-1);
+  const [callBuyApi, setCallBuyApi] = useState<boolean>(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
   const wallet = useWallet();
 
   const { data } = useListPreMintQuery();
-  const { mutateAsync } = useBuyPreMintMutation();
+  const { mutateAsync, status } = useBuyPreMintMutation();
+  const { buyNft } = useMarketApi();
   const router = useRouter();
   const uuid = router.query?.idx;
 
   const handleBuy = async () => {
-    await mutateAsync(nftIndex ?? 0, detailNft.price);
+    await mutateAsync(nftIndex ?? 0, detailNft.price).then(() =>
+      setCallBuyApi(true)
+    );
   };
 
   const { exec: buy, isLoading } = useAsyncCall(
     handleBuy,
     t("succes.successBuyNft")
   );
+
+  useEffect(() => {
+    const buyApi = async () => {
+      await buyNft(uuid as string);
+      setCallBuyApi(false);
+    };
+
+    if (status === "success" && callBuyApi) {
+      buyApi();
+    }
+  }, [status, callBuyApi]);
 
   const dataNFT = useMemo(() => {
     return DUMMY_JSON.find(j => j.uuid === uuid);
@@ -59,7 +75,6 @@ export const Detail = () => {
     );
   }, [data]);
 
-  console.log("data NFT", dataNFT, "detailNFT:", detailNft);
   return (
     <LayoutMain title={detailNft.name}>
       <Stack position={"relative"} maxW={"xs"} ml={"60%"} zIndex={"hide"}>

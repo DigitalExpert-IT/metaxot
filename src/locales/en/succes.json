@@ -1,3 +1,6 @@
 {
-  "successBuyNft": "success buy nft"
+  "successLogin": "success login",
+  "successBuyNft": "success buy nft",
+  "successTransferToGame": "success transfer item to Game",
+  "successSellNft": "success sell nft"
 }
