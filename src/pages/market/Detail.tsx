@@ -26,7 +26,7 @@ import useMarketApi from "hooks/metaxotGame/useMarketApi";
 export const Detail = () => {
   const [detailNft, setDetailNft] = useState<detail | undefined | any>({});
   const [nftIndex, setNftIndex] = useState<string | any>(-1);
-  const [callBuyApi, setCallBuyApi] = useState<boolean>(false);
+  const [isCallBuyApi, setIsCallBuyApi] = useState<boolean>(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
   const wallet = useWallet();
@@ -39,7 +39,7 @@ export const Detail = () => {
 
   const handleBuy = async () => {
     await mutateAsync(nftIndex ?? 0, detailNft.price).then(() =>
-      setCallBuyApi(true)
+      setIsCallBuyApi(true)
     );
   };
 
@@ -48,16 +48,17 @@ export const Detail = () => {
     t("succes.successBuyNft")
   );
 
+  // Buy from Metaxot Game API
   useEffect(() => {
     const buyApi = async () => {
       await buyNft(uuid as string);
-      setCallBuyApi(false);
+      setIsCallBuyApi(false);
     };
 
-    if (status === "success" && callBuyApi) {
+    if (status === "success" && isCallBuyApi) {
       buyApi();
     }
-  }, [status, callBuyApi]);
+  }, [status, isCallBuyApi]);
 
   const dataNFT = useMemo(() => {
     return DUMMY_JSON.find(j => j.uuid === uuid);

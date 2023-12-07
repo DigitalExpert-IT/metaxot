@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Box,
   Heading,
@@ -8,6 +8,7 @@ import {
   Wrap,
   WrapItem,
   Skeleton,
+  Button,
 } from "@chakra-ui/react";
 import {
   useAddress,
@@ -17,19 +18,27 @@ import {
 } from "@thirdweb-dev/react";
 import { MNFT } from "constant/address";
 import { DUMMY_JSON } from "constant/dummyResAPI";
+import { useAsyncCall } from "hooks/useAsyncCall";
+import { t } from "i18next";
+import useMarketApi from "hooks/metaxotGame/useMarketApi";
+import { useSellNftMutation } from "hooks/market";
 
 const chain = process.env.NEXT_PUBLIC_CHAIN_ID;
 
 export const NFTs = () => {
   const address = useAddress();
+  const [sellNftUid, setSellNftUid] = useState<string | null>(null);
   const { contract } = useContract(MNFT[chain as "0x29a"]);
   const {
     data: NFTsData,
     isLoading: isLoadingNFTs,
     isFetching,
   } = useOwnedNFTs(contract, address);
+  const { sellNft: sellNftApi } = useMarketApi();
 
   const { data: NFTBalance } = useNFTBalance(contract, address, 1);
+
+  const { mutateAsync, status } = useSellNftMutation();
 
   const nftWithMetadata = useMemo(() => {
     return NFTsData?.map((e: any) => {
@@ -38,8 +47,28 @@ export const NFTs = () => {
     });
   }, [NFTsData]);
 
-  console.log(isLoadingNFTs);
-  console.log("NFT data", nftWithMetadata);
+  const handleSellContract = async (nft_id: string, uri: string) => {
+    await mutateAsync(Number(nft_id) ?? 0).then(() =>
+      setSellNftUid(uri.substring(uri.lastIndexOf("=") + 1))
+    );
+  };
+
+  const { exec: sell, isLoading } = useAsyncCall(
+    handleSellContract,
+    t("succes.successSellNft")
+  );
+
+  // Sell from Metaxot Game API
+  useEffect(() => {
+    const sellApi = async () => {
+      await sellNftApi(sellNftUid ?? "");
+      setSellNftUid(null);
+    };
+
+    if (status === "success" && sellNftUid) {
+      sellApi();
+    }
+  }, [status, sellNftUid]);
 
   if (isLoadingNFTs) {
     return (
@@ -104,6 +133,12 @@ export const NFTs = () => {
                         : null}
                     </Box>
                   </Stack>
+                  <Button
+                    isLoading={isLoading}
+                    onClick={() => sell(e.metadata?.id, e.metadata?.uri)}
+                  >
+                    {t("pages.profile.sellNft")}
+                  </Button>
                 </Stack>
               </WrapItem>
             ))}

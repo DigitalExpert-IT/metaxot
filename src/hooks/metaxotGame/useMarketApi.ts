@@ -32,7 +32,7 @@ const useMarketApi = () => {
           return { data, successMessage: t("succes.successSellNft") };
         })
         .catch(error => {
-          throw new Error(`error buy nft ${error?.message}`);
+          throw new Error(`error sell nft ${error?.message}`);
         });
     }
   );
