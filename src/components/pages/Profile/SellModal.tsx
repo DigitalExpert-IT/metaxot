@@ -33,15 +33,16 @@ export default NiceModal.create((metadata: INftMetadata) => {
   const [sellNftUid, setSellNftUid] = useState<string | null>(null);
   const { register, handleSubmit } = useForm<ISellForm>();
   const { sellNft: sellNftApi } = useMarketApi();
-  const onSubmit: SubmitHandler<ISellForm> = data => {
-    sell(metadata?.id, metadata?.uri).then(() => modal.hide());
+  const onSubmit: SubmitHandler<ISellForm> = () => {
+    sell();
+    console.log("=========== Metamask metadata:", metadata);
   };
 
   const { mutateAsync, status } = useSellNftMutation();
 
-  const handleSellContract = async (nft_id: string, uri: string) => {
-    await mutateAsync(Number(nft_id) ?? 0).then(() =>
-      setSellNftUid(uri.substring(uri.lastIndexOf("=") + 1))
+  const handleSellContract = async () => {
+    await mutateAsync(Number(metadata.id) ?? 0).then(() =>
+      setSellNftUid(metadata.uri.substring(metadata.uri.lastIndexOf("=") + 1))
     );
   };
 
@@ -55,6 +56,7 @@ export default NiceModal.create((metadata: INftMetadata) => {
     const sellApi = async () => {
       await sellNftApi(sellNftUid ?? "");
       setSellNftUid(null);
+      modal.hide();
     };
 
     if (status === "success" && sellNftUid) {
@@ -116,7 +118,7 @@ export default NiceModal.create((metadata: INftMetadata) => {
               isLoading={isLoading}
               colorScheme="brand"
               w={"100%"}
-              onClick={() => NiceModal.show(SellModal)}
+              onClick={() => sell()}
             >
               {t("modal.sellNft.sell")}
             </Button>
