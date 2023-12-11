@@ -17,5 +17,8 @@
     "placeholder": {
       "username": "@username"
     }
+  },
+  "sellNft": {
+    "sell": "Sell"
   }
 }

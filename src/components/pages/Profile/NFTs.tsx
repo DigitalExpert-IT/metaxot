@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   Box,
   Heading,
@@ -18,27 +18,21 @@ import {
 } from "@thirdweb-dev/react";
 import { MNFT } from "constant/address";
 import { DUMMY_JSON } from "constant/dummyResAPI";
-import { useAsyncCall } from "hooks/useAsyncCall";
 import { t } from "i18next";
-import useMarketApi from "hooks/metaxotGame/useMarketApi";
-import { useSellNftMutation } from "hooks/market";
+import NiceModal from "@ebay/nice-modal-react";
+import SellModal from "./SellModal";
 
 const chain = process.env.NEXT_PUBLIC_CHAIN_ID;
 
 export const NFTs = () => {
   const address = useAddress();
-  const [sellNftUid, setSellNftUid] = useState<string | null>(null);
   const { contract } = useContract(MNFT[chain as "0x29a"]);
-  const {
-    data: NFTsData,
-    isLoading: isLoadingNFTs,
-    isFetching,
-  } = useOwnedNFTs(contract, address);
-  const { sellNft: sellNftApi } = useMarketApi();
+  const { data: NFTsData, isLoading: isLoadingNFTs } = useOwnedNFTs(
+    contract,
+    address
+  );
 
   const { data: NFTBalance } = useNFTBalance(contract, address, 1);
-
-  const { mutateAsync, status } = useSellNftMutation();
 
   const nftWithMetadata = useMemo(() => {
     return NFTsData?.map((e: any) => {
@@ -46,29 +40,6 @@ export const NFTs = () => {
       return { ...e, ...detail };
     });
   }, [NFTsData]);
-
-  const handleSellContract = async (nft_id: string, uri: string) => {
-    await mutateAsync(Number(nft_id) ?? 0).then(() =>
-      setSellNftUid(uri.substring(uri.lastIndexOf("=") + 1))
-    );
-  };
-
-  const { exec: sell, isLoading } = useAsyncCall(
-    handleSellContract,
-    t("succes.successSellNft")
-  );
-
-  // Sell from Metaxot Game API
-  useEffect(() => {
-    const sellApi = async () => {
-      await sellNftApi(sellNftUid ?? "");
-      setSellNftUid(null);
-    };
-
-    if (status === "success" && sellNftUid) {
-      sellApi();
-    }
-  }, [status, sellNftUid]);
 
   if (isLoadingNFTs) {
     return (
@@ -86,19 +57,19 @@ export const NFTs = () => {
   }
 
   return (
-    <Box maxW={"container.lg"}>
+    <Box>
       <Box my="10">
         <Heading py="2" as="h2" fontSize="lg">
           NFTs
         </Heading>
         <Stack>
-          <Wrap>
+          <Wrap spacing={8}>
             {!Number(NFTBalance) && (
               <Text color="whiteAlpha.400">You Don&apos;t Have NFT . . . </Text>
             )}
             {nftWithMetadata?.map((e, i) => (
               <WrapItem key={i} rounded="md" overflow="hidden">
-                <Stack bg="whiteAlpha.100" w={{ md: "30rem" }}>
+                <Stack bg="whiteAlpha.100" w={{ md: "16rem" }}>
                   {/* <Image
                     src={e.metadata.image ?? ""}
                     alt={String(e.metadata.name)}
@@ -133,12 +104,15 @@ export const NFTs = () => {
                         : null}
                     </Box>
                   </Stack>
-                  <Button
-                    isLoading={isLoading}
-                    onClick={() => sell(e.metadata?.id, e.metadata?.uri)}
-                  >
-                    {t("pages.profile.sellNft")}
-                  </Button>
+                  <Box p={2}>
+                    <Button
+                      w={"full"}
+                      colorScheme="brand"
+                      onClick={() => NiceModal.show(SellModal, e.metadata)}
+                    >
+                      {t("pages.profile.sellNft")}
+                    </Button>
+                  </Box>
                 </Stack>
               </WrapItem>
             ))}
