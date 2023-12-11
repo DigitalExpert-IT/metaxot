@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import {
   Button,
@@ -23,6 +23,7 @@ import useMarketApi from "hooks/metaxotGame/useMarketApi";
 import { useSellNftMutation } from "hooks/market";
 import { INftMetadata } from "hooks/nft";
 import { useAsyncCall } from "hooks/useAsyncCall";
+import { toBn } from "evm-bn";
 
 interface ISellForm {
   price: string;
@@ -30,18 +31,25 @@ interface ISellForm {
 
 export default NiceModal.create((metadata: INftMetadata) => {
   const modal = useModal();
+  const submitRef = useRef<any>(null);
   const [sellNftUid, setSellNftUid] = useState<string | null>(null);
-  const { register, handleSubmit } = useForm<ISellForm>();
+  const {
+    register,
+    handleSubmit,
+    resetField,
+    formState: { errors },
+  } = useForm<ISellForm>();
   const { sellNft: sellNftApi } = useMarketApi();
-  const onSubmit: SubmitHandler<ISellForm> = () => {
-    sell();
+  const onSubmit: SubmitHandler<ISellForm> = data => {
+    console.log("Metamask data", data);
     console.log("=========== Metamask metadata:", metadata);
+    sell(data.price);
   };
 
   const { mutateAsync, status } = useSellNftMutation();
 
-  const handleSellContract = async () => {
-    await mutateAsync(Number(metadata.id) ?? 0).then(() =>
+  const handleSellContract = async (price: string) => {
+    await mutateAsync(Number(metadata.id) ?? 0, toBn(`${price}`, 9)).then(() =>
       setSellNftUid(metadata.uri.substring(metadata.uri.lastIndexOf("=") + 1))
     );
   };
@@ -56,7 +64,7 @@ export default NiceModal.create((metadata: INftMetadata) => {
     const sellApi = async () => {
       await sellNftApi(sellNftUid ?? "");
       setSellNftUid(null);
-      modal.hide();
+      handleModalClose();
     };
 
     if (status === "success" && sellNftUid) {
@@ -66,10 +74,16 @@ export default NiceModal.create((metadata: INftMetadata) => {
 
   const handleModalClose = () => {
     modal.hide();
+    resetField("price");
   };
 
   return (
-    <Modal size={"2xl"} isOpen={modal.visible} onClose={handleModalClose}>
+    <Modal
+      size={"2xl"}
+      isOpen={modal.visible}
+      onClose={handleModalClose}
+      initialFocusRef={submitRef}
+    >
       <ModalOverlay />
       <ModalContent
         borderRadius={"xl"}
@@ -107,7 +121,11 @@ export default NiceModal.create((metadata: INftMetadata) => {
                   <Text fontSize={"sm"}>172.012902902029</Text>
                 </Box>
                 <FormControl>
-                  <Input placeholder="Input Price" {...register("price")} />
+                  <Input
+                    placeholder="Input Price"
+                    {...register("price", { required: true })}
+                  />
+                  {errors.price && <span>Please input NFT price</span>}
                 </FormControl>
               </Stack>
             </HStack>
@@ -115,10 +133,11 @@ export default NiceModal.create((metadata: INftMetadata) => {
 
           <ModalFooter pb={0}>
             <Button
+              ref={submitRef}
+              type="submit"
               isLoading={isLoading}
               colorScheme="brand"
               w={"100%"}
-              onClick={() => sell()}
             >
               {t("modal.sellNft.sell")}
             </Button>

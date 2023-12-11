@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import {
   Button,
@@ -18,6 +19,7 @@ import useAuth, { ILoginForm } from "hooks/metaxotGame/useAuth";
 
 export default NiceModal.create(() => {
   const modal = useModal();
+  const submitRef = useRef<any>(null);
   const { authenticate, isLoading } = useAuth();
   const { register, handleSubmit } = useForm<ILoginForm>();
   const onSubmit: SubmitHandler<ILoginForm> = data => {
@@ -29,7 +31,11 @@ export default NiceModal.create(() => {
   };
 
   return (
-    <Modal isOpen={modal.visible} onClose={handleModalClose}>
+    <Modal
+      isOpen={modal.visible}
+      onClose={handleModalClose}
+      initialFocusRef={submitRef}
+    >
       <ModalOverlay />
       <ModalContent py={16}>
         <ModalHeader mb={8}>
@@ -56,6 +62,7 @@ export default NiceModal.create(() => {
 
           <ModalFooter>
             <Button
+              ref={submitRef}
               type="submit"
               colorScheme="blue"
               mr={3}
