@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Box,
   Heading,
@@ -17,16 +17,38 @@ import {
   useOwnedNFTs,
 } from "@thirdweb-dev/react";
 import { MNFT } from "constant/address";
-import { DUMMY_JSON } from "constant/dummyResAPI";
 import { t } from "i18next";
 import NiceModal from "@ebay/nice-modal-react";
 import SellModal from "./SellModal";
+import axRef from "hooks/metaxotGame/axiosRef";
 
 const chain = process.env.NEXT_PUBLIC_CHAIN_ID;
+
+export interface INFTData {
+  attributes: string[];
+  code: number;
+  description: string;
+  external_url: string;
+  image: string;
+  metadata: { id: string; uri: string; code: number; result: {} };
+  name: string;
+  owner: string;
+  result: {
+    InteriorData: string;
+    Id: string;
+    Rotation: { x: number; y: number; z: number };
+    FloorData: string;
+    Position: { x: number; y: number; z: number };
+  };
+  status: number;
+  supply: string;
+  type: string;
+}
 
 export const NFTs = () => {
   const address = useAddress();
   const { contract } = useContract(MNFT[chain as "0x29a"]);
+  const [metadatas, setMetadatas] = useState<any>(null);
   const { data: NFTsData, isLoading: isLoadingNFTs } = useOwnedNFTs(
     contract,
     address
@@ -34,12 +56,29 @@ export const NFTs = () => {
 
   const { data: NFTBalance } = useNFTBalance(contract, address, 1);
 
-  const nftWithMetadata = useMemo(() => {
+  // Cause the uri needing auth, we need (temporary until found the propper way)
+  useEffect(() => {
+    const getMetadata = async () => {
+      await Promise.all(
+        NFTsData?.map(
+          async nft => await axRef.get(nft.metadata.uri).then(res => res.data)
+        ) ?? []
+      ).then(results => {
+        setMetadatas(results);
+      });
+    };
+
+    getMetadata();
+  }, [NFTsData]);
+
+  const nftWithMetadata: INFTData[] | undefined = useMemo(() => {
+    if (!metadatas) return [] as INFTData[];
+
     return NFTsData?.map((e: any) => {
-      const detail = DUMMY_JSON.find(j => j.uuid === e["0"]);
+      const detail = metadatas.find(j => j.result.id === e["0"]);
       return { ...e, ...detail };
     });
-  }, [NFTsData]);
+  }, [metadatas]);
 
   if (isLoadingNFTs) {
     return (
@@ -70,45 +109,22 @@ export const NFTs = () => {
             {nftWithMetadata?.map((e, i) => (
               <WrapItem key={i} rounded="md" overflow="hidden">
                 <Stack bg="whiteAlpha.100" w={{ md: "16rem" }}>
-                  {/* <Image
-                    src={e.metadata.image ?? ""}
-                    alt={String(e.metadata.name)}
-                    objectFit="cover"
-                  /> */}
-
                   <Image
-                    src={e.picture}
-                    alt="character"
+                    src={e.image}
+                    alt={e.name}
                     fallbackSrc="https://via.placeholder.com/300"
                   />
 
-                  <Stack direction={{ md: "row", base: "column" }} p="2">
-                    <Box>
-                      {Object.keys(e.metadata).map((j, k) => (
-                        <Text key={k} fontSize="xs" noOfLines={1}>
-                          {j}
-                        </Text>
-                      ))}
-                    </Box>
-                    <Box>
-                      {Object.values(e.metadata)
-                        ? Object.values(e.metadata ?? [])?.map(
-                            (j: any | string, k) => {
-                              return (
-                                <Text key={k} fontSize="xs" noOfLines={1}>
-                                  {j ? j.toString() : "null"}
-                                </Text>
-                              );
-                            }
-                          )
-                        : null}
-                    </Box>
-                  </Stack>
+                  <Box p={2}>
+                    <Text fontSize="md" fontWeight={"bold"} noOfLines={1}>
+                      {e.name}
+                    </Text>
+                  </Box>
                   <Box p={2}>
                     <Button
                       w={"full"}
                       colorScheme="brand"
-                      onClick={() => NiceModal.show(SellModal, e.metadata)}
+                      onClick={() => NiceModal.show(SellModal, e)}
                     >
                       {t("pages.profile.sellNft")}
                     </Button>

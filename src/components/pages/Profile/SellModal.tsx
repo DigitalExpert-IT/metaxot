@@ -21,18 +21,18 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { t } from "i18next";
 import useMarketApi from "hooks/metaxotGame/useMarketApi";
 import { useSellNftMutation } from "hooks/market";
-import { INftMetadata } from "hooks/nft";
 import { useAsyncCall } from "hooks/useAsyncCall";
 import { toBn } from "evm-bn";
+import { INFTData } from "./NFTs";
 
 interface ISellForm {
   price: string;
 }
 
-export default NiceModal.create((metadata: INftMetadata) => {
+export default NiceModal.create((nft: INFTData) => {
   const modal = useModal();
   const submitRef = useRef<any>(null);
-  const [sellNftUid, setSellNftUid] = useState<string | null>(null);
+  const [isCallSell, setCallSell] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -41,16 +41,14 @@ export default NiceModal.create((metadata: INftMetadata) => {
   } = useForm<ISellForm>();
   const { sellNft: sellNftApi } = useMarketApi();
   const onSubmit: SubmitHandler<ISellForm> = data => {
-    console.log("Metamask data", data);
-    console.log("=========== Metamask metadata:", metadata);
     sell(data.price);
   };
 
   const { mutateAsync, status } = useSellNftMutation();
 
   const handleSellContract = async (price: string) => {
-    await mutateAsync(Number(metadata.id) ?? 0, toBn(`${price}`, 9)).then(() =>
-      setSellNftUid(metadata.uri.substring(metadata.uri.lastIndexOf("=") + 1))
+    await mutateAsync(Number(nft.metadata.id) ?? 0, toBn(`${price}`, 9)).then(
+      () => setCallSell(true)
     );
   };
 
@@ -62,15 +60,15 @@ export default NiceModal.create((metadata: INftMetadata) => {
   // Sell from Metaxot Game API
   useEffect(() => {
     const sellApi = async () => {
-      await sellNftApi(sellNftUid ?? "");
-      setSellNftUid(null);
+      await sellNftApi(nft.result.Id ?? "");
+      setCallSell(false);
       handleModalClose();
     };
 
-    if (status === "success" && sellNftUid) {
+    if (status === "success" && isCallSell) {
       sellApi();
     }
-  }, [status, sellNftUid]);
+  }, [status, isCallSell]);
 
   const handleModalClose = () => {
     modal.hide();
@@ -95,30 +93,28 @@ export default NiceModal.create((metadata: INftMetadata) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalBody>
             <HStack gap={4}>
-              <Box>
+              <Box flex={1}>
                 <Image
-                  //   src={e.picture}
+                  src={nft.image}
                   borderRadius={"2xl"}
                   alt="character"
                   fallbackSrc="https://via.placeholder.com/300"
                 />
               </Box>
-              <Stack>
+              <Stack flex={1}>
                 <Text fontSize={"sm"}>Category: Lot</Text>
-                <Text fontSize={"2xl"}>LOT NFT</Text>
+                <Text fontSize={"2xl"}>{nft.name}</Text>
                 <Box>
                   <Text color={"brand.500"}>UID</Text>
-                  <Text fontSize={"sm"}>
-                    550e8400-e29b-41d4-a716-446655440000
-                  </Text>
+                  <Text fontSize={"sm"}>{nft.result.Id}</Text>
                 </Box>
                 <Box>
                   <Text color={"brand.500"}>Latitude</Text>
-                  <Text fontSize={"sm"}>40.41789675</Text>
+                  <Text fontSize={"sm"}>{nft.result.Position.x}</Text>
                 </Box>
                 <Box>
                   <Text color={"brand.500"}>Longitude</Text>
-                  <Text fontSize={"sm"}>172.012902902029</Text>
+                  <Text fontSize={"sm"}>{nft.result.Position.y}</Text>
                 </Box>
                 <FormControl>
                   <Input
@@ -135,7 +131,7 @@ export default NiceModal.create((metadata: INftMetadata) => {
             <Button
               ref={submitRef}
               type="submit"
-              isLoading={isLoading}
+              isLoading={isLoading || isCallSell}
               colorScheme="brand"
               w={"100%"}
             >
