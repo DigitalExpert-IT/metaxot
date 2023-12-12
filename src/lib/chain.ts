@@ -19,6 +19,20 @@ const chainMap = {
     },
     rpc: ["https://valhalacoin.cloud"],
   },
+  "0x539": {
+    chainId: 1337,
+    chain: "Sabak",
+    name: "Sabak",
+    testnet: true,
+    slug: "sabak",
+    shortName: "sbk",
+    nativeCurrency: {
+      name: "STH",
+      symbol: "STH",
+      decimals: 18,
+    },
+    rpc: ["HTTP://127.0.0.1:7545"],
+  },
 };
 
 export const getActiveChain = () => {

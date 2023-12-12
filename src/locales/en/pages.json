@@ -126,43 +126,47 @@
       "description": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui molestias doloribus."
     }
   },
-  "roadmap":{
-    "title":"ROADMAP",
-    "content":"Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui molestias doloribus.",
-    "preRelease":{
-      "title":"PRE-ALPHA RELEASE",
-      "roadmap":{
-        "month":"2 <span>Month</span>",
-        "days":"12 <span>Days</span>",
-        "q1":{
+  "roadmap": {
+    "title": "ROADMAP",
+    "content": "Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. Est cumque beatae qui molestias doloribus.",
+    "preRelease": {
+      "title": "PRE-ALPHA RELEASE",
+      "roadmap": {
+        "month": "2 <span>Month</span>",
+        "days": "12 <span>Days</span>",
+        "q1": {
           "title": "Title Road Map",
-            "content":" Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
-            "quartal": "2019, July Q1"
+          "content": " Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
+          "quartal": "2019, July Q1"
         },
-        "q2":{
+        "q2": {
           "title": "Title Road Map",
-            "content":" Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
-            "quartal": "2021, Q2"
+          "content": " Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
+          "quartal": "2021, Q2"
         },
-        "q3":{
+        "q3": {
           "title": "Title Road Map",
-            "content":" Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
-            "quartal": "2022, Q3"
+          "content": " Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
+          "quartal": "2022, Q3"
         },
-        "q4":{
+        "q4": {
           "title": "Title Road Map",
-            "content":" Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
-            "quartal": "2021, Q4"
+          "content": " Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero Est cumque beatae qui molestiasdoloribus.",
+          "quartal": "2021, Q4"
         }
       }
     }
   },
-  "market":{
-    "category":{
-      "all":"All",
-      "caracters":"Caracter",
-      "lands":"Land",
-      "materials":"Materials"
+  "profile": {
+    "sellNft": "Sell NFT"
+  },
+  "market": {
+    "category": {
+      "all": "All",
+      "caracters": "Caracter",
+      "lands": "Land",
+      "materials": "Materials",
+      "buildings": "Buildings"
     }
   }
 }

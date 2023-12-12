@@ -4,12 +4,16 @@
     "landSale": "Land Sale",
     "roadMap": "Road Map",
     "download": "Download",
-    "market":"Market"
+    "market": "Market",
+    "profile": "Profile"
   },
   "footer": {
     "dropYourEmail": "Drop your email for further information.",
     "allRightsReserved": "All Rights Reserved."
   },
+  "connectWallet": "Connect Wallet",
+  "supportWallet": "Supported Wallet",
+  "buy": "Buy",
   "available": "Available",
   "browse": "Browse",
   "buyLand": "Buy Land",

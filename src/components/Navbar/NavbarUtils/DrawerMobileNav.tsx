@@ -15,11 +15,12 @@ import {
   DrawerContent,
   DrawerCloseButton,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { INavigation } from "constant/navigation";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { ConnectWallet, darkTheme } from "@thirdweb-dev/react";
 
 interface MobileDrawerProps {
   isOpen: boolean;
@@ -28,10 +29,26 @@ interface MobileDrawerProps {
   logo: string;
 }
 
+/**
+ * Note...!!!
+ * drawerMobileNav here only on drawer
+ * if u expect navbar thunneeling to drawer u wrong
+ * if u add button or something in navbar
+ * make sure check the navbar drawer to..!! XD
+ *
+ */
+
 export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
   const { isOpen, onClose, data, logo } = props;
   const { isOpen: openChild, onToggle } = useDisclosure();
   const { t } = useTranslation();
+
+  const [host, setHost] = useState("");
+  useEffect(() => {
+    if (window.location.host) {
+      setHost(window.location.host);
+    }
+  }, []);
 
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
@@ -44,7 +61,24 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
           </AspectRatio>
         </DrawerHeader>
         <Stack direction="row" w="full" justify="center" p="2" my="5">
-          <Button colorScheme={"metaxot"}>Connect Wallet</Button>
+          <ConnectWallet
+            theme={darkTheme({
+              colors: {
+                primaryButtonBg: "#b51aff",
+                primaryButtonText: "#FFFF",
+              },
+            })}
+            btnTitle={t("common.connectWallet") ?? ""}
+            modalTitle={t("common.supportWallet") ?? ""}
+            modalSize={"wide"}
+            welcomeScreen={{
+              img: {
+                src: `http://${host}/assets/logo/metaxot.svg`,
+                width: 150,
+                height: 150,
+              },
+            }}
+          />
         </Stack>
         <DrawerBody>
           <Stack spacing="5">

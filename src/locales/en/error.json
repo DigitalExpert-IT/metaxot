@@ -5,6 +5,7 @@
   "registrationFee": "Unmatch Registration Fee",
   "notOwnedNft": "You don't own an NFT",
   "errorCode": {
+    "NotConnect": "Need to Connect Wallet",
     "ACTION_REJECTED": "User Reject Transaction!",
     "NotEnoughBalance": "Not Enough Balance",
     "NotEnoughPool": "Not Enough Pool"
