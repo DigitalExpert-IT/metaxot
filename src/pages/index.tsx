@@ -35,8 +35,23 @@ export const Market = () => {
   const route = useRouter();
 
   const filteredData = useMemo(() => {
-    if (isActive === -1) return data;
-    return data?.filter(nft => Number(nft.category ?? 0) === isActive);
+    if (isActive === -1) {
+      return data.sort((a, b) => {
+        if (a.isSold === b.isSold) {
+          return 0;
+        }
+        return a.isSold ? 1 : -1;
+      });
+    }
+
+    return data
+      ?.filter(nft => Number(nft.category ?? 0) === isActive)
+      .sort((a, b) => {
+        if (a.isSold === b.isSold) {
+          return 0;
+        }
+        return a.isSold ? 1 : -1;
+      });
   }, [data, isActive]);
 
   return (
@@ -90,19 +105,55 @@ export const Market = () => {
                 <WrapItem
                   w={{ md: "23%", base: "43%" }}
                   key={idx}
-                  onClick={() => route.push(`/market/${e.uuid}`)}
-                  cursor="pointer"
+                  onClick={() => !e.isSold && route.push(`/market/${e.uuid}`)}
+                  cursor={e.isSold ? "not-allowed" : "pointer"}
                   _hover={{
                     transform: "scale(1.01) ",
                     transition: "0.1s",
                   }}
                 >
                   <Stack bg="whiteAlpha.300" rounded="lg" overflow="hidden">
-                    <Image
-                      src={e.picture}
-                      alt="character"
-                      fallbackSrc="https://via.placeholder.com/300"
-                    />
+                    <Box pos={"relative"}>
+                      {e.isSold && (
+                        <>
+                          <Box
+                            pos={"absolute"}
+                            top={0}
+                            bottom={0}
+                            left={0}
+                            right={0}
+                            backgroundColor={"#0000008f"}
+                          ></Box>
+                          <Box
+                            pos={"absolute"}
+                            width={"fit-content"}
+                            height={"fit-content"}
+                            top={0}
+                            bottom={0}
+                            left={0}
+                            right={0}
+                            p={2}
+                            margin={"auto"}
+                            border={"3px solid red"}
+                            borderRadius={"lg"}
+                            transform={"rotate(315deg);"}
+                          >
+                            <Text
+                              fontSize={"3xl"}
+                              fontWeight={"bold"}
+                              color={"red"}
+                            >
+                              Sold Out
+                            </Text>
+                          </Box>
+                        </>
+                      )}
+                      <Image
+                        src={e.picture}
+                        alt="character"
+                        fallbackSrc="https://via.placeholder.com/300"
+                      />
+                    </Box>
                     <Stack p="3">
                       <Text fontSize={"xl"}>{e.name}</Text>
                       <Stack direction={"row"} justify="space-between">
