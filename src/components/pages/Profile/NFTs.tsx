@@ -61,7 +61,8 @@ export const NFTs = () => {
     const getMetadata = async () => {
       await Promise.all(
         NFTsData?.map(
-          async nft => await axRef.get(nft.metadata.uri).then(res => res.data)
+          async (nft: any) =>
+            await axRef.get(nft.metadata.uri).then(res => res.data)
         ) ?? []
       ).then(results => {
         setMetadatas(results);
@@ -75,7 +76,7 @@ export const NFTs = () => {
     if (!metadatas) return [] as INFTData[];
 
     return NFTsData?.map((e: any) => {
-      const detail = metadatas.find(j => j.result.id === e["0"]);
+      const detail = metadatas.find((j: any) => j.result.id === e["0"]);
       return { ...e, ...detail };
     });
   }, [metadatas]);

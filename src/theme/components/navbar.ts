@@ -48,9 +48,12 @@ export const navbarTheme = defineMultiStyleConfig({
       display: { base: "none", md: "none", lg: "flex" },
     },
     navbarItem: {
+      minWidth: "122px",
+      padding: "0px 8px",
+      margin: "0px !important",
       _hover: {
         textShadow: "0px 0px 8px white",
-      }
+      },
     },
     dropDownList: {},
     dropDownItem: {

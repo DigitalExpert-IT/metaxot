@@ -47,8 +47,8 @@ export default NiceModal.create((nft: INFTData) => {
   const { mutateAsync, status } = useSellNftMutation();
 
   const handleSellContract = async (price: string) => {
-    await mutateAsync(Number(nft.metadata.id) ?? 0, toBn(`${price}`, 9)).then(
-      () => setCallSell(true)
+    await mutateAsync(Number(nft.metadata.id) ?? 0, price).then(() =>
+      setCallSell(true)
     );
   };
 

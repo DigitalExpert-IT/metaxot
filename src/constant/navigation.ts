@@ -39,6 +39,10 @@ export const NAVIGATION: Array<INavigation> = [
     href: "/",
   },
   {
+    name: "tradeCenter",
+    href: "/trade-center",
+  },
+  {
     name: "profile",
     href: "/profile",
   },
