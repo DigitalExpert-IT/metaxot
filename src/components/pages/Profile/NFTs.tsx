@@ -21,6 +21,7 @@ import { t } from "i18next";
 import NiceModal from "@ebay/nice-modal-react";
 import SellModal from "./SellModal";
 import axRef from "hooks/metaxotGame/axiosRef";
+import { useListNftSalesQuery } from "hooks/market";
 
 const chain = process.env.NEXT_PUBLIC_CHAIN_ID;
 
@@ -53,6 +54,7 @@ export const NFTs = () => {
     contract,
     address
   );
+  const { data: ListNftSales } = useListNftSalesQuery();
 
   const { data: NFTBalance } = useNFTBalance(contract, address, 1);
 
@@ -72,14 +74,27 @@ export const NFTs = () => {
     getMetadata();
   }, [NFTsData]);
 
-  const nftWithMetadata: INFTData[] | undefined = useMemo(() => {
-    if (!metadatas) return [] as INFTData[];
+  const nftOnListSales = useMemo(() => {
+    if (!ListNftSales) return [];
 
-    return NFTsData?.map((e: any) => {
+    return ListNftSales.reduce((acc, nft) => {
+      if (nft?.owner?.toLowerCase() === address.toLowerCase()) {
+        return [...acc, { ...nft, isOnMarket: true }];
+      }
+      return acc;
+    }, []);
+  }, [ListNftSales]);
+
+  const nftWithMetadata: INFTData[] | undefined = useMemo(() => {
+    if (!metadatas || !NFTsData) return [] as INFTData[];
+
+    const allOwnedNft = NFTsData?.concat(nftOnListSales);
+
+    return allOwnedNft?.map((e: any) => {
       const detail = metadatas.find((j: any) => j.result.id === e["0"]);
       return { ...e, ...detail };
     });
-  }, [metadatas]);
+  }, [NFTsData, nftOnListSales, metadatas]);
 
   if (isLoadingNFTs) {
     return (
@@ -109,7 +124,31 @@ export const NFTs = () => {
             )}
             {nftWithMetadata?.map((e, i) => (
               <WrapItem key={i} rounded="md" overflow="hidden">
-                <Stack bg="whiteAlpha.100" w={{ md: "16rem" }}>
+                <Box pos="relative" bg="whiteAlpha.100" w={{ md: "16rem" }}>
+                  {e.isOnMarket && (
+                    <Box
+                      pos={"absolute"}
+                      width={"fit-content"}
+                      height={"fit-content"}
+                      top={6}
+                      left={-10}
+                      px={8}
+                      py={0}
+                      border={"3px solid red"}
+                      borderRadius={"lg"}
+                      background={"red"}
+                      transform={"rotate(315deg);"}
+                    >
+                      <Text
+                        fontSize={"sm"}
+                        fontWeight={"bold"}
+                        color={"white"}
+                        textTransform={"uppercase"}
+                      >
+                        On Market
+                      </Text>
+                    </Box>
+                  )}
                   <Image
                     src={e.image}
                     alt={e.name}
@@ -127,10 +166,12 @@ export const NFTs = () => {
                       colorScheme="brand"
                       onClick={() => NiceModal.show(SellModal, e)}
                     >
-                      {t("pages.profile.sellNft")}
+                      {e.isOnMarket
+                        ? t("pages.profile.cancelSell")
+                        : t("pages.profile.sellNft")}
                     </Button>
                   </Box>
-                </Stack>
+                </Box>
               </WrapItem>
             ))}
           </Wrap>

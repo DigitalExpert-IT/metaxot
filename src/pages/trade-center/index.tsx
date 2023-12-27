@@ -12,18 +12,19 @@ import {
 import { LayoutMain, CircleGalaxy } from "components";
 import { CATEGORY } from "constant/pages/category";
 import {
-  useListPreMintQuery,
+  useListNftSalesQuery,
   // useListPreMintQueryByCategory,
 } from "hooks/market";
 import { t } from "i18next";
 import { useRouter } from "next/router";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { fromBn } from "evm-bn";
+import axRef from "hooks/metaxotGame/axiosRef";
 
 export const Market = () => {
   const [isActive, setIsActive] = useState<number>(-1);
-  const { data } = useListPreMintQuery();
-  // const { data: categoryItem } = useListPreMintQueryByCategory(isActive);
+  const { data } = useListNftSalesQuery();
+  const [metadatas, setMetadatas] = useState<[] | any>([]);
   const nomarilizer = useMemo(() => {
     return CATEGORY.map((ctg, i) => {
       if (isActive === i) {
@@ -34,25 +35,40 @@ export const Market = () => {
   }, [isActive]);
   const route = useRouter();
 
+  // Cause the uri needing auth, we need (temporary until found the propper way)
+  useEffect(() => {
+    const getMetadata = async () => {
+      if (data) {
+        await Promise.all(
+          data?.map(
+            async (nft: any) =>
+              await axRef
+                .get(
+                  process.env.NEXT_PUBLIC_METAXOT_API +
+                    "/get_lot?lotId=" +
+                    nft.uuid
+                )
+                .then((res) => setMetadatas((prev) => [...prev, res.data]))
+          )
+        );
+      }
+    };
+    getMetadata();
+  }, [data]);
+
   const filteredData = useMemo(() => {
+    if (!metadatas) return [];
+    const nftList = data?.map((e: any) => {
+      const detail = metadatas.find((j: any) => j.result.id === e.uuid);
+      return { ...e, ...detail };
+    });
+
     if (isActive === -1) {
-      return data?.sort((a, b) => {
-        if (a.isSold === b.isSold) {
-          return 0;
-        }
-        return a.isSold ? 1 : -1;
-      });
+      return nftList;
     }
 
-    return data
-      ?.filter((nft) => Number(nft.category ?? 0) === isActive)
-      ?.sort((a, b) => {
-        if (a.isSold === b.isSold) {
-          return 0;
-        }
-        return a.isSold ? 1 : -1;
-      });
-  }, [data, isActive]);
+    return nftList?.filter((nft) => Number(nft.category ?? 0) === isActive);
+  }, [data, metadatas, isActive]);
 
   return (
     <LayoutMain title="Market">
