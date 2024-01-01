@@ -38,6 +38,10 @@ axRef.interceptors.response.use(
     return response;
   },
   error => {
+    if (error.response && error.response.code === "ERR_NETWORK") {
+      console.log("Error Timeout");
+    }
+
     if (error.response && error.response.status === 401) {
       Cookies.remove("token");
       localStorage.removeItem("userData");

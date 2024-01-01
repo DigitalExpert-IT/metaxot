@@ -20,6 +20,7 @@ import { MNFT } from "constant/address";
 import { t } from "i18next";
 import NiceModal from "@ebay/nice-modal-react";
 import SellModal from "./SellModal";
+import Alert from "components/Basic/Alert";
 import axRef from "hooks/metaxotGame/axiosRef";
 import { useListNftSalesQuery } from "hooks/market";
 
@@ -75,7 +76,7 @@ export const NFTs = () => {
   }, [NFTsData]);
 
   const nftOnListSales = useMemo(() => {
-    if (!ListNftSales) return [];
+    if (!ListNftSales || !address) return [];
 
     return ListNftSales.reduce((acc, nft) => {
       if (nft?.owner?.toLowerCase() === address.toLowerCase()) {
@@ -83,7 +84,7 @@ export const NFTs = () => {
       }
       return acc;
     }, []);
-  }, [ListNftSales]);
+  }, [ListNftSales, address]);
 
   const nftWithMetadata: INFTData[] | undefined = useMemo(() => {
     if (!metadatas || !NFTsData) return [] as INFTData[];
@@ -161,15 +162,27 @@ export const NFTs = () => {
                     </Text>
                   </Box>
                   <Box p={2}>
-                    <Button
-                      w={"full"}
-                      colorScheme="brand"
-                      onClick={() => NiceModal.show(SellModal, e)}
-                    >
-                      {e.isOnMarket
-                        ? t("pages.profile.cancelSell")
-                        : t("pages.profile.sellNft")}
-                    </Button>
+                    {e.isOnMarket ? (
+                      <Button
+                        w={"full"}
+                        colorScheme="brand"
+                        onClick={() =>
+                          Alert({
+                            text: "Are you sure to cancel selling this NFT?",
+                          })
+                        }
+                      >
+                        {t("pages.profile.cancelSell")}
+                      </Button>
+                    ) : (
+                      <Button
+                        w={"full"}
+                        colorScheme="brand"
+                        onClick={() => NiceModal.show(SellModal, e)}
+                      >
+                        {t("pages.profile.sellNft")}
+                      </Button>
+                    )}
                   </Box>
                 </Box>
               </WrapItem>

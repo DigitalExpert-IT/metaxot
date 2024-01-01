@@ -106,15 +106,15 @@ export default NiceModal.create((nft: INFTData) => {
                 <Text fontSize={"2xl"}>{nft.name}</Text>
                 <Box>
                   <Text color={"brand.500"}>UID</Text>
-                  <Text fontSize={"sm"}>{nft.result.Id}</Text>
+                  <Text fontSize={"sm"}>{nft.result?.Id}</Text>
                 </Box>
                 <Box>
                   <Text color={"brand.500"}>Latitude</Text>
-                  <Text fontSize={"sm"}>{nft.result.Position.x}</Text>
+                  <Text fontSize={"sm"}>{nft.result?.Position.x}</Text>
                 </Box>
                 <Box>
                   <Text color={"brand.500"}>Longitude</Text>
-                  <Text fontSize={"sm"}>{nft.result.Position.y}</Text>
+                  <Text fontSize={"sm"}>{nft.result?.Position.y}</Text>
                 </Box>
                 <FormControl>
                   <Input
