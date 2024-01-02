@@ -26,5 +26,7 @@
   "lotLeft": "Lot Left",
   "send": "send",
   "section": "Section",
-  "extras": "extras"
+  "extras": "extras",
+  "cancel": "Cancel",
+  "confirm": "Confirm"
 }

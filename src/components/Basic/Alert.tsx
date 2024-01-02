@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef, useState } from "react";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import {
   Button,
@@ -13,7 +13,13 @@ import {
 import { t } from "i18next";
 
 type IAlertOptions = {
-  text: string;
+  text: {
+    title?: string;
+    content?: string;
+    confirm?: string;
+    cancel?: string;
+  };
+  body?: React.ReactElement;
   type?: "alert" | "confirm";
 };
 
@@ -22,15 +28,20 @@ type IAlert = (options: IAlertOptions) => Promise<unknown>;
 const AlertModal = NiceModal.create((props: IAlertOptions) => {
   const modal = useModal();
   const cancelRef = useRef<any>(null);
-  const { text } = props;
+  const { text, body } = props;
 
   const handleModalClose = () => {
     modal.hide();
   };
 
+  const handleModalConfirm = async () => {
+    modal.resolve(true);
+    modal.hide();
+  };
+
   return (
     <Modal
-      size={"2xl"}
+      size={"md"}
       isOpen={modal.visible}
       onClose={handleModalClose}
       initialFocusRef={cancelRef}
@@ -43,16 +54,27 @@ const AlertModal = NiceModal.create((props: IAlertOptions) => {
         py={8}
       >
         <ModalCloseButton />
-        <ModalBody>
-          <Text color={"brand.500"}>{text}</Text>
+        <ModalBody textAlign={"center"} color={"white"}>
+          <Text fontSize={"2xl"} fontWeight={"bold"} mb={4}>
+            {text?.title}
+          </Text>
+          {body ? body : <Text>{text?.content}</Text>}
         </ModalBody>
 
-        <ModalFooter pb={0}>
-          <Button colorScheme="red" w={"100%"}>
-            {t("common.cancel")}
+        <ModalFooter pb={0} gap={8}>
+          <Button
+            ref={cancelRef}
+            variant={"outline"}
+            onClick={handleModalClose}
+          >
+            {text?.cancel ? text.cancel : t("common.cancel")}
           </Button>
-          <Button ref={cancelRef} type="submit" colorScheme="brand" w={"100%"}>
-            {t("common.")}
+          <Button
+            type="submit"
+            colorScheme="brand"
+            onClick={handleModalConfirm}
+          >
+            {text?.confirm ? text.confirm : "Ok"}
           </Button>
         </ModalFooter>
       </ModalContent>

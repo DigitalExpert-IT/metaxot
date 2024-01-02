@@ -1,9 +1,8 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import {
   Button,
   FormControl,
-  FormLabel,
   Input,
   Modal,
   ModalBody,
@@ -22,7 +21,6 @@ import { t } from "i18next";
 import useMarketApi from "hooks/metaxotGame/useMarketApi";
 import { useSellNftMutation } from "hooks/market";
 import { useAsyncCall } from "hooks/useAsyncCall";
-import { toBn } from "evm-bn";
 import { INFTData } from "./NFTs";
 
 interface ISellForm {

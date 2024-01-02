@@ -23,10 +23,19 @@ import SellModal from "./SellModal";
 import Alert from "components/Basic/Alert";
 import axRef from "hooks/metaxotGame/axiosRef";
 import { useListNftSalesQuery } from "hooks/market";
+import { useCancelSellMutation } from "hooks/market/useCancelSellMutation";
+import { useAsyncCall } from "hooks/useAsyncCall";
+import { fromBn } from "evm-bn";
+import { BigNumber } from "ethers";
 
 const chain = process.env.NEXT_PUBLIC_CHAIN_ID;
 
 export interface INFTData {
+  0: BigNumber; // nftId
+  1: string; // owner
+  2: BigNumber; // price
+  3: string; // uuid
+  4: BigNumber; // category
   attributes: string[];
   code: number;
   description: string;
@@ -58,6 +67,13 @@ export const NFTs = () => {
   const { data: ListNftSales } = useListNftSalesQuery();
 
   const { data: NFTBalance } = useNFTBalance(contract, address, 1);
+
+  const { mutateAsync: handleCancelSellContract } = useCancelSellMutation();
+
+  const { exec: cancelSell, isLoading } = useAsyncCall(
+    handleCancelSellContract,
+    t("succes.successCancelSellNFT")
+  );
 
   // Cause the uri needing auth, we need (temporary until found the propper way)
   useEffect(() => {
@@ -96,6 +112,36 @@ export const NFTs = () => {
       return { ...e, ...detail };
     });
   }, [NFTsData, nftOnListSales, metadatas]);
+
+  const handleCancelSell = async (e: INFTData) => {
+    if (
+      await Alert({
+        text: {
+          title: "Cancel Selling",
+          confirm: t("common.confirm") ?? "",
+        },
+        body: (
+          <Box textAlign={"center"}>
+            <Text mb={4}>{t("pages.profile.cancelSellAlert")}</Text>
+            <Box
+              width={"fit-content"}
+              backgroundColor={"#2D2F34"}
+              px={8}
+              py={2}
+              borderRadius={"2xl"}
+              margin={"auto"}
+            >
+              <Text color={"brand.500"} fontWeight={"bold"}>
+                {e.name}
+              </Text>
+            </Box>
+          </Box>
+        ),
+      })
+    ) {
+      await cancelSell(+fromBn(e[0]));
+    }
+  };
 
   if (isLoadingNFTs) {
     return (
@@ -166,11 +212,8 @@ export const NFTs = () => {
                       <Button
                         w={"full"}
                         colorScheme="brand"
-                        onClick={() =>
-                          Alert({
-                            text: "Are you sure to cancel selling this NFT?",
-                          })
-                        }
+                        onClick={() => handleCancelSell(e)}
+                        isLoading={isLoading}
                       >
                         {t("pages.profile.cancelSell")}
                       </Button>

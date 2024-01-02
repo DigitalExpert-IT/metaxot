@@ -159,7 +159,8 @@
   },
   "profile": {
     "sellNft": "Sell NFT",
-    "cancelSell": "Cancel Sell"
+    "cancelSell": "Cancel Sell",
+    "cancelSellAlert": "Are you sure want to cancel selling this NFT?"
   },
   "market": {
     "category": {
