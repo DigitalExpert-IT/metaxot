@@ -33,6 +33,20 @@ const chainMap = {
     },
     rpc: ["HTTP://127.0.0.1:7545"],
   },
+  "0x7a69": {
+    chainId: 31337,
+    chain: "Berutu",
+    name: "Berutu",
+    testnet: true,
+    slug: "berutu",
+    shortName: "brt",
+    nativeCurrency: {
+      name: "BTH",
+      symbol: "BTH",
+      decimals: 18,
+    },
+    rpc: ["http://127.0.0.1:8545/"],
+  },
 };
 
 export const getActiveChain = () => {
