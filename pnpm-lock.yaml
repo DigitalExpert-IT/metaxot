@@ -111,8 +111,8 @@ dependencies:
     specifier: ^4.17.21
     version: 4.17.21
   metaxot-contract:
-    specifier: ^1.5.2
-    version: 1.5.2(@ethersproject/bignumber@5.7.0)(@nomicfoundation/hardhat-chai-matchers@2.0.2)(@nomicfoundation/hardhat-ethers@3.0.4)(@nomicfoundation/hardhat-network-helpers@1.0.9)(@nomicfoundation/hardhat-verify@1.1.1)(@typechain/ethers-v6@0.4.3)(@typechain/hardhat@8.0.3)(@types/chai@4.3.9)(@types/mocha@10.0.3)(@types/node@18.11.10)(chai@4.3.10)(ethers@5.7.2)(hardhat-gas-reporter@1.0.9)(hardhat@2.18.3)(solidity-coverage@0.8.5)(ts-node@10.9.1)(typechain@8.3.2)(typescript@4.9.3)
+    specifier: ^1.5.3
+    version: 1.5.3(@ethersproject/bignumber@5.7.0)(@nomicfoundation/hardhat-chai-matchers@2.0.2)(@nomicfoundation/hardhat-ethers@3.0.4)(@nomicfoundation/hardhat-network-helpers@1.0.9)(@nomicfoundation/hardhat-verify@1.1.1)(@typechain/ethers-v6@0.4.3)(@typechain/hardhat@8.0.3)(@types/chai@4.3.9)(@types/mocha@10.0.3)(@types/node@18.11.10)(chai@4.3.10)(ethers@5.7.2)(hardhat-gas-reporter@1.0.9)(hardhat@2.18.3)(solidity-coverage@0.8.5)(ts-node@10.9.1)(typechain@8.3.2)(typescript@4.9.3)
   next:
     specifier: 13.1.2
     version: 13.1.2(@babel/core@7.20.5)(react-dom@18.2.0)(react@18.2.0)
@@ -12553,8 +12553,8 @@ packages:
     resolution: {integrity: sha512-mUYWsMKNrm4lfygPkL3OfGzOPTR2DBlTkBNHM//F6hGp8cLThY897crAlk3/Jo17LEOOjQUrNAx6DvgO77QJkA==}
     dev: false
 
-  /metaxot-contract@1.5.2(@ethersproject/bignumber@5.7.0)(@nomicfoundation/hardhat-chai-matchers@2.0.2)(@nomicfoundation/hardhat-ethers@3.0.4)(@nomicfoundation/hardhat-network-helpers@1.0.9)(@nomicfoundation/hardhat-verify@1.1.1)(@typechain/ethers-v6@0.4.3)(@typechain/hardhat@8.0.3)(@types/chai@4.3.9)(@types/mocha@10.0.3)(@types/node@18.11.10)(chai@4.3.10)(ethers@5.7.2)(hardhat-gas-reporter@1.0.9)(hardhat@2.18.3)(solidity-coverage@0.8.5)(ts-node@10.9.1)(typechain@8.3.2)(typescript@4.9.3):
-    resolution: {integrity: sha512-UVT3eh9GvcwEExLpwVgOrNmvgFtYCUTK227bK4xClEGbj2dHeh0yYkUNsHGtdcJy6RVpQsAJMOJiRtH1u8eq4A==}
+  /metaxot-contract@1.5.3(@ethersproject/bignumber@5.7.0)(@nomicfoundation/hardhat-chai-matchers@2.0.2)(@nomicfoundation/hardhat-ethers@3.0.4)(@nomicfoundation/hardhat-network-helpers@1.0.9)(@nomicfoundation/hardhat-verify@1.1.1)(@typechain/ethers-v6@0.4.3)(@typechain/hardhat@8.0.3)(@types/chai@4.3.9)(@types/mocha@10.0.3)(@types/node@18.11.10)(chai@4.3.10)(ethers@5.7.2)(hardhat-gas-reporter@1.0.9)(hardhat@2.18.3)(solidity-coverage@0.8.5)(ts-node@10.9.1)(typechain@8.3.2)(typescript@4.9.3):
+    resolution: {integrity: sha512-eJQaZZf3BSnha16KnBuETor7AnYYz8ZIw5fGKT0cSCVArp0QHoMWOnZUogF9IUOCDt8kHCdgofLecoZ6dqksVQ==}
     dependencies:
       '@nomicfoundation/hardhat-toolbox': 3.0.0(@nomicfoundation/hardhat-chai-matchers@2.0.2)(@nomicfoundation/hardhat-ethers@3.0.4)(@nomicfoundation/hardhat-network-helpers@1.0.9)(@nomicfoundation/hardhat-verify@1.1.1)(@typechain/ethers-v6@0.4.3)(@typechain/hardhat@8.0.3)(@types/chai@4.3.9)(@types/mocha@10.0.3)(@types/node@18.11.10)(chai@4.3.10)(ethers@5.7.2)(hardhat-gas-reporter@1.0.9)(hardhat@2.18.3)(solidity-coverage@0.8.5)(ts-node@10.9.1)(typechain@8.3.2)(typescript@4.9.3)
       '@nomiclabs/hardhat-ganache': 2.0.1(hardhat@2.18.3)

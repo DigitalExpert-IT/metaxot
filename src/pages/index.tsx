@@ -23,7 +23,7 @@ import { fromBn } from "evm-bn";
 export const Market = () => {
   const [isActive, setIsActive] = useState<number>(-1);
   const { data } = useListPreMintQuery();
-  // const { data: categoryItem } = useListPreMintQueryByCategory(isActive);
+
   const nomarilizer = useMemo(() => {
     return CATEGORY.map((ctg, i) => {
       if (isActive === i) {

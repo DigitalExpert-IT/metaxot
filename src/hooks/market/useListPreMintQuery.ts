@@ -2,7 +2,6 @@ import { useMarketContract } from "./useMarketContract";
 import { useContractRead } from "@thirdweb-dev/react";
 import { Market } from "metaxot-contract/typechain-types";
 import { useMemo } from "react";
-import { DUMMY_JSON } from "constant/dummyResAPI";
 import { toBn } from "evm-bn";
 
 type GetListedPremintNftSales = Awaited<
@@ -18,10 +17,8 @@ export const useListPreMintQuery = () => {
 
   const normalize = useMemo(() => {
     return data?.map((e: any) => {
-      const detail = DUMMY_JSON.find(j => j.uuid === e.uuid);
-      return { ...e, ...detail };
+      return { ...e };
     });
-    return () =>{};
   }, [data]);
 
   return {
@@ -40,10 +37,8 @@ export const useListPreMintQueryByCategory = (id_category: number) => {
 
   const normalize = useMemo(() => {
     return data?.map((e: any) => {
-      const detail = DUMMY_JSON.find(j => j.uuid === e.uuid);
-      return { ...e, ...detail };
+      return { ...e };
     });
-    return () =>{};
   }, [data]);
 
   return {

@@ -139,7 +139,7 @@ export const NFTs = () => {
         ),
       })
     ) {
-      await cancelSell(+fromBn(e[0]));
+      await cancelSell(+fromBn(e["0"]));
     }
   };
 
@@ -166,7 +166,7 @@ export const NFTs = () => {
         </Heading>
         <Stack>
           <Wrap spacing={8}>
-            {!Number(NFTBalance) && (
+            {!Number(NFTBalance) && nftWithMetadata.length <= 0 && (
               <Text color="whiteAlpha.400">You Don&apos;t Have NFT . . . </Text>
             )}
             {nftWithMetadata?.map((e, i) => (

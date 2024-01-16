@@ -22,6 +22,7 @@ import useMarketApi from "hooks/metaxotGame/useMarketApi";
 import { useSellNftMutation } from "hooks/market";
 import { useAsyncCall } from "hooks/useAsyncCall";
 import { INFTData } from "./NFTs";
+import { toBn } from "evm-bn";
 
 interface ISellForm {
   price: string;
@@ -45,7 +46,7 @@ export default NiceModal.create((nft: INFTData) => {
   const { mutateAsync, status } = useSellNftMutation();
 
   const handleSellContract = async (price: string) => {
-    await mutateAsync(Number(nft.metadata.id) ?? 0, price).then(() =>
+    await mutateAsync(Number(nft.metadata.id) ?? 0, toBn(price, 9)).then(() =>
       setCallSell(true)
     );
   };
