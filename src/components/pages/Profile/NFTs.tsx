@@ -27,15 +27,24 @@ import { useCancelSellMutation } from "hooks/market/useCancelSellMutation";
 import { useAsyncCall } from "hooks/useAsyncCall";
 import { fromBn } from "evm-bn";
 import { BigNumber } from "ethers";
+import { generateUriPath } from "utils/uri";
 
 const chain = process.env.NEXT_PUBLIC_CHAIN_ID;
 
-export interface INFTData {
+export interface IListNftSales {
   0: BigNumber; // nftId
   1: string; // owner
   2: BigNumber; // price
   3: string; // uuid
   4: BigNumber; // category
+  category: BigNumber;
+  nftId: BigNumber;
+  owner: string;
+  price: BigNumber;
+  uuid: string;
+}
+
+export interface INFTData {
   attributes: string[];
   code: number;
   description: string;
@@ -86,10 +95,20 @@ export const NFTs = () => {
       ).then(results => {
         setMetadatas(results);
       });
+      await Promise.all(
+        ListNftSales?.map(
+          async (nft: any) =>
+            await axRef
+              .get(generateUriPath(nft.uuid, +fromBn(nft.category, 1) * 10))
+              .then(res => res.data)
+        ) ?? []
+      ).then(results => {
+        setMetadatas((prevResult: any) => [...prevResult, ...results]);
+      });
     };
 
     getMetadata();
-  }, [NFTsData]);
+  }, [NFTsData, ListNftSales]);
 
   const nftOnListSales = useMemo(() => {
     if (!ListNftSales || !address) return [];
@@ -103,17 +122,26 @@ export const NFTs = () => {
   }, [ListNftSales, address]);
 
   const nftWithMetadata: INFTData[] | undefined = useMemo(() => {
-    if (!metadatas || !NFTsData) return [] as INFTData[];
+    if (!nftOnListSales || !NFTsData || !metadatas) return [] as INFTData[];
 
     const allOwnedNft = NFTsData?.concat(nftOnListSales);
 
+    // add metadata to NFT
     return allOwnedNft?.map((e: any) => {
-      const detail = metadatas.find((j: any) => j.result.id === e["0"]);
+      const detail = metadatas.find((j: any) => {
+        if (e.uuid) {
+          // this state if the nft data comefrom list NFT sales
+          return j.result.Id === e.uuid;
+        } else {
+          // this state if the NFT data comefrom owned nft
+          return j.result.Id === e.metadata.uri.split("=")[1];
+        }
+      });
       return { ...e, ...detail };
     });
   }, [NFTsData, nftOnListSales, metadatas]);
 
-  const handleCancelSell = async (e: INFTData) => {
+  const handleCancelSell = async (e: IListNftSales) => {
     if (
       await Alert({
         text: {
@@ -139,7 +167,7 @@ export const NFTs = () => {
         ),
       })
     ) {
-      await cancelSell(+fromBn(e["0"]));
+      await cancelSell(+fromBn(e.nftId, 1) * 10);
     }
   };
 

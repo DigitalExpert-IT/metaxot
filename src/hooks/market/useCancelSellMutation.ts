@@ -1,5 +1,5 @@
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
-import { useMarketContract } from "./useMarketContract"
+import { useMarketContract } from "./useMarketContract";
 import { ZERO_ADDRESS } from "constant/dummyResAPI";
 
 export const useCancelSellMutation = () => {

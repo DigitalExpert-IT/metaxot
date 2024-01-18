@@ -1,5 +1,6 @@
 import { useMarketContract } from "./useMarketContract";
 import { useContractRead } from "@thirdweb-dev/react";
+import { ZERO_ADDRESS } from "constant/dummyResAPI";
 import { Market } from "metaxot-contract/typechain-types";
 import { useMemo } from "react";
 
@@ -13,9 +14,13 @@ export const useListNftSalesQuery = () => {
   );
 
   const normalize = useMemo(() => {
-    return data?.map((e: any) => {
-      return { ...e };
-    });
+    return data?.reduce((acc: any, nft: any) => {
+      if (nft["owner"] == ZERO_ADDRESS) {
+        return [...acc];
+      } else {
+        return [...acc, { ...nft }];
+      }
+    }, []);
   }, [data]);
 
   return {

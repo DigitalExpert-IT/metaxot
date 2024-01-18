@@ -19,6 +19,7 @@ import { t } from "i18next";
 import { useRouter } from "next/router";
 import { useMemo, useState, useEffect } from "react";
 import { fromBn } from "evm-bn";
+import { generateUriPath } from "utils/uri";
 import axRef from "hooks/metaxotGame/axiosRef";
 
 export const Market = () => {
@@ -38,21 +39,18 @@ export const Market = () => {
   // Cause the uri needing auth, we need (temporary until found the propper way)
   useEffect(() => {
     const getMetadata = async () => {
-      if (data) {
-        await Promise.all(
-          data?.map(
-            async (nft: any) =>
-              await axRef
-                .get(
-                  process.env.NEXT_PUBLIC_METAXOT_API +
-                    "/get_lot?lotId=" +
-                    nft.uuid
-                )
-                .then((res) => setMetadatas((prev) => [...prev, res.data]))
-          )
-        );
-      }
+      await Promise.all(
+        data?.map(
+          async (nft: any) =>
+            await axRef
+              .get(generateUriPath(nft.uuid, +fromBn(nft.category, 1) * 10))
+              .then((res) => res.data)
+        ) ?? []
+      ).then((results) => {
+        setMetadatas(results);
+      });
     };
+
     getMetadata();
   }, [data]);
 
@@ -63,11 +61,21 @@ export const Market = () => {
       return { ...e, ...detail };
     });
 
+    // add metadata to NFT
+    const nftWithMetadata = nftList?.map((e: any) => {
+      const detail = metadatas.find((j: any) => {
+        return j.result.Id === e.uuid;
+      });
+      return { ...e, ...detail };
+    });
+
     if (isActive === -1) {
-      return nftList;
+      return nftWithMetadata;
     }
 
-    return nftList?.filter((nft) => Number(nft.category ?? 0) === isActive);
+    return nftWithMetadata?.filter(
+      (nft) => Number(nft.category ?? 0) === isActive
+    );
   }, [data, metadatas, isActive]);
 
   return (
@@ -165,8 +173,8 @@ export const Market = () => {
                         </>
                       )}
                       <Image
-                        src={e.picture}
-                        alt="character"
+                        src={e.image}
+                        alt={e.name}
                         fallbackSrc="https://via.placeholder.com/300"
                       />
                     </Box>
