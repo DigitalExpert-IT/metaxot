@@ -59,7 +59,9 @@ export default NiceModal.create((nft: INFTData) => {
   // Sell from Metaxot Game API
   useEffect(() => {
     const sellApi = async () => {
-      await sellNftApi(nft.result.Id ?? "");
+      if (!nft.result.Id) return;
+
+      await sellNftApi(nft.result?.Id ?? "");
       setCallSell(false);
       handleModalClose();
     };
