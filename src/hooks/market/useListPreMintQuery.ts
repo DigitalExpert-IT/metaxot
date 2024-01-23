@@ -1,6 +1,6 @@
 import { useMarketContract } from "./useMarketContract";
 import { useContractRead } from "@thirdweb-dev/react";
-import { Market } from "metaxot-contract/typechain-types";
+import { Market } from "contracts/typechain-types";
 import { useMemo } from "react";
 import { toBn } from "evm-bn";
 

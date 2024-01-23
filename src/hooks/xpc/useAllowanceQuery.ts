@@ -1,5 +1,5 @@
 import { useAddress, useContractRead } from "@thirdweb-dev/react";
-import { Xpc } from "metaxot-contract/typechain-types";
+import { Xpc } from "contracts/typechain-types";
 import { useXpcContract } from "./useXpcContract";
 import { ZERO_ADDRESS } from "constant/dummyResAPI";
 import { useMarketContract } from "hooks/market";
