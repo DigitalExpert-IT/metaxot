@@ -3,6 +3,7 @@ import { useContractRead } from "@thirdweb-dev/react";
 import { Market } from "metaxot-contract/typechain-types";
 import { useMemo } from "react";
 import { toBn } from "evm-bn";
+import { ZERO_ADDRESS } from "constant/dummyResAPI";
 
 type GetListedPremintNftSales = Awaited<
   ReturnType<Market["getListedPreMintNftSales"]>
@@ -16,9 +17,13 @@ export const useListPreMintQuery = () => {
   );
 
   const normalize = useMemo(() => {
-    return data?.map((e: any) => {
-      return { ...e };
-    });
+    return data?.reduce((acc: any, e: any) => {
+      if (e["price"]?.eq(toBn("0")) && e["0"] === "") {
+        return [...acc];
+      } else {
+        return [...acc, { ...e }];
+      }
+    }, []);
   }, [data]);
 
   return {

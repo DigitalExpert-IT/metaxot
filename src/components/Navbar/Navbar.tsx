@@ -71,7 +71,7 @@ export const Navbar = () => {
             modalSize={"wide"}
             welcomeScreen={{
               img: {
-                src: `http://${host}/assets/logo/metaxot.svg`,
+                src: `http://${host}/assets/logo/metaxot.png`,
                 width: 150,
                 height: 150,
               },

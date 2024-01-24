@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Cookies from "js-cookie";
 
 interface IError {
@@ -37,9 +37,12 @@ axRef.interceptors.response.use(
   response => {
     return response;
   },
-  error => {
-    if (error.response && error.response.code === "ERR_NETWORK") {
-      console.log("Error Timeout");
+  (error: AxiosError) => {
+    if (error?.code === "ERR_NETWORK" || error?.code === "ECONNABORTED") {
+      return Promise.reject<IError>({
+        status: "time_out",
+        message: "Error timeout",
+      });
     }
 
     if (error.response && error.response.status === 401) {
@@ -49,8 +52,8 @@ axRef.interceptors.response.use(
 
     if (error.response && error.response.data) {
       return Promise.reject<IError>({
-        status: error.response.data.status,
-        message: error.response.data.message,
+        status: error.status,
+        message: error.message,
       });
     }
 
