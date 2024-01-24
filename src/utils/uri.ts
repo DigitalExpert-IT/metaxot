@@ -1,4 +1,4 @@
-const CATEGORY_MAP: { [key: string]: string } = {
+export const CATEGORY_MAP: { [key: string]: string } = {
   "0": "lot",
   "1": "building",
 };

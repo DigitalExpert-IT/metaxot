@@ -125,8 +125,6 @@ export const NFTs = () => {
     }, []);
   }, [ListNftSales, address]);
 
-  console.log("ListNftSales", ListNftSales);
-
   const nftWithMetadata: INFTData[] = useMemo(() => {
     if (!nftOnListSales || !NFTsData || !metadatas) return [] as INFTData[];
 
@@ -146,8 +144,6 @@ export const NFTs = () => {
       return { ...e, ...detail };
     });
   }, [NFTsData, nftOnListSales, metadatas]);
-
-  console.log("NFT with metadata", nftWithMetadata);
 
   const handleCancelSell = async (e: IListNftSales | INFTData) => {
     if (

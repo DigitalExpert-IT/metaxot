@@ -8,6 +8,7 @@ import {
   ModalBody,
   ModalOverlay,
   ModalContent,
+  HStack,
 } from "@chakra-ui/react";
 import { CircleGalaxy, LayoutMain } from "components";
 import { useTranslation } from "react-i18next";
@@ -15,13 +16,13 @@ import { useRouter } from "next/router";
 import { useBuyPreMintMutation, useListPreMintQuery } from "hooks/market";
 import { useEffect, useState, useMemo } from "react";
 import { fromBn } from "evm-bn";
-import { ZERO_ADDRESS } from "constant/dummyResAPI";
-import { shortenAddress } from "utils";
 import { useAsyncCall } from "hooks/useAsyncCall";
-import { detail } from "./[idx]";
+import { detail } from "./[id]";
 import { useWallet } from "@thirdweb-dev/react";
-import { DUMMY_JSON } from "constant/dummyResAPI";
 import useMarketApi from "hooks/metaxotGame/useMarketApi";
+import axRef from "hooks/metaxotGame/axiosRef";
+import { generateUriPath } from "utils/uri";
+import { CATEGORY_MAP } from "utils/uri";
 
 const Detail = () => {
   const [detailNft, setDetailNft] = useState<detail | undefined | any>({});
@@ -35,7 +36,8 @@ const Detail = () => {
   const { mutateAsync, status } = useBuyPreMintMutation();
   const { buyNft } = useMarketApi();
   const router = useRouter();
-  const uuid = router.query?.idx;
+  const uuid = router.query?.id as string;
+  const category = router.query?.category as string;
 
   const handleBuy = async () => {
     await mutateAsync(nftIndex ?? 0, detailNft.price).then(() =>
@@ -60,21 +62,18 @@ const Detail = () => {
     }
   }, [status, isCallBuyApi]);
 
-  const dataNFT = useMemo(() => {
-    return DUMMY_JSON.find((j) => j.uuid === uuid);
-  }, [data, uuid]);
-
   useEffect(() => {
-    if (!data || !router.query.idx || !router.isReady) return;
-    setDetailNft(
-      data?.find((e, index) => {
-        if (e["0"] == uuid) {
-          setNftIndex(index);
-          return true;
-        }
-      })
-    );
-  }, [data]);
+    if (!data || !uuid || !category) return;
+
+    const metadata = async () => {
+      const res = await axRef.get(generateUriPath(uuid, +category));
+      const nftData = data.find((nft) => nft["0"] === uuid);
+
+      setDetailNft({ ...nftData, ...res.data });
+    };
+
+    metadata();
+  }, [data, uuid, category]);
 
   return (
     <LayoutMain title={detailNft.name}>
@@ -92,15 +91,15 @@ const Detail = () => {
             justifyContent="center"
           >
             <Image
-              // src="https://ik.imagekit.io/msxxxaegj/metashot/lot_medium.png?updatedAt=1699335228063"
-              src={dataNFT?.picture}
-              alt={dataNFT?.name}
+              src={detailNft?.image}
+              alt={detailNft?.name}
+              fallbackSrc="https://via.placeholder.com/600"
               rounded={"lg"}
             ></Image>
           </Stack>
-          <Stack flex={2} justify="space-between">
+          <Stack flex={1} justify="space-between">
             <Text fontSize={"2xl"} fontWeight="600">
-              {dataNFT?.name}
+              {detailNft?.name}
             </Text>
             <Stack
               bg="whiteAlpha.300"
@@ -108,64 +107,39 @@ const Detail = () => {
               borderWidth="1px"
               borderStyle={"solid"}
               borderColor="whiteAlpha.400"
-              direction={"row"}
-              py="2"
+              p="4"
             >
-              <Stack flex={1} p="5">
-                {Object.keys(detailNft).map((e, i) => {
-                  if (i <= 5 || e === "picture" || e === "bg" || e === "price")
-                    return;
-                  return <Text key={i}>{e}</Text>;
-                })}
-              </Stack>
-              <Stack
-                flex={1}
-                borderLeft={"1px solid"}
-                borderColor="whiteAlpha.400"
-                p="5"
-              >
-                {Object.values(detailNft).map((e, i) => {
-                  if (
-                    i <= 5 ||
-                    e === detailNft.picture ||
-                    e === detailNft.bg ||
-                    e === detailNft.price
-                  )
-                    return;
-                  return (
-                    <Text key={i} fontSize={i <= 6 ? "xs" : "md"}>
-                      {String(e)}
-                    </Text>
-                  );
-                })}
-                {/* 
-                <Text>Rare</Text>
-            <Text>Arcer</Text>
-            <Stack direction={"row"} alignItems="center">
-              <Progress flex={1} hasStripe value={64} />
-              <Text>64</Text>
+              <HStack>
+                <Text minW={"32"}>UUID</Text>
+                <Text textTransform={"capitalize"}>{uuid}</Text>
+              </HStack>
+              <HStack>
+                <Text minW={"32"}>Category</Text>
+                <Text textTransform={"capitalize"}>
+                  {CATEGORY_MAP[detailNft?.category]}
+                </Text>
+              </HStack>
+              <HStack>
+                <Text minW={"32"}>Is Rentalable</Text>
+                <Text>{detailNft?.isRentalAble ? "Yes" : "No"}</Text>
+              </HStack>
             </Stack>
-            <Stack direction={"row"} alignItems="center">
-              <Progress flex={1} hasStripe value={10} />
-              <Text>10</Text>
-            </Stack>
-            <Stack direction={"row"} alignItems="center">
-              <Progress flex={1} hasStripe value={5} />
-              <Text>5</Text>
-            </Stack> */}
-              </Stack>
-            </Stack>
-            <Stack direction={"row"} justify="space-between">
-              <Text color={"whiteAlpha.500"} fontSize="xs">
-                owned by {shortenAddress(ZERO_ADDRESS)}
-              </Text>
+            <Stack justify="space-between">
               <Text fontWeight={"bold"}>
                 {fromBn(detailNft?.price ?? 0, 9)} XPC
               </Text>
+              <Button
+                onClick={buy}
+                isLoading={isLoading}
+                isDisabled={detailNft?.isSold}
+              >
+                {detailNft?.isSold
+                  ? t("common.sold")
+                  : wallet
+                  ? t("common.buy")
+                  : t("common.connectWallet")}
+              </Button>
             </Stack>
-            <Button onClick={buy} isLoading={isLoading}>
-              {wallet ? t("common.buy") : t("common.connectWallet")}
-            </Button>
           </Stack>
         </Stack>
       </Stack>

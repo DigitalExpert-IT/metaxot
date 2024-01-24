@@ -122,6 +122,10 @@ export const Market = () => {
               waiting ... tresno jalaran soko kulino
             </Text>
           </Box>
+        ) : data.length <= 0 ? (
+          <Box height={100} mt={8} textAlign={"center"}>
+            <Text fontWeight={"bold"}>Tidak ada NFT</Text>
+          </Box>
         ) : (
           <Wrap spacing={"5"}>
             {filteredData?.map((e: any, idx: number) => {
