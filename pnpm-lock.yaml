@@ -111,8 +111,8 @@ dependencies:
     specifier: ^4.17.21
     version: 4.17.21
   metaxot-contract:
-    specifier: ^1.5.8
-    version: 1.5.8(@ethersproject/bignumber@5.7.0)
+    specifier: ^1.5.9
+    version: 1.5.9(@ethersproject/bignumber@5.7.0)
   next:
     specifier: 13.1.2
     version: 13.1.2(@babel/core@7.20.5)(react-dom@18.2.0)(react@18.2.0)
@@ -8654,8 +8654,8 @@ packages:
     resolution: {integrity: sha512-mUYWsMKNrm4lfygPkL3OfGzOPTR2DBlTkBNHM//F6hGp8cLThY897crAlk3/Jo17LEOOjQUrNAx6DvgO77QJkA==}
     dev: false
 
-  /metaxot-contract@1.5.8(@ethersproject/bignumber@5.7.0):
-    resolution: {integrity: sha512-GUqI7HQNL46WYMC7J8E94qPbh9boWGMUthRK5RtZ5tYavo5lcltN207+zFiJgug8+2ypC0wPjyhdJA8zT6ouOg==}
+  /metaxot-contract@1.5.9(@ethersproject/bignumber@5.7.0):
+    resolution: {integrity: sha512-r8H+xQyDC0WWG96MYXgkelDaVV3nl3lgtm40cq+ZWg79Ijciu41cEWumSB7Fp5SdSpm3BACYZ2SPOOnCNCaopA==}
     dependencies:
       '@openzeppelin/contracts': 4.9.3
       '@openzeppelin/contracts-upgradeable': 4.9.3
