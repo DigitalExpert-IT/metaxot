@@ -25,7 +25,7 @@ import axRef from "hooks/metaxotGame/axiosRef";
 import { useListNftSalesQuery } from "hooks/market";
 import { useCancelSellMutation } from "hooks/market/useCancelSellMutation";
 import { useAsyncCall } from "hooks/useAsyncCall";
-import { fromBn } from "evm-bn";
+import { fromBn, toBn } from "evm-bn";
 import { BigNumber } from "ethers";
 import { generateUriPath } from "utils/uri";
 
@@ -42,6 +42,8 @@ export interface IListNftSales {
   owner: string;
   price: BigNumber;
   uuid: string;
+  name?: string;
+  isOnMarket?: boolean;
 }
 
 export interface INFTData {
@@ -63,6 +65,8 @@ export interface INFTData {
   status: number;
   supply: string;
   type: string;
+  nftId?: BigNumber;
+  isOnMarket?: boolean;
 }
 
 export const NFTs = () => {
@@ -110,10 +114,10 @@ export const NFTs = () => {
     getMetadata();
   }, [NFTsData, ListNftSales]);
 
-  const nftOnListSales = useMemo(() => {
+  const nftOnListSales: INFTData[] = useMemo(() => {
     if (!ListNftSales || !address) return [];
 
-    return ListNftSales.reduce((acc, nft) => {
+    return ListNftSales.reduce((acc: any, nft: any) => {
       if (nft?.owner?.toLowerCase() === address.toLowerCase()) {
         return [...acc, { ...nft, isOnMarket: true }];
       }
@@ -123,10 +127,10 @@ export const NFTs = () => {
 
   console.log("ListNftSales", ListNftSales);
 
-  const nftWithMetadata: INFTData[] | undefined = useMemo(() => {
+  const nftWithMetadata: INFTData[] = useMemo(() => {
     if (!nftOnListSales || !NFTsData || !metadatas) return [] as INFTData[];
 
-    const allOwnedNft = NFTsData?.concat(nftOnListSales);
+    const allOwnedNft = [...NFTsData, ...nftOnListSales];
 
     // add metadata to NFT
     return allOwnedNft?.map((e: any) => {
@@ -145,7 +149,7 @@ export const NFTs = () => {
 
   console.log("NFT with metadata", nftWithMetadata);
 
-  const handleCancelSell = async (e: IListNftSales) => {
+  const handleCancelSell = async (e: IListNftSales | INFTData) => {
     if (
       await Alert({
         text: {
@@ -164,14 +168,16 @@ export const NFTs = () => {
               margin={"auto"}
             >
               <Text color={"brand.500"} fontWeight={"bold"}>
-                {e.name}
+                {e?.name}
               </Text>
             </Box>
           </Box>
         ),
       })
     ) {
-      await cancelSell(+fromBn(e.nftId, 1) * 10);
+      if (e.nftId) {
+        await cancelSell(+fromBn(e.nftId, 1) * 10);
+      }
     }
   };
 

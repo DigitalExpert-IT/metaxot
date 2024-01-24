@@ -1,5 +1,5 @@
 import { BigNumber, ethers } from "ethers";
-import { Detail } from "./Detail";
+import Detail from "./Detail";
 export interface detail {
   bg: string;
   category: BigNumber;

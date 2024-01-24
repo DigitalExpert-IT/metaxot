@@ -23,7 +23,7 @@ import { useWallet } from "@thirdweb-dev/react";
 import { DUMMY_JSON } from "constant/dummyResAPI";
 import useMarketApi from "hooks/metaxotGame/useMarketApi";
 
-export const Detail = () => {
+const Detail = () => {
   const [detailNft, setDetailNft] = useState<detail | undefined | any>({});
   const [nftIndex, setNftIndex] = useState<string | any>(-1);
   const [isCallBuyApi, setIsCallBuyApi] = useState<boolean>(false);
@@ -61,7 +61,7 @@ export const Detail = () => {
   }, [status, isCallBuyApi]);
 
   const dataNFT = useMemo(() => {
-    return DUMMY_JSON.find(j => j.uuid === uuid);
+    return DUMMY_JSON.find((j) => j.uuid === uuid);
   }, [data, uuid]);
 
   useEffect(() => {
@@ -180,3 +180,5 @@ export const Detail = () => {
     </LayoutMain>
   );
 };
+
+export default Detail;
