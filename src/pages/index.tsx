@@ -125,6 +125,10 @@ export const Market = () => {
               waiting ... tresno jalaran soko kulino
             </Text>
           </Box>
+        ) : data.length <= 0 ? (
+          <Box height={100} mt={8} textAlign={"center"}>
+            <Text fontWeight={"bold"}>Tidak ada NFT</Text>
+          </Box>
         ) : (
           <Wrap spacing={"5"}>
             {filteredData?.map((e: any, idx: number) => {
@@ -132,7 +136,10 @@ export const Market = () => {
                 <WrapItem
                   w={{ md: "23%", base: "43%" }}
                   key={idx}
-                  onClick={() => !e.isSold && route.push(`/market/${e.uuid}`)}
+                  onClick={() =>
+                    !e.isSold &&
+                    route.push(`/market/${e.uuid}?category=${e.category}`)
+                  }
                   cursor={e.isSold ? "not-allowed" : "pointer"}
                   _hover={{
                     transform: "scale(1.01) ",
