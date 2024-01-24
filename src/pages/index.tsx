@@ -121,13 +121,13 @@ export const Market = () => {
       <Stack py="2" pb={12}>
         {data === undefined ? (
           <Box height={100} textAlign={"center"}>
-            <Text fontWeight={"bold"}>
-              waiting ... tresno jalaran soko kulino
-            </Text>
+            <Text fontWeight={"bold"}>Loading ...</Text>
           </Box>
-        ) : data.length <= 0 ? (
+        ) : filteredData.length <= 0 ? (
           <Box height={100} mt={8} textAlign={"center"}>
-            <Text fontWeight={"bold"}>Tidak ada NFT</Text>
+            <Text fontWeight={"bold"} fontSize={"xl"}>
+              No NFT
+            </Text>
           </Box>
         ) : (
           <Wrap spacing={"5"}>

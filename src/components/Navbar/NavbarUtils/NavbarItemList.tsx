@@ -14,6 +14,7 @@ import { ThemeContext } from "./NavbarMain";
 import { useTranslation } from "react-i18next";
 import { INavigation } from "constant/navigation";
 import { ChevronRightIcon } from "@chakra-ui/icons";
+import { useRouter } from "next/router";
 
 interface NavItemProps {
   data: INavigation[];
@@ -23,6 +24,8 @@ export const NavbarItemList: React.FC<NavItemProps> = props => {
   const { data } = props;
   const { t } = useTranslation();
   const styles = useContext(ThemeContext);
+  const router = useRouter();
+
   return (
     <>
       {data.map((item, idx) => (
@@ -30,7 +33,11 @@ export const NavbarItemList: React.FC<NavItemProps> = props => {
           <Popover trigger="hover" placement="bottom-start">
             <PopoverTrigger>
               <Link href={item.href ?? "#"} key={idx}>
-                <Text {...styles.navbarItem}>
+                <Text
+                  color={router.pathname === item.href && "orange.400"}
+                  fontWeight={router.pathname === item.href && "bold"}
+                  {...styles.navbarItem}
+                >
                   {t(`common.navigation.${item.name}`)}
                 </Text>
               </Link>
