@@ -48,6 +48,7 @@ axRef.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       Cookies.remove("token");
       localStorage.removeItem("userData");
+      window.location.replace("/login");
     }
 
     if (error.response && error.response.data) {

@@ -4,6 +4,7 @@ import { useAsyncCall } from "hooks/useAsyncCall";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 export interface ILoginForm {
   email: string;
@@ -18,6 +19,7 @@ interface IUserData {
 }
 
 const useAuth = () => {
+  const router = useRouter();
   const { t } = useTranslation();
   const toast = useToast();
   const [token, setToken] = useState<string | null>(
@@ -53,6 +55,7 @@ const useAuth = () => {
         Cookies.set("token", authorizationToken);
         localStorage.setItem("userData", JSON.stringify(user));
 
+        router.replace("/");
         return { successMessage: t("succes.successLogin") };
       } catch (error) {
         throw new Error("Authentication failed");
@@ -76,6 +79,7 @@ const useAuth = () => {
     localStorage.removeItem("userData");
 
     toast({ status: "success", description: "Logout Success" });
+    router.replace("/login");
   };
 
   return {
