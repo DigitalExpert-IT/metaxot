@@ -9,7 +9,7 @@ import {
   Button,
   Image,
 } from "@chakra-ui/react";
-import { FramerBox } from "components/animation";
+import { FramerBox } from "components/Animation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useAuth, { ILoginForm } from "hooks/metaxotGame/useAuth";
 
