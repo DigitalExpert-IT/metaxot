@@ -111,8 +111,8 @@ dependencies:
     specifier: ^4.17.21
     version: 4.17.21
   metaxot-contract:
-    specifier: ^1.5.9
-    version: 1.5.9(@ethersproject/bignumber@5.7.0)
+    specifier: ^1.5.10
+    version: 1.5.10(@ethersproject/bignumber@5.7.0)
   next:
     specifier: 13.1.2
     version: 13.1.2(@babel/core@7.20.5)(react-dom@18.2.0)(react@18.2.0)
@@ -153,8 +153,8 @@ dependencies:
     specifier: ^3.22.4
     version: 3.22.4
   zustand:
-    specifier: ^4.1.4
-    version: 4.1.4(immer@9.0.16)(react@18.2.0)
+    specifier: ^4.5.0
+    version: 4.5.0(@types/react@18.0.25)(immer@9.0.16)(react@18.2.0)
 
 devDependencies:
   '@babel/core':
@@ -8654,8 +8654,8 @@ packages:
     resolution: {integrity: sha512-mUYWsMKNrm4lfygPkL3OfGzOPTR2DBlTkBNHM//F6hGp8cLThY897crAlk3/Jo17LEOOjQUrNAx6DvgO77QJkA==}
     dev: false
 
-  /metaxot-contract@1.5.9(@ethersproject/bignumber@5.7.0):
-    resolution: {integrity: sha512-r8H+xQyDC0WWG96MYXgkelDaVV3nl3lgtm40cq+ZWg79Ijciu41cEWumSB7Fp5SdSpm3BACYZ2SPOOnCNCaopA==}
+  /metaxot-contract@1.5.10(@ethersproject/bignumber@5.7.0):
+    resolution: {integrity: sha512-6KFloz1ICjBJg3Sp1gEfaBIX+CMLe90PkRchctdNGKj+LsBJW+RkYUNxlWJni2FSxT9ZNFpTDT0qXinpqwb08w==}
     dependencies:
       '@openzeppelin/contracts': 4.9.3
       '@openzeppelin/contracts-upgradeable': 4.9.3
@@ -11601,18 +11601,22 @@ packages:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: false
 
-  /zustand@4.1.4(immer@9.0.16)(react@18.2.0):
-    resolution: {integrity: sha512-k2jVOlWo8p4R83mQ+/uyB8ILPO2PCJOf+QVjcL+1PbMCk1w5OoPYpAIxy9zd93FSfmJqoH6lGdwzzjwqJIRU5A==}
+  /zustand@4.5.0(@types/react@18.0.25)(immer@9.0.16)(react@18.2.0):
+    resolution: {integrity: sha512-zlVFqS5TQ21nwijjhJlx4f9iGrXSL0o/+Dpy4txAP22miJ8Ti6c1Ol1RLNN98BMib83lmDH/2KmLwaNXpjrO1A==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
-      immer: '>=9.0'
+      '@types/react': '>=16.8'
+      immer: '>=9.0.6'
       react: '>=16.8'
     peerDependenciesMeta:
+      '@types/react':
+        optional: true
       immer:
         optional: true
       react:
         optional: true
     dependencies:
+      '@types/react': 18.0.25
       immer: 9.0.16
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)

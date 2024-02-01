@@ -18,7 +18,7 @@ export const Navbar = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [host, setHost] = useState("");
-  const { isAuthenticated, logout } = useAuth();
+  const { logout } = useAuth();
 
   useEffect(() => {
     if (window.location.host) {
@@ -46,19 +46,9 @@ export const Navbar = () => {
           display={{ base: "none", md: "none", lg: "flex" }}
         >
           {/* <Button colorScheme={"metaxot"}>Connect Wallet</Button> */}
-          {isAuthenticated ? (
-            <Button me={4} onClick={logout} suppressHydrationWarning>
-              Logout
-            </Button>
-          ) : (
-            <Button
-              me={4}
-              onClick={() => NiceModal.show(LoginModal)}
-              suppressHydrationWarning
-            >
-              Login
-            </Button>
-          )}
+          <Button me={4} onClick={logout} suppressHydrationWarning>
+            Logout
+          </Button>
           <ConnectWallet
             theme={darkTheme({
               colors: {

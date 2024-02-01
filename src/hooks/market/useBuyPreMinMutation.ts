@@ -23,6 +23,12 @@ export const useBuyPreMintMutation = () => {
         code: "NotConnect",
       };
     }
+
+    // approve trigger
+    await mutateAsyncApprove({
+      args: [market.contract?.getAddress(), price],
+    });
+
     const allowance = await xpc.contract?.call("allowance", [
       address,
       market.contract?.getAddress(),
@@ -41,10 +47,6 @@ export const useBuyPreMintMutation = () => {
       return buy.receipt;
     }
 
-    // approve trigger
-    await mutateAsyncApprove({
-      args: [market.contract?.getAddress(), price],
-    });
     handleBuy(id, price);
   };
 

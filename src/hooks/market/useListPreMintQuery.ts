@@ -18,11 +18,7 @@ export const useListPreMintQuery = () => {
 
   const normalize = useMemo(() => {
     return data?.reduce((acc: any, e: any) => {
-      if (e["price"]?.eq(toBn("0")) && e["0"] === "") {
-        return [...acc];
-      } else {
-        return [...acc, { ...e }];
-      }
+      return [...acc, { ...e }];
     }, []);
   }, [data]);
 
