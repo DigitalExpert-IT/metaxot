@@ -1,5 +1,6 @@
 {
   "successLogin": "success login",
+  "successApprove": "success approve, waiting for gass pay confirmation",
   "successBuyNft": "success buy nft",
   "successTransferToGame": "success transfer item to Game",
   "successCancelSellNFT": "success cancel selling NFT",

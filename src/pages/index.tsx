@@ -55,7 +55,7 @@ export const Market = () => {
   const filteredData = useMemo(() => {
     if (!metadatas || !data) return [];
 
-    const removedUnknownList = data?.filter((nft) => nft["0"] !== "");
+    const removedUnknownList = data?.filter((nft) => nft["1"] !== "");
 
     // add metadata to NFT
     const nftWithMetadata = removedUnknownList?.map((e: any) => {
