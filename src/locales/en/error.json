@@ -8,6 +8,7 @@
     "NotConnect": "Need to Connect Wallet",
     "ACTION_REJECTED": "User Reject Transaction!",
     "NotEnoughBalance": "Not Enough Balance",
-    "NotEnoughPool": "Not Enough Pool"
+    "NotEnoughPool": "Not Enough Pool",
+    "NotLogged": "Please Login First"
   }
 }

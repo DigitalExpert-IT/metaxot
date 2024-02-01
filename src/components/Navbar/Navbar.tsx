@@ -7,18 +7,19 @@ import {
 } from "./NavbarUtils";
 import React, { useEffect, useState } from "react";
 import { NAVIGATION } from "constant";
-import { Button, Flex, useDisclosure, Text } from "@chakra-ui/react";
+import Link from "next/link";
+import { Button, Flex, useDisclosure } from "@chakra-ui/react";
 import { ConnectWallet, darkTheme } from "@thirdweb-dev/react";
 import { useTranslation } from "react-i18next";
-import LoginModal from "components/AuthModal/LoginModal";
-import NiceModal from "@ebay/nice-modal-react";
+// import LoginModal from "components/AuthModal/LoginModal";
+// import NiceModal from "@ebay/nice-modal-react";
 import useAuth from "hooks/metaxotGame/useAuth";
 
 export const Navbar = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [host, setHost] = useState("");
-  const { logout } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   useEffect(() => {
     if (window.location.host) {
@@ -46,9 +47,17 @@ export const Navbar = () => {
           display={{ base: "none", md: "none", lg: "flex" }}
         >
           {/* <Button colorScheme={"metaxot"}>Connect Wallet</Button> */}
-          <Button me={4} onClick={logout} suppressHydrationWarning>
-            Logout
-          </Button>
+          {isAuthenticated ? (
+            <Button me={4} onClick={logout} suppressHydrationWarning>
+              Logout
+            </Button>
+          ) : (
+            <Link href={"/login"}>
+              <Button me={4} suppressHydrationWarning>
+                Login
+              </Button>
+            </Link>
+          )}
           <ConnectWallet
             theme={darkTheme({
               colors: {

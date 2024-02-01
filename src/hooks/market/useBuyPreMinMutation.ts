@@ -3,11 +3,13 @@ import { useMarketContract } from "./useMarketContract";
 import { useApproveMutation, useXpcContract } from "hooks/xpc";
 import { ZERO_ADDRESS } from "constant/dummyResAPI";
 import { BigNumber } from "ethers";
+import useAuth from "hooks/metaxotGame/useAuth";
 import { useBalanceQuery } from "hooks/xpc/useBalanceQuery";
 
 export const useBuyPreMintMutation = () => {
   const market = useMarketContract();
   const xpc = useXpcContract();
+  const { isAuthenticated } = useAuth();
   const address = useAddress() ?? ZERO_ADDRESS;
 
   const { data: myBalance } = useBalanceQuery();
@@ -18,6 +20,11 @@ export const useBuyPreMintMutation = () => {
   );
 
   const handleBuy = async (id: number, price: BigNumber) => {
+    if (!isAuthenticated) {
+      throw {
+        code: "NotLogged",
+      };
+    }
     if (address === ZERO_ADDRESS) {
       throw {
         code: "NotConnect",
