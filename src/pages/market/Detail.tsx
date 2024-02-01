@@ -69,6 +69,8 @@ const Detail = () => {
       const res = await axRef.get(generateUriPath(uuid, +category));
       const nftData = data.find((nft) => nft["0"] === uuid);
 
+      setNftIndex(data.findIndex((nft) => nft["0"] === uuid));
+
       setDetailNft({ ...nftData, ...res.data });
     };
 
