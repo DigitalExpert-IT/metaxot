@@ -3,11 +3,13 @@ import { useMarketContract } from "./useMarketContract";
 import { useApproveMutation, useNftContract } from "hooks/nft";
 import { ZERO_ADDRESS } from "constant/dummyResAPI";
 import { BigNumberish } from "ethers";
+import useAuth from "hooks/metaxotGame/useAuth";
 
 export const useSellNftMutation = () => {
   const market = useMarketContract();
   const mnft = useNftContract();
   const address = useAddress() ?? ZERO_ADDRESS;
+  const { isAuthenticated } = useAuth();
 
   const { mutateAsync: mutateAsyncApprove } = useApproveMutation();
   const { mutateAsync: sellAsync, ...rest } = useContractWrite(
@@ -19,6 +21,11 @@ export const useSellNftMutation = () => {
     id: number,
     price: string | BigNumberish | Number
   ) => {
+    if (!isAuthenticated) {
+      throw {
+        code: "NotLogged",
+      };
+    }
     if (address === ZERO_ADDRESS) {
       throw {
         code: "NotConnect",
