@@ -165,7 +165,8 @@
   "market": {
     "category": {
       "all": "All",
-      "caracters": "Caracter",
+      "lot": "Lot",
+      "property": "Propery",
       "lands": "Land",
       "materials": "Materials",
       "buildings": "Buildings"
