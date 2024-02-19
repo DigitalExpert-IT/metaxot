@@ -9,6 +9,10 @@ import {
   WrapItem,
   Skeleton,
   Button,
+  Grid,
+  GridItem,
+  ButtonGroup,
+  UnorderedList,
 } from "@chakra-ui/react";
 import {
   useAddress,
@@ -16,6 +20,7 @@ import {
   useNFTBalance,
   useOwnedNFTs,
 } from "@thirdweb-dev/react";
+import { CATEGORY } from "constant/pages/category";
 import { MNFT } from "constant/address";
 import { t } from "i18next";
 import NiceModal from "@ebay/nice-modal-react";
@@ -71,12 +76,14 @@ export interface INFTData {
 
 export const NFTs = () => {
   const address = useAddress();
+  const [isActive, setIsActive] = useState<number>(0);
   const { contract } = useContract(MNFT[chain as "0x29a"]);
   const [metadatas, setMetadatas] = useState<any>(null);
   const { data: NFTsData, isLoading: isLoadingNFTs } = useOwnedNFTs(
     contract,
     address
   );
+
   const { data: ListNftSales } = useListNftSalesQuery();
 
   const { data: NFTBalance } = useNFTBalance(contract, address, 1);
@@ -114,6 +121,15 @@ export const NFTs = () => {
     getMetadata();
   }, [NFTsData, ListNftSales]);
 
+  const nomarilizer = useMemo(() => {
+    return CATEGORY.map((ctg, i) => {
+      if (isActive === i) {
+        return { ...ctg, isActive: true };
+      }
+      return { ...ctg, isActive: false };
+    });
+  }, [isActive]);
+
   const nftOnListSales: INFTData[] = useMemo(() => {
     if (!ListNftSales || !address) return [];
 
@@ -130,20 +146,55 @@ export const NFTs = () => {
 
     const allOwnedNft = [...NFTsData, ...nftOnListSales];
 
-    // add metadata to NFT
-    return allOwnedNft?.map((e: any) => {
+    // Sort by URI with multiple categories
+    const sortedNft = allOwnedNft.sort((a: any, b: any) => {
+      const uriA = a.external_url || "";
+      const uriB = b.external_url || "";
+
+      const getCategoryPriorityIndex = (uri: string) => {
+        for (let i = 0; i < CATEGORY.length; i++) {
+          if (uri.includes(CATEGORY[i].name.toLowerCase())) {
+            return i;
+          }
+        }
+        return CATEGORY.length; // If not found, put it at the end
+      };
+
+      const categoryIndexA = getCategoryPriorityIndex(uriA);
+      const categoryIndexB = getCategoryPriorityIndex(uriB);
+
+      if (categoryIndexA < categoryIndexB) return -1;
+      if (categoryIndexA > categoryIndexB) return 1;
+      return 0;
+    });
+
+    // Add metadata to NFT
+    const nftWithMetadata = sortedNft.map((e: any) => {
       const detail = metadatas.find((j: any) => {
         if (e.uuid) {
-          // this state if the nft data comefrom list NFT sales
+          // This state if the NFT data comes from the list NFT sales
           return j.result.Id === e.uuid;
         } else {
-          // this state if the NFT data comefrom owned nft
-          return j.result.Id === e.metadata.uri.split("=")[1];
+          // This state if the NFT data comes from owned NFT
+          return j.result.Id === (e.metadata?.uri?.split("=")[1] || "");
         }
       });
       return { ...e, ...detail };
     });
-  }, [NFTsData, nftOnListSales, metadatas]);
+
+    // Filter by category
+    const filteredNftWithMetadata = nftWithMetadata.filter(nft => {
+      // Define the category you want to filter by
+      const categoryToFilter = `get_${CATEGORY[isActive].name}`;
+      const uri = nft.external_url || "";
+      const lowerCaseUri = uri.toLowerCase();
+      const lowerCaseCategory = categoryToFilter.toLowerCase();
+
+      return lowerCaseUri.includes(lowerCaseCategory);
+    });
+
+    return filteredNftWithMetadata;
+  }, [NFTsData, nftOnListSales, metadatas, isActive]);
 
   const handleCancelSell = async (e: IListNftSales | INFTData) => {
     if (
@@ -180,8 +231,8 @@ export const NFTs = () => {
   if (isLoadingNFTs) {
     return (
       <Box my="10">
-        <Heading py="2" as="h2" fontSize="lg">
-          NFTs
+        <Heading py="2" as="h1">
+          NFT
         </Heading>
         <Skeleton
           w={{ xl: "18%", base: "40%" }}
@@ -195,77 +246,148 @@ export const NFTs = () => {
   return (
     <Box>
       <Box my="10">
-        <Heading py="2" as="h2" fontSize="lg">
-          NFTs
+        <Heading py="2" as="h2">
+          NFT
         </Heading>
-        <Stack>
-          <Wrap spacing={8}>
-            {!Number(NFTBalance) && nftWithMetadata.length <= 0 && (
-              <Text color="whiteAlpha.400">You Don&apos;t Have NFT . . . </Text>
-            )}
-            {nftWithMetadata?.map((e, i) => (
-              <WrapItem key={i} rounded="md" overflow="hidden">
-                <Box pos="relative" bg="whiteAlpha.100" w={{ md: "16rem" }}>
-                  {e.isOnMarket && (
-                    <Box
-                      pos={"absolute"}
-                      width={"fit-content"}
-                      height={"fit-content"}
-                      top={6}
-                      left={-10}
-                      px={8}
-                      py={0}
-                      border={"3px solid red"}
-                      borderRadius={"lg"}
-                      background={"red"}
-                      transform={"rotate(315deg);"}
-                    >
-                      <Text
-                        fontSize={"sm"}
-                        fontWeight={"bold"}
-                        color={"white"}
-                        textTransform={"uppercase"}
-                      >
-                        On Market
-                      </Text>
-                    </Box>
-                  )}
-                  <Image
-                    src={e.image}
-                    alt={e.name}
-                    fallbackSrc="https://via.placeholder.com/300"
-                  />
+        <Grid
+          h="60vh"
+          templateAreas={`"header header"
+                  "nav main"
+                  "nav main"`}
+          gridTemplateRows={"50px 1fr 30px"}
+          gridTemplateColumns={"200px 1fr"}
+          borderRadius={"2xl"}
+          border="2px"
+          borderColor={"#A4A4BE"}
+        >
+          <GridItem
+            borderTopRadius={"2xl"}
+            border="1px"
+            borderColor={"#A4A4BE"}
+            pl="2"
+            bg="#73707D"
+            area={"header"}
+            textAlign={"center"}
+            alignItems={"center"}
+          >
+            <Text fontSize={"xl"} margin={"auto"} mt={"1vh"}>
+              Your NFT Collection
+            </Text>
+          </GridItem>
+          <GridItem
+            borderBottomLeftRadius={"2xl"}
+            border="1px"
+            borderColor={"#A4A4BE"}
+            bgColor="rgba(115,112,125, 0.7)"
+            area={"nav"}
+            py={3}
+          >
+            {nomarilizer.map((category, i) => {
+              return (
+                <Button
+                  key={i}
+                  variant={"ghost"}
+                  width={"full"}
+                  size={"lg"}
+                  justifyContent={"flex-start"}
+                  borderRadius={0}
+                  isActive={category.isActive ? true : false}
+                  leftIcon={
+                    <category.icons
+                      color={category.isActive ? "#CEA8FF" : "white"}
+                    />
+                  }
+                  onClick={() => setIsActive(i)}
+                  color={category.isActive ? "#CEA8FF" : "white"}
+                  _active={{ backgroundColor: "#454550" }}
+                >
+                  {category.name}
+                </Button>
+              );
+            })}
+          </GridItem>
+          <GridItem
+            borderBottomRightRadius={"2xl"}
+            border="1px"
+            borderColor={"#A4A4BE"}
+            bgColor="rgba(115,112,125, 0.5)"
+            area={"main"}
+            overflow={"auto"}
+          >
+            <Stack p={5}>
+              <Wrap spacing={8}>
+                {!Number(NFTBalance) && nftWithMetadata.length <= 0 && (
+                  <Text color="whiteAlpha.400">
+                    You Don&apos;t Have NFT . . .{" "}
+                  </Text>
+                )}
+                {nftWithMetadata?.map((e, i) => (
+                  <WrapItem key={i} rounded="md" overflow="hidden">
+                    <Box pos="relative" bg="whiteAlpha.100" w={{ md: "16rem" }}>
+                      {e.isOnMarket && (
+                        <Box
+                          pos={"absolute"}
+                          width={"fit-content"}
+                          height={"fit-content"}
+                          top={6}
+                          left={-10}
+                          px={8}
+                          py={0}
+                          border={"3px solid red"}
+                          borderRadius={"lg"}
+                          background={"red"}
+                          transform={"rotate(315deg);"}
+                        >
+                          <Text
+                            fontSize={"sm"}
+                            fontWeight={"bold"}
+                            color={"white"}
+                            textTransform={"uppercase"}
+                          >
+                            On Market
+                          </Text>
+                        </Box>
+                      )}
+                      <Image
+                        src={e.image}
+                        alt={e.name}
+                        fallbackSrc="https://via.placeholder.com/300"
+                      />
 
-                  <Box p={2}>
-                    <Text fontSize="md" fontWeight={"bold"} noOfLines={1}>
-                      {e.name}
-                    </Text>
-                  </Box>
-                  <Box p={2}>
-                    {e.isOnMarket ? (
-                      <Button
-                        w={"full"}
-                        colorScheme="brand"
-                        onClick={() => handleCancelSell(e)}
-                        isLoading={isLoading}
-                      >
-                        {t("pages.profile.cancelSell")}
-                      </Button>
-                    ) : (
-                      <Button
-                        w={"full"}
-                        colorScheme="brand"
-                        onClick={() => NiceModal.show(SellModal, e)}
-                      >
-                        {t("pages.profile.sellNft")}
-                      </Button>
-                    )}
-                  </Box>
-                </Box>
-              </WrapItem>
-            ))}
-          </Wrap>
-        </Stack>
+                      <Box p={2}>
+                        <Text fontSize="md" fontWeight={"bold"} noOfLines={1}>
+                          {e.name}
+                        </Text>
+                      </Box>
+                      <Box p={2}>
+                        {e.isOnMarket ? (
+                          <Button
+                            w={"full"}
+                            colorScheme="brand"
+                            onClick={() => handleCancelSell(e)}
+                            isLoading={isLoading}
+                            bgGradient="linear(to-r, #6679F2, #AD00FF)"
+                          >
+                            {t("pages.profile.cancelSell")}
+                          </Button>
+                        ) : (
+                          <Button
+                            w={"full"}
+                            colorScheme="brand"
+                            onClick={() => NiceModal.show(SellModal, e)}
+                            bgGradient="linear(to-r, #6679F2, #AD00FF)"
+                          >
+                            {t("pages.profile.sellNft")}
+                          </Button>
+                        )}
+                      </Box>
+                    </Box>
+                  </WrapItem>
+                ))}
+              </Wrap>
+            </Stack>
+          </GridItem>
+        </Grid>
       </Box>
     </Box>
   );

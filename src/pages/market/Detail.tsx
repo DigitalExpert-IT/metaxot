@@ -9,6 +9,9 @@ import {
   ModalOverlay,
   ModalContent,
   HStack,
+  Box,
+  VStack,
+  Divider,
 } from "@chakra-ui/react";
 import { CircleGalaxy, LayoutMain } from "components";
 import { useTranslation } from "react-i18next";
@@ -97,51 +100,78 @@ const Detail = () => {
               alt={detailNft?.name}
               fallbackSrc="https://via.placeholder.com/600"
               rounded={"lg"}
+              pos={"relative"}
             ></Image>
+            <Button
+              pos={"absolute"}
+              top={"45vh"}
+              left={"33vh"}
+              minW={"412px"}
+              minH={"68px"}
+              borderRadius={15}
+              bgGradient={"linear(to-l, #5984F3, #A442E8)"}
+              bgClip="button"
+              _hover={{
+                bgGradient: "linear(to-l, #5984F3, #A442E8)",
+              }}
+              fontSize={"xl"}
+              onClick={buy}
+              isLoading={isLoading}
+              isDisabled={detailNft?.isSold}
+            >
+              {detailNft?.isSold
+                ? t("common.sold")
+                : wallet
+                ? t("common.buy")
+                : t("common.connectWallet")}
+            </Button>
           </Stack>
-          <Stack flex={1} justify="space-between">
-            <Text fontSize={"2xl"} fontWeight="600">
-              {detailNft?.name}
-            </Text>
-            <Stack
+          <Stack flex={1}>
+            <HStack justifyContent={"space-between"}>
+              <Text fontSize={"2xl"} fontWeight="600">
+                {detailNft?.name}
+              </Text>
+              <Text fontSize={"sm"} fontWeight="300" color={"grey"}>
+                owned by
+              </Text>
+            </HStack>
+            <HStack
               bg="whiteAlpha.300"
               rounded={"lg"}
               borderWidth="1px"
               borderStyle={"solid"}
               borderColor="whiteAlpha.400"
               p="4"
+              gap={3}
             >
-              <HStack>
+              <Stack>
                 <Text minW={"32"}>UUID</Text>
-                <Text textTransform={"capitalize"}>{uuid}</Text>
-              </HStack>
-              <HStack>
                 <Text minW={"32"}>Category</Text>
+                <Text minW={"32"}>Is Rentalable</Text>
+                <Text minW={"32"}>Is Sold</Text>
+                <Text minW={"32"}>Name</Text>
+              </Stack>
+              <Divider
+                borderColor={"white"}
+                borderRadius={"2px"}
+                orientation="vertical"
+              />
+              <Stack>
+                <Text textTransform={"capitalize"}>{uuid}</Text>
                 <Text textTransform={"capitalize"}>
                   {CATEGORY_MAP[detailNft?.category]}
                 </Text>
-              </HStack>
-              <HStack>
-                <Text minW={"32"}>Is Rentalable</Text>
                 <Text>{detailNft?.isRentalAble ? "Yes" : "No"}</Text>
-              </HStack>
-            </Stack>
-            <Stack justify="space-between">
+                <Text>{detailNft?.isSold ? "Yes" : "No"}</Text>
+                <Text>{detailNft?.name}</Text>
+              </Stack>
+            </HStack>
+            <HStack justify="space-between">
+              <Text fontSize={"xl"}>Price</Text>
               <Text fontWeight={"bold"}>
                 {fromBn(detailNft?.price ?? 0, 9)} XPC
               </Text>
-              <Button
-                onClick={buy}
-                isLoading={isLoading}
-                isDisabled={detailNft?.isSold}
-              >
-                {detailNft?.isSold
-                  ? t("common.sold")
-                  : wallet
-                  ? t("common.buy")
-                  : t("common.connectWallet")}
-              </Button>
-            </Stack>
+            </HStack>
           </Stack>
         </Stack>
       </Stack>

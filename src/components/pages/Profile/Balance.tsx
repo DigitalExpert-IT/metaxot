@@ -1,11 +1,21 @@
-import { Box, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  HStack,
+  Heading,
+  Image,
+  Stack,
+  Text,
+  Divider,
+} from "@chakra-ui/react";
 import { useAddress, useBalance, useWallet } from "@thirdweb-dev/react";
 import { XPC_CONTRACT } from "constant/address";
+import useAuth from "hooks/metaxotGame/useAuth";
 
 const chain = process.env.NEXT_PUBLIC_CHAIN_ID;
 
 export const Balance = () => {
   const address = useAddress();
+  const { userData } = useAuth();
   const { data: dataWallet, isLoading: isLoadingWallet } = useBalance(
     XPC_CONTRACT[chain as "0x29a"]
   );
@@ -17,81 +27,54 @@ export const Balance = () => {
   }
 
   return (
-    <Box maxW={"container.lg"}>
+    <Box maxW={"full"}>
       <Heading as="h1">Profile</Heading>
-      <Box my="1" p="1" rounded="md" border="1px" borderColor="whiteAlpha.400">
-        <Text noOfLines={1}>{address}</Text>
-      </Box>
-
-      <Heading as="h2" mt="4">
-        COIN
-      </Heading>
-      <Stack direction="row">
-        <Box>
-          {Object.keys(coin ?? {}).map((e, i) => (
-            <Box
-              my="1"
-              p="1"
-              rounded="md"
-              key={i}
-              border="1px"
-              borderColor="whiteAlpha.400"
-            >
-              <Text>{e}</Text>
-            </Box>
-          ))}
+      <HStack gap={10} mt={5}>
+        <Image
+          src="https://ik.imagekit.io/msxxxaegj/metashot/dummy-profile.png?updatedAt=1707132259209"
+          alt=""
+        />
+        <Box
+          my="1"
+          borderRadius={"2xl"}
+          border="2px"
+          borderColor={"#A4A4BE"}
+          bgColor="rgba(115,112,125, 0.5)"
+          width={"full"}
+          height={"full"}
+          flex={1}
+          flexDir={"column"}
+        >
+          <HStack
+            alignItems={"center"}
+            flex={1}
+            justifyContent={"space-between"}
+          >
+            <HStack>
+              <Stack gap={2} flex={1} p={4}>
+                <Text noOfLines={1}>Username</Text>
+                <Text noOfLines={1}>Rank</Text>
+                <Text noOfLines={1}>Wallet Address</Text>
+                <Text noOfLines={1}>XPC</Text>
+                <Text noOfLines={1}>DTH</Text>
+              </Stack>
+              <Divider
+                borderColor={"white"}
+                borderRadius={"2px"}
+                height={"200px"}
+                orientation="vertical"
+              />
+            </HStack>
+            <Stack gap={2} textAlign={"right"} align={"flex-end"} p={4}>
+              <Text noOfLines={1}>{userData?.email}</Text>
+              <Text noOfLines={1}>{"Silver"}</Text>
+              <Text noOfLines={1}>{address}</Text>
+              <Text noOfLines={1}>{coin?.displayValue.toString()}</Text>
+              <Text noOfLines={1}>{dataWallet?.displayValue.toString()}</Text>
+            </Stack>
+          </HStack>
         </Box>
-        <Box flex={1}>
-          {Object.values(coin ?? {}).map((e, i) => (
-            <Box
-              my="1"
-              p="1"
-              rounded="md"
-              key={i}
-              border="1px"
-              borderColor="whiteAlpha.400"
-            >
-              <Text noOfLines={1}>{e.toString()}</Text>
-            </Box>
-          ))}
-        </Box>
-      </Stack>
-
-      <Heading as="h2" mt="4">
-        ERC20
-      </Heading>
-      <Stack direction="row">
-        <Box>
-          {Object.keys(dataWallet ?? {}).map((e, i) => (
-            <Box
-              my="1"
-              p="1"
-              rounded="md"
-              key={i}
-              border="1px"
-              borderColor="whiteAlpha.400"
-            >
-              <Text>{e}</Text>
-            </Box>
-          ))}
-        </Box>
-        <Box flex={1}>
-          {Object.values(dataWallet ?? {})
-            ? Object.values(dataWallet ?? {}).map((e, i) => (
-                <Box
-                  my="1"
-                  p="1"
-                  rounded="md"
-                  key={i}
-                  border="1px"
-                  borderColor="whiteAlpha.400"
-                >
-                  <Text noOfLines={1}>{e.toString()}</Text>
-                </Box>
-              ))
-            : null}
-        </Box>
-      </Stack>
+      </HStack>
     </Box>
   );
 };

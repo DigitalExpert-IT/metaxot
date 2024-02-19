@@ -45,6 +45,7 @@ export const navbarTheme = defineMultiStyleConfig({
       textAlign: "center",
       textTransform: "capitalize",
       marginEnd: 8,
+      marginRight: "10%",
       display: { base: "none", md: "none", lg: "flex" },
     },
     navbarItem: {

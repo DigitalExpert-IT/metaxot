@@ -115,7 +115,7 @@ export const Market = () => {
               key={i}
               onClick={() => setIsActive(i)}
             >
-              {t(`pages.market.category.${category?.name}`)}
+              {CATEGORY[i].name}
             </ListItem>
           );
         })}

@@ -34,7 +34,12 @@ export const NavbarItemList: React.FC<NavItemProps> = props => {
             <PopoverTrigger>
               <Link href={item.href ?? "#"} key={idx}>
                 <Text
-                  color={router.pathname === item.href && "orange.400"}
+                  bgGradient={
+                    router.pathname === item.href
+                      ? "linear(to-l, #5984F3, #A442E8)"
+                      : "linear(to-l, #FFFFFF, #FFFFFF)"
+                  }
+                  bgClip="text"
                   fontWeight={router.pathname === item.href && "bold"}
                   {...styles.navbarItem}
                 >
