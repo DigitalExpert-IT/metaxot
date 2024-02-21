@@ -31,6 +31,7 @@ import axRef from "hooks/metaxotGame/axiosRef";
 import { SearchIcon } from "@chakra-ui/icons";
 import { CgSortAz } from "react-icons/cg";
 import { BsArrowsAngleExpand, BsArrowsAngleContract } from "react-icons/bs";
+import { INFTData } from "../../components/pages/Profile/NFTs";
 
 export const Market = () => {
   const [isActive, setIsActive] = useState<number>(-1);
@@ -88,7 +89,7 @@ export const Market = () => {
     );
   }, [data, metadatas, isActive]);
 
-  const filteredDataByCategory = useMemo(() => {
+  const filteredDataByCategory: never[][] = useMemo(() => {
     if (!metadatas || !data) return [];
 
     const removedUnknownList = data?.filter((nft) => nft["1"] !== "");
@@ -107,14 +108,14 @@ export const Market = () => {
     nftWithMetadata?.forEach((nft) => {
       const categoryIndex = Number(nft.category ?? 0);
       if (categoryIndex >= 0 && categoryIndex < CATEGORY.length) {
-        categorizedNFTs[categoryIndex].push(nft);
+        categorizedNFTs[categoryIndex].push(nft as never);
       }
     });
 
     // Sort and slice NFTs in each category
     const filteredData = categorizedNFTs.map((nftArray) =>
       nftArray
-        .sort((a, b) => (a.isSold === b.isSold ? 0 : a.isSold ? 1 : -1))
+        .sort((a: any, b: any) => (a.isSold === b.isSold ? 0 : a.isSold ? 1 : -1))
         .slice(0, isActive ? 4 : nftArray.length)
     );
 

@@ -67,6 +67,7 @@ export interface INFTData {
   metadata: { id: string; uri: string; code: number; result: {} };
   name: string;
   owner: string;
+  category?: never[][];
   result: {
     InteriorData: string;
     Id: string;
