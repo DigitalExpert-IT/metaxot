@@ -36,9 +36,10 @@ import { INFTData } from "../components/pages/Profile/NFTs";
 export const Market = () => {
   const [isActive, setIsActive] = useState<number>(-1);
   const [metadatas, setMetadatas] = useState<[] | any>([]);
-  const [expand, setIsExpand] = useState(false);
+  const [selectFilter, setSelectFilter] = useState<number>(-1);
   const route = useRouter();
   const { data } = useListPreMintQuery();
+  const activeSort = CATEGORY[selectFilter];
 
   // Cause the uri needing auth, we need (temporary until found the propper way)
   useEffect(() => {
@@ -55,37 +56,10 @@ export const Market = () => {
     getMetadata();
   }, [data]);
 
-  const filteredData = useMemo(() => {
-    if (!metadatas || !data) return [];
-
-    const removedUnknownList = data?.filter((nft) => nft["1"] !== "");
-
-    // add metadata to NFT
-    const nftWithMetadata = removedUnknownList?.map((e: any) => {
-      const detail = metadatas.find((j: any) => j.result.Id === e.uuid);
-
-      return { ...e, ...detail };
-    });
-
-    if (isActive === -1) {
-      return nftWithMetadata?.sort((a, b) => {
-        if (a.isSold === b.isSold) {
-          return 0;
-        }
-        return a.isSold ? 1 : -1;
-      });
-    }
-
-    return nftWithMetadata
-      ?.filter((nft) => Number(nft.category ?? 0) === isActive)
-      ?.sort((a, b) => {
-        if (a.isSold === b.isSold) {
-          return 0;
-        }
-        return a.isSold ? 1 : -1;
-      });
-  }, [data, metadatas, isActive]);
-
+  const handleSelectChange = (event: string) => {
+    const selectedValue = event.target?.value;
+    setSelectFilter(parseInt(selectedValue));
+  };
 
   const filteredDataByCategory: never[][] = useMemo(() => {
     if (!metadatas || !data) return [];
@@ -113,7 +87,9 @@ export const Market = () => {
     // Sort and slice NFTs in each category
     const filteredData = categorizedNFTs.map((nftArray) =>
       nftArray
-        .sort((a: any, b: any) => (a.isSold === b.isSold ? 0 : a.isSold ? 1 : -1))
+        .sort((a: any, b: any) =>
+          a.isSold === b.isSold ? 0 : a.isSold ? 1 : -1
+        )
         .slice(0, isActive ? 4 : nftArray.length)
     );
 
@@ -128,10 +104,14 @@ export const Market = () => {
       <HStack my={5} justifyContent={"space-between"}>
         <Heading>Find Your NFT</Heading>
         <HStack>
-          <Select variant={"unstyled"} icon={<CgSortAz />}>
-            <option value=""></option>
+          <Select
+            variant={"unstyled"}
+            icon={<CgSortAz />}
+            onChange={handleSelectChange}
+          >
+            <option value="-1"></option>
             {CATEGORY.map((item, id) => (
-              <option value="option1" key={id}>
+              <option value={id} key={id}>
                 {item.name}
               </option>
             ))}
@@ -150,32 +130,32 @@ export const Market = () => {
         </HStack>
       </HStack>
       <Stack
-        as={UnorderedList}
         direction="column"
         spacing="1rem"
         marginInlineStart={"0"}
         listStyleType="none"
         py="8"
       >
-        {CATEGORY.map((item, id) => (
+        {selectFilter >= 0 ? (
           <>
-            <HStack justifyContent={"space-between"} key={id}>
+            <HStack justifyContent={"space-between"}>
               <HStack>
-                <item.icons color={"white"} />
-                <Text>{item.name}</Text>
+                <activeSort.icons color={"white"} />
+                <Text>{CATEGORY[selectFilter].name}</Text>
               </HStack>
               <Box>
                 <Button
                   leftIcon={
-                    isActive === id ? (
+                    isActive === selectFilter ? (
                       <BsArrowsAngleContract size={"1.5rem"} />
                     ) : (
                       <BsArrowsAngleExpand size={"1.5rem"} />
                     )
                   }
                   variant={"unstyled"}
-                  // onClick={() => setIsExpand(!expand)}
-                  onClick={() => setIsActive(isActive === id ? -1 : id)}
+                  onClick={() =>
+                    setIsActive(isActive === selectFilter ? -1 : selectFilter)
+                  }
                 />
               </Box>
             </HStack>
@@ -184,7 +164,7 @@ export const Market = () => {
                 <Box height={100} textAlign={"center"}>
                   <Text fontWeight={"bold"}>Loading ...</Text>
                 </Box>
-              ) : filteredDataByCategory[id].length <= 0 ? (
+              ) : filteredDataByCategory[selectFilter]?.length <= 0 ? (
                 <Box height={100} mt={8} textAlign={"center"}>
                   <Text fontWeight={"bold"} fontSize={"xl"}>
                     Coming Soon
@@ -192,89 +172,213 @@ export const Market = () => {
                 </Box>
               ) : (
                 <Wrap spacing={"5"}>
-                  {filteredDataByCategory[id]?.map((e: any, idx: number) => {
-                    return (
-                      <WrapItem
-                        w={{ md: "23%", base: "43%" }}
-                        key={idx}
-                        onClick={() =>
-                          !e.isSold &&
-                          route.push(`/market/${e.uuid}?category=${e.category}`)
-                        }
-                        cursor={e.isSold ? "not-allowed" : "pointer"}
-                        _hover={{
-                          transform: "scale(1.01) ",
-                          transition: "0.1s",
-                        }}
-                      >
-                        <Stack
-                          bg="whiteAlpha.300"
-                          rounded="lg"
-                          overflow="hidden"
+                  {filteredDataByCategory[selectFilter].map(
+                    (e: any, idx: number) => {
+                      return (
+                        <WrapItem
+                          w={{ md: "23%", base: "43%" }}
+                          key={idx}
+                          onClick={() =>
+                            !e.isSold &&
+                            route.push(
+                              `/market/${e.uuid}?category=${e.category}`
+                            )
+                          }
+                          cursor={e.isSold ? "not-allowed" : "pointer"}
+                          _hover={{
+                            transform: "scale(1.01) ",
+                            transition: "0.1s",
+                          }}
                         >
-                          <Box pos={"relative"}>
-                            {e.isSold && (
-                              <>
-                                <Box
-                                  pos={"absolute"}
-                                  top={0}
-                                  bottom={0}
-                                  left={0}
-                                  right={0}
-                                  backgroundColor={"#0000008f"}
-                                ></Box>
-                                <Box
-                                  pos={"absolute"}
-                                  width={"fit-content"}
-                                  height={"fit-content"}
-                                  top={0}
-                                  bottom={0}
-                                  left={0}
-                                  right={0}
-                                  p={2}
-                                  margin={"auto"}
-                                  border={"3px solid red"}
-                                  borderRadius={"lg"}
-                                  transform={"rotate(315deg);"}
-                                >
-                                  <Text
-                                    fontSize={"3xl"}
-                                    fontWeight={"bold"}
-                                    color={"red"}
+                          <Stack
+                            bg="whiteAlpha.300"
+                            rounded="lg"
+                            overflow="hidden"
+                          >
+                            <Box pos={"relative"}>
+                              {e.isSold && (
+                                <>
+                                  <Box
+                                    pos={"absolute"}
+                                    top={0}
+                                    bottom={0}
+                                    left={0}
+                                    right={0}
+                                    backgroundColor={"#0000008f"}
+                                  ></Box>
+                                  <Box
+                                    pos={"absolute"}
+                                    width={"fit-content"}
+                                    height={"fit-content"}
+                                    top={0}
+                                    bottom={0}
+                                    left={0}
+                                    right={0}
+                                    p={2}
+                                    margin={"auto"}
+                                    border={"3px solid red"}
+                                    borderRadius={"lg"}
+                                    transform={"rotate(315deg);"}
                                   >
-                                    Sold Out
+                                    <Text
+                                      fontSize={"3xl"}
+                                      fontWeight={"bold"}
+                                      color={"red"}
+                                    >
+                                      Sold Out
+                                    </Text>
+                                  </Box>
+                                </>
+                              )}
+                              <Image
+                                src={e.image}
+                                alt={e.name}
+                                fallbackSrc="https://via.placeholder.com/300"
+                              />
+                            </Box>
+                            <Stack p="3">
+                              <Text fontSize={"xl"}>{e.name}</Text>
+                              <Stack direction={"row"} justify="space-between">
+                                <Stack>
+                                  <Text color={"whiteAlpha.700"} fontSize="xs">
+                                    Price
                                   </Text>
-                                </Box>
-                              </>
-                            )}
-                            <Image
-                              src={e.image}
-                              alt={e.name}
-                              fallbackSrc="https://via.placeholder.com/300"
-                            />
-                          </Box>
-                          <Stack p="3">
-                            <Text fontSize={"xl"}>{e.name}</Text>
-                            <Stack direction={"row"} justify="space-between">
-                              <Stack>
-                                <Text color={"whiteAlpha.700"} fontSize="xs">
-                                  Price
-                                </Text>
-                                <Text fontWeight={"800"}>
-                                  {fromBn(e.price, 9)} XPC
-                                </Text>
+                                  <Text fontWeight={"800"}>
+                                    {fromBn(e.price, 9)} XPC
+                                  </Text>
+                                </Stack>
                               </Stack>
                             </Stack>
                           </Stack>
-                        </Stack>
-                      </WrapItem>
-                    );
-                  })}
+                        </WrapItem>
+                      );
+                    }
+                  )}
                 </Wrap>
               )}
             </Stack>
           </>
-        ))}
+        ) : (
+          CATEGORY.map((item, id) => (
+            <>
+              <HStack justifyContent={"space-between"} key={id}>
+                <HStack>
+                  <item.icons color={"white"} />
+                  <Text>{item.name}</Text>
+                </HStack>
+                <Box>
+                  <Button
+                    leftIcon={
+                      isActive === id ? (
+                        <BsArrowsAngleContract size={"1.5rem"} />
+                      ) : (
+                        <BsArrowsAngleExpand size={"1.5rem"} />
+                      )
+                    }
+                    variant={"unstyled"}
+                    onClick={() => setIsActive(isActive === id ? -1 : id)}
+                  />
+                </Box>
+              </HStack>
+              <Stack py="2" pb={12}>
+                {data === undefined ? (
+                  <Box height={100} textAlign={"center"}>
+                    <Text fontWeight={"bold"}>Loading ...</Text>
+                  </Box>
+                ) : filteredDataByCategory[id]?.length <= 0 ? (
+                  <Box height={100} mt={8} textAlign={"center"}>
+                    <Text fontWeight={"bold"} fontSize={"xl"}>
+                      Coming Soon
+                    </Text>
+                  </Box>
+                ) : (
+                  <Wrap spacing={"5"}>
+                    {filteredDataByCategory[id]?.map((e: any, idx: number) => {
+                      return (
+                        <WrapItem
+                          w={{ md: "23%", base: "43%" }}
+                          key={idx}
+                          onClick={() =>
+                            !e.isSold &&
+                            route.push(
+                              `/market/${e.uuid}?category=${e.category}`
+                            )
+                          }
+                          cursor={e.isSold ? "not-allowed" : "pointer"}
+                          _hover={{
+                            transform: "scale(1.01) ",
+                            transition: "0.1s",
+                          }}
+                        >
+                          <Stack
+                            bg="whiteAlpha.300"
+                            rounded="lg"
+                            overflow="hidden"
+                          >
+                            <Box pos={"relative"}>
+                              {e.isSold && (
+                                <>
+                                  <Box
+                                    pos={"absolute"}
+                                    top={0}
+                                    bottom={0}
+                                    left={0}
+                                    right={0}
+                                    backgroundColor={"#0000008f"}
+                                  ></Box>
+                                  <Box
+                                    pos={"absolute"}
+                                    width={"fit-content"}
+                                    height={"fit-content"}
+                                    top={0}
+                                    bottom={0}
+                                    left={0}
+                                    right={0}
+                                    p={2}
+                                    margin={"auto"}
+                                    border={"3px solid red"}
+                                    borderRadius={"lg"}
+                                    transform={"rotate(315deg);"}
+                                  >
+                                    <Text
+                                      fontSize={"3xl"}
+                                      fontWeight={"bold"}
+                                      color={"red"}
+                                    >
+                                      Sold Out
+                                    </Text>
+                                  </Box>
+                                </>
+                              )}
+                              <Image
+                                src={e.image}
+                                alt={e.name}
+                                fallbackSrc="https://via.placeholder.com/300"
+                              />
+                            </Box>
+                            <Stack p="3">
+                              <Text fontSize={"xl"}>{e.name}</Text>
+                              <Stack direction={"row"} justify="space-between">
+                                <Stack>
+                                  <Text color={"whiteAlpha.700"} fontSize="xs">
+                                    Price
+                                  </Text>
+                                  <Text fontWeight={"800"}>
+                                    {fromBn(e.price, 9)} XPC
+                                  </Text>
+                                </Stack>
+                              </Stack>
+                            </Stack>
+                          </Stack>
+                        </WrapItem>
+                      );
+                    })}
+                  </Wrap>
+                )}
+              </Stack>
+            </>
+          ))
+        )}
       </Stack>
     </LayoutMain>
   );

@@ -7,6 +7,7 @@ import {
   Music,
   Robot,
   Character,
+  Art,
 } from "../../components/Icons";
 
 export const CATEGORY = [
@@ -16,12 +17,7 @@ export const CATEGORY = [
     isActive: false,
   },
   {
-    name: "Animal",
-    icons: Animal,
-    isActive: false,
-  },
-  {
-    name: "Buildings",
+    name: "Property",
     icons: Buildings,
     isActive: false,
   },
@@ -31,13 +27,23 @@ export const CATEGORY = [
     isActive: false,
   },
   {
-    name: "Bag",
+    name: "Accessories",
     icons: Bag,
     isActive: false,
   },
   {
     name: "Music",
     icons: Music,
+    isActive: false,
+  },
+  {
+    name: "Art",
+    icons: Art,
+    isActive: false,
+  },
+  {
+    name: "Animal",
+    icons: Animal,
     isActive: false,
   },
   {

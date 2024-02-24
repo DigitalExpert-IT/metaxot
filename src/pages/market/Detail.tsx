@@ -80,6 +80,7 @@ const Detail = () => {
     metadata();
   }, [data, uuid, category]);
 
+
   return (
     <LayoutMain title={detailNft.name}>
       <Stack position={"relative"} maxW={"xs"} ml={"60%"} zIndex={"hide"}>
@@ -99,13 +100,15 @@ const Detail = () => {
               src={detailNft?.image}
               alt={detailNft?.name}
               fallbackSrc="https://via.placeholder.com/600"
+              maxW={"30rem"}
+              ml={"5rem"}
               rounded={"lg"}
               pos={"relative"}
             ></Image>
             <Button
               pos={"absolute"}
-              top={"45vh"}
-              left={"33vh"}
+              top={"50%"}
+              left={"35vh"}
               minW={"412px"}
               minH={"68px"}
               borderRadius={15}
