@@ -56,7 +56,7 @@ export const Market = () => {
     getMetadata();
   }, [data]);
 
-  const handleSelectChange = (event: string) => {
+  const handleSelectChange = (event: any) => {
     const selectedValue = event.target?.value;
     setSelectFilter(parseInt(selectedValue));
   };
