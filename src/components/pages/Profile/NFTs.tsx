@@ -13,6 +13,11 @@ import {
   GridItem,
   ButtonGroup,
   UnorderedList,
+  HStack,
+  Select,
+  InputGroup,
+  InputLeftElement,
+  Input,
 } from "@chakra-ui/react";
 import {
   useAddress,
@@ -33,6 +38,8 @@ import { useAsyncCall } from "hooks/useAsyncCall";
 import { fromBn, toBn } from "evm-bn";
 import { BigNumber } from "ethers";
 import { generateUriPath } from "utils/uri";
+import { CgSortAz } from "react-icons/cg";
+import { SearchIcon } from "@chakra-ui/icons";
 
 const chain = process.env.NEXT_PUBLIC_CHAIN_ID;
 
@@ -60,6 +67,7 @@ export interface INFTData {
   metadata: { id: string; uri: string; code: number; result: {} };
   name: string;
   owner: string;
+  category?: never[][];
   result: {
     InteriorData: string;
     Id: string;
@@ -315,6 +323,29 @@ export const NFTs = () => {
             overflow={"auto"}
           >
             <Stack p={5}>
+              <HStack mb={5} justifyContent={"flex-end"}>
+                <HStack>
+                  <Select variant={"unstyled"} icon={<CgSortAz />}>
+                    <option value=""></option>
+                    {CATEGORY.map((item, id) => (
+                      <option value="option1" key={id}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </Select>
+                  <InputGroup backgroundColor={"white"} borderRadius={10}>
+                    <InputLeftElement pointerEvents="none">
+                      <SearchIcon color="#A4A4BE" />
+                    </InputLeftElement>
+                    <Input
+                      backgroundColor={"white"}
+                      borderRadius={10}
+                      placeholder="Seach NFT"
+                      _placeholder={{ color: "#A4A4BE" }}
+                    />
+                  </InputGroup>
+                </HStack>
+              </HStack>
               <Wrap spacing={8}>
                 {!Number(NFTBalance) && nftWithMetadata.length <= 0 && (
                   <Text color="whiteAlpha.400">
