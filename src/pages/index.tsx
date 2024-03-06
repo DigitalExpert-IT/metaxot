@@ -12,6 +12,7 @@ import {
   IconButton,
   Flex,
   Divider,
+  Button,
 } from "@chakra-ui/react";
 import { LayoutMain, CircleGalaxy } from "components";
 import { CATEGORY } from "constant/pages/category";
@@ -27,9 +28,11 @@ import { fromBn } from "evm-bn";
 import axRef from "hooks/metaxotGame/axiosRef";
 import { generateUriPath } from "utils/uri";
 import { IMAGE_CAROUSEL } from "constant/pages/home";
+import { Trans, useTranslation } from "react-i18next";
 
 export const Home = () => {
-  const [isActive, setIsActive] = useState<number>(-1);
+  const { t } = useTranslation();
+  const [isActive, setIsActive] = useState<number>(0);
   const [metadatas, setMetadatas] = useState<[] | any>([]);
   const [activeCarousel, setIsActiveCarousel] = useState<number>(1);
   const route = useRouter();
@@ -71,17 +74,6 @@ export const Home = () => {
       return { ...e, ...detail };
     });
 
-    if (isActive === -1) {
-      return nftWithMetadata
-        ?.sort((a, b) => {
-          if (a.isSold === b.isSold) {
-            return 0;
-          }
-          return a.isSold ? 1 : -1;
-        })
-        .slice(0, 8);
-    }
-
     return nftWithMetadata
       ?.filter((nft) => Number(nft.category ?? 0) === isActive)
       ?.sort((a, b) => {
@@ -94,7 +86,6 @@ export const Home = () => {
   }, [data, metadatas, isActive]);
 
   //this function is just option while the image navigation not clickable
-
   const handlePrev = () => {
     setIsActiveCarousel((prevIndex) =>
       prevIndex > 0 ? prevIndex - 1 : IMAGE_CAROUSEL.length - 1
@@ -114,7 +105,7 @@ export const Home = () => {
           <CircleGalaxy top={0} mt={"-30rem"} />
         </Stack>
         <Stack gap={10}>
-          <Heading>What's New</Heading>
+          <Heading>{"What's New"}</Heading>
           <Flex
             align="center"
             justify="center"
@@ -154,6 +145,16 @@ export const Home = () => {
                   minW={idx === activeCarousel ? "60%" : "5%"}
                 >
                   <Image src={item.src} alt={item.alt} />
+                  <Button
+                    zIndex={2}
+                    pos={"absolute"}
+                    bgGradient={"linear(to-tr, #706AF5, #A90AFF)'"}
+                    ml={"80%"}
+                    mt={"-10%"}
+                    borderRadius={"30px"}
+                  >
+                    More
+                  </Button>
                 </Box>
               );
             })}
@@ -182,17 +183,15 @@ export const Home = () => {
         </Stack>
         <Stack gap={5}>
           <Heading>GET 50% OFF</Heading>
-          <Text textAlign={"justify"}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
-          </Text>
+          <Text textAlign={"justify"}>{t("common.dummyContent")}</Text>
         </Stack>
         <Stack>
           <Heading>Trending</Heading>
+          <Box height={100} mt={8} textAlign={"center"} >
+            <Text fontWeight={"bold"} fontSize={"xl"}>
+              Trending NFT is Coming Soon
+            </Text>
+          </Box>
         </Stack>
         <Stack
           as={UnorderedList}
@@ -201,18 +200,8 @@ export const Home = () => {
           marginInlineStart={"0"}
           listStyleType="none"
           py="2"
+          gap={5}
         >
-          <ListItem
-            bgGradient={
-              isActive == -1 ? "linear(to-tr, #706AF5, #A90AFF)'" : ""
-            }
-            p="2"
-            rounded="md"
-            cursor={"pointer"}
-            onClick={() => setIsActive(-1)}
-          >
-            {t(`pages.market.category.all`)}
-          </ListItem>
           {nomarilizer.map((category, i) => {
             return (
               <ListItem
@@ -220,7 +209,8 @@ export const Home = () => {
                   category?.isActive ? "linear(to-tr, #706AF5, #A90AFF)'" : ""
                 }
                 p="2"
-                rounded="md"
+                px="8"
+                rounded="30px"
                 cursor={"pointer"}
                 key={i}
                 onClick={() => setIsActive(i)}
