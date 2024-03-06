@@ -19,10 +19,6 @@ export interface ISocial {
 
 export const NAVIGATION: Array<INavigation> = [
   // {
-  //   name: "home",
-  //   href: "/",
-  // },
-  // {
   //   name: "landSale",
   //   href: "/land-sale",
   // },
@@ -35,8 +31,12 @@ export const NAVIGATION: Array<INavigation> = [
   //   href: "/download",
   // },
   {
-    name: "market",
+    name: "home",
     href: "/",
+  },
+  {
+    name: "market",
+    href: "/market",
   },
   {
     name: "tradeCenter",

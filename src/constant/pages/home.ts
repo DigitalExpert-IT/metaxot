@@ -89,3 +89,18 @@ export const CREW_LINE_UP = [
       "“ Lorem ipsum dolor sit amet. Et corporis iste nam necessitatibus voluptas qui sapiente libero. “",
   },
 ];
+
+export const IMAGE_CAROUSEL = [
+  {
+    src: "https://ik.imagekit.io/msxxxaegj/metashot/dummyCarousel1.png?updatedAt=1709647336080",
+    alt: "carousel1",
+  },
+  {
+    src: "https://ik.imagekit.io/msxxxaegj/metashot/dummyCarousel2.png?updatedAt=1709647336042",
+    alt: "carousel1",
+  },
+  {
+    src: "https://ik.imagekit.io/msxxxaegj/metashot/dummyCarousel3.png?updatedAt=1709647336173",
+    alt: "carousel1",
+  },
+];

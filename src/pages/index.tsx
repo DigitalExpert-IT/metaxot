@@ -6,18 +6,16 @@ import {
   Wrap,
   WrapItem,
   Image,
-  Icon,
   Box,
-  HStack,
   Heading,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  Select,
-  Button,
+  HStack,
+  IconButton,
+  Flex,
+  Divider,
 } from "@chakra-ui/react";
 import { LayoutMain, CircleGalaxy } from "components";
 import { CATEGORY } from "constant/pages/category";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import {
   useListPreMintQuery,
   // useListPreMintQueryByCategory,
@@ -28,18 +26,14 @@ import { useMemo, useState, useEffect } from "react";
 import { fromBn } from "evm-bn";
 import axRef from "hooks/metaxotGame/axiosRef";
 import { generateUriPath } from "utils/uri";
-import { SearchIcon } from "@chakra-ui/icons";
-import { CgSortAz } from "react-icons/cg";
-import { BsArrowsAngleExpand, BsArrowsAngleContract } from "react-icons/bs";
-import { INFTData } from "../components/pages/Profile/NFTs";
+import { IMAGE_CAROUSEL } from "constant/pages/home";
 
-export const Market = () => {
+export const Home = () => {
   const [isActive, setIsActive] = useState<number>(-1);
   const [metadatas, setMetadatas] = useState<[] | any>([]);
-  const [selectFilter, setSelectFilter] = useState<number>(-1);
+  const [activeCarousel, setIsActiveCarousel] = useState<number>(1);
   const route = useRouter();
   const { data } = useListPreMintQuery();
-  const activeSort = CATEGORY[selectFilter];
 
   // Cause the uri needing auth, we need (temporary until found the propper way)
   useEffect(() => {
@@ -56,332 +50,279 @@ export const Market = () => {
     getMetadata();
   }, [data]);
 
-  const handleSelectChange = (event: any) => {
-    const selectedValue = event.target?.value;
-    setSelectFilter(parseInt(selectedValue));
-  };
+  const nomarilizer = useMemo(() => {
+    return CATEGORY.map((ctg, i) => {
+      if (isActive === i) {
+        return { ...ctg, isActive: true };
+      }
+      return { ...ctg, isActive: false };
+    });
+  }, [isActive]);
 
-  const filteredDataByCategory: never[][] = useMemo(() => {
+  const filteredData = useMemo(() => {
     if (!metadatas || !data) return [];
 
     const removedUnknownList = data?.filter((nft) => nft["1"] !== "");
 
-    // Add metadata to NFT
+    // add metadata to NFT
     const nftWithMetadata = removedUnknownList?.map((e: any) => {
       const detail = metadatas.find((j: any) => j.result.Id === e.uuid);
 
       return { ...e, ...detail };
     });
 
-    // Initialize an array to store NFTs for each category
-    const categorizedNFTs = new Array(CATEGORY.length).fill([]).map(() => []);
+    if (isActive === -1) {
+      return nftWithMetadata
+        ?.sort((a, b) => {
+          if (a.isSold === b.isSold) {
+            return 0;
+          }
+          return a.isSold ? 1 : -1;
+        })
+        .slice(0, 8);
+    }
 
-    // Filter and categorize NFTs by category
-    nftWithMetadata?.forEach((nft) => {
-      const categoryIndex = Number(nft.category ?? 0);
-      if (categoryIndex >= 0 && categoryIndex < CATEGORY.length) {
-        categorizedNFTs[categoryIndex].push(nft as never);
-      }
-    });
-
-    // Sort and slice NFTs in each category
-    const filteredData = categorizedNFTs.map((nftArray) =>
-      nftArray
-        .sort((a: any, b: any) =>
-          a.isSold === b.isSold ? 0 : a.isSold ? 1 : -1
-        )
-        .slice(0, isActive ? 4 : nftArray.length)
-    );
-
-    return filteredData;
+    return nftWithMetadata
+      ?.filter((nft) => Number(nft.category ?? 0) === isActive)
+      ?.sort((a, b) => {
+        if (a.isSold === b.isSold) {
+          return 0;
+        }
+        return a.isSold ? 1 : -1;
+      })
+      .slice(0, 8);
   }, [data, metadatas, isActive]);
+
+  //this function is just option while the image navigation not clickable
+
+  const handlePrev = () => {
+    setIsActiveCarousel((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : IMAGE_CAROUSEL.length - 1
+    );
+  };
+
+  const handleNext = () => {
+    setIsActiveCarousel((prevIndex) =>
+      prevIndex < IMAGE_CAROUSEL.length - 1 ? prevIndex + 1 : 0
+    );
+  };
 
   return (
     <LayoutMain title="Market">
-      <Stack position={"relative"} maxW={"xs"} ml={"60%"} zIndex={"hide"}>
-        <CircleGalaxy top={0} mt={"-30rem"} />
-      </Stack>
-      <HStack my={5} justifyContent={"space-between"}>
-        <Heading>Find Your NFT</Heading>
-        <HStack>
-          <Select
-            variant={"unstyled"}
-            icon={<CgSortAz />}
-            onChange={handleSelectChange}
+      <Stack gap={10}>
+        <Stack position={"relative"} maxW={"xs"} ml={"60%"} zIndex={"hide"}>
+          <CircleGalaxy top={0} mt={"-30rem"} />
+        </Stack>
+        <Stack gap={10}>
+          <Heading>What's New</Heading>
+          <Flex
+            align="center"
+            justify="center"
+            position="relative"
+            py={"12rem"}
           >
-            <option value="-1"></option>
-            {CATEGORY.map((item, id) => (
-              <option value={id} key={id}>
-                {item.name}
-              </option>
-            ))}
-          </Select>
-          <InputGroup backgroundColor={"white"} borderRadius={10}>
-            <InputLeftElement pointerEvents="none">
-              <SearchIcon color="#A4A4BE" />
-            </InputLeftElement>
-            <Input
-              backgroundColor={"white"}
-              borderRadius={10}
-              placeholder="Seach NFT"
-              _placeholder={{ color: "#A4A4BE" }}
+            <IconButton
+              icon={<ChevronLeftIcon />}
+              aria-label="Previous"
+              onClick={handlePrev}
+              position="absolute"
+              left="10px"
+              zIndex={2}
             />
-          </InputGroup>
-        </HStack>
-      </HStack>
-      <Stack
-        direction="column"
-        spacing="1rem"
-        marginInlineStart={"0"}
-        listStyleType="none"
-        py="8"
-      >
-        {selectFilter >= 0 ? (
-          <>
-            <HStack justifyContent={"space-between"}>
-              <HStack>
-                <activeSort.icons color={"white"} />
-                <Text>{CATEGORY[selectFilter].name}</Text>
-              </HStack>
-              <Box>
-                <Button
-                  leftIcon={
-                    isActive === selectFilter ? (
-                      <BsArrowsAngleContract size={"1.5rem"} />
-                    ) : (
-                      <BsArrowsAngleExpand size={"1.5rem"} />
-                    )
-                  }
-                  variant={"unstyled"}
-                  onClick={() =>
-                    setIsActive(isActive === selectFilter ? -1 : selectFilter)
-                  }
-                />
-              </Box>
-            </HStack>
-            <Stack py="2" pb={12}>
-              {data === undefined ? (
-                <Box height={100} textAlign={"center"}>
-                  <Text fontWeight={"bold"}>Loading ...</Text>
+            <IconButton
+              icon={<ChevronRightIcon />}
+              aria-label="Next"
+              onClick={handleNext}
+              position="absolute"
+              right="10px"
+              zIndex={2}
+            />
+            {IMAGE_CAROUSEL.map((item, idx) => {
+              const offset = idx - activeCarousel;
+              const opacity =
+                Math.abs(offset) > 1 ? 0 : 1 - Math.abs(offset) * 0.5;
+              const transform = `translateX(${offset * 100}%)`;
+              return (
+                <Box
+                  key={idx}
+                  position="absolute"
+                  left="50%"
+                  transform={`translateX(-50%) ${transform}`}
+                  opacity={opacity}
+                  transition="transform 0.5s, opacity 0.5s"
+                  zIndex={idx === activeCarousel ? 1 : 0}
+                  minW={idx === activeCarousel ? "60%" : "5%"}
+                >
+                  <Image src={item.src} alt={item.alt} />
                 </Box>
-              ) : filteredDataByCategory[selectFilter]?.length <= 0 ? (
-                <Box height={100} mt={8} textAlign={"center"}>
-                  <Text fontWeight={"bold"} fontSize={"xl"}>
-                    Coming Soon
-                  </Text>
-                </Box>
-              ) : (
-                <Wrap spacing={"5"}>
-                  {filteredDataByCategory[selectFilter].map(
-                    (e: any, idx: number) => {
-                      return (
-                        <WrapItem
-                          w={{ md: "23%", base: "43%" }}
-                          key={idx}
-                          onClick={() =>
-                            !e.isSold &&
-                            route.push(
-                              `/market/${e.uuid}?category=${e.category}`
-                            )
-                          }
-                          cursor={e.isSold ? "not-allowed" : "pointer"}
-                          _hover={{
-                            transform: "scale(1.01) ",
-                            transition: "0.1s",
-                          }}
-                        >
-                          <Stack
-                            bg="whiteAlpha.300"
-                            rounded="lg"
-                            overflow="hidden"
-                          >
-                            <Box pos={"relative"}>
-                              {e.isSold && (
-                                <>
-                                  <Box
-                                    pos={"absolute"}
-                                    top={0}
-                                    bottom={0}
-                                    left={0}
-                                    right={0}
-                                    backgroundColor={"#0000008f"}
-                                  ></Box>
-                                  <Box
-                                    pos={"absolute"}
-                                    width={"fit-content"}
-                                    height={"fit-content"}
-                                    top={0}
-                                    bottom={0}
-                                    left={0}
-                                    right={0}
-                                    p={2}
-                                    margin={"auto"}
-                                    border={"3px solid red"}
-                                    borderRadius={"lg"}
-                                    transform={"rotate(315deg);"}
-                                  >
-                                    <Text
-                                      fontSize={"3xl"}
-                                      fontWeight={"bold"}
-                                      color={"red"}
-                                    >
-                                      Sold Out
-                                    </Text>
-                                  </Box>
-                                </>
-                              )}
-                              <Image
-                                src={e.image}
-                                alt={e.name}
-                                fallbackSrc="https://via.placeholder.com/300"
-                              />
-                            </Box>
-                            <Stack p="3">
-                              <Text fontSize={"xl"}>{e.name}</Text>
-                              <Stack direction={"row"} justify="space-between">
-                                <Stack>
-                                  <Text color={"whiteAlpha.700"} fontSize="xs">
-                                    Price
-                                  </Text>
-                                  <Text fontWeight={"800"}>
-                                    {fromBn(e.price, 9)} XPC
-                                  </Text>
-                                </Stack>
-                              </Stack>
-                            </Stack>
-                          </Stack>
-                        </WrapItem>
-                      );
+              );
+            })}
+          </Flex>
+          <HStack align="center" justify="center">
+            <Divider
+              borderColor={activeCarousel === 0 ? "#6779F3" : "gray.300"}
+              my={2}
+              w={"5%"}
+              borderWidth={"1.5px"}
+              onClick={() => setIsActiveCarousel(0)}
+            />
+            <Divider
+              borderColor={activeCarousel === 1 ? "#6779F3" : "gray.300"}
+              w={"5%"}
+              borderWidth={"1.5px"}
+              onClick={() => setIsActiveCarousel(1)}
+            />
+            <Divider
+              borderColor={activeCarousel === 2 ? "#6779F3" : "gray.300"}
+              w={"5%"}
+              borderWidth={"1.5px"}
+              onClick={() => setIsActiveCarousel(2)}
+            />
+          </HStack>
+        </Stack>
+        <Stack gap={5}>
+          <Heading>GET 50% OFF</Heading>
+          <Text textAlign={"justify"}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged.
+          </Text>
+        </Stack>
+        <Stack>
+          <Heading>Trending</Heading>
+        </Stack>
+        <Stack
+          as={UnorderedList}
+          direction="row"
+          spacing="1rem"
+          marginInlineStart={"0"}
+          listStyleType="none"
+          py="2"
+        >
+          <ListItem
+            bgGradient={
+              isActive == -1 ? "linear(to-tr, #706AF5, #A90AFF)'" : ""
+            }
+            p="2"
+            rounded="md"
+            cursor={"pointer"}
+            onClick={() => setIsActive(-1)}
+          >
+            {t(`pages.market.category.all`)}
+          </ListItem>
+          {nomarilizer.map((category, i) => {
+            return (
+              <ListItem
+                bgGradient={
+                  category?.isActive ? "linear(to-tr, #706AF5, #A90AFF)'" : ""
+                }
+                p="2"
+                rounded="md"
+                cursor={"pointer"}
+                key={i}
+                onClick={() => setIsActive(i)}
+              >
+                {CATEGORY[i].name}
+              </ListItem>
+            );
+          })}
+        </Stack>
+        <Stack py="2" pb={12}>
+          {data === undefined ? (
+            <Box height={100} textAlign={"center"}>
+              <Text fontWeight={"bold"}>Loading ...</Text>
+            </Box>
+          ) : filteredData.length <= 0 ? (
+            <Box height={100} mt={8} textAlign={"center"}>
+              <Text fontWeight={"bold"} fontSize={"xl"}>
+                No NFT
+              </Text>
+            </Box>
+          ) : (
+            <Wrap spacing={"5"}>
+              {filteredData?.map((e: any, idx: number) => {
+                return (
+                  <WrapItem
+                    w={{ md: "23%", base: "43%" }}
+                    key={idx}
+                    onClick={() =>
+                      !e.isSold &&
+                      route.push(`/market/${e.uuid}?category=${e.category}`)
                     }
-                  )}
-                </Wrap>
-              )}
-            </Stack>
-          </>
-        ) : (
-          CATEGORY.map((item, id) => (
-            <>
-              <HStack justifyContent={"space-between"} key={id}>
-                <HStack>
-                  <item.icons color={"white"} />
-                  <Text>{item.name}</Text>
-                </HStack>
-                <Box>
-                  <Button
-                    leftIcon={
-                      isActive === id ? (
-                        <BsArrowsAngleContract size={"1.5rem"} />
-                      ) : (
-                        <BsArrowsAngleExpand size={"1.5rem"} />
-                      )
-                    }
-                    variant={"unstyled"}
-                    onClick={() => setIsActive(isActive === id ? -1 : id)}
-                  />
-                </Box>
-              </HStack>
-              <Stack py="2" pb={12}>
-                {data === undefined ? (
-                  <Box height={100} textAlign={"center"}>
-                    <Text fontWeight={"bold"}>Loading ...</Text>
-                  </Box>
-                ) : filteredDataByCategory[id]?.length <= 0 ? (
-                  <Box height={100} mt={8} textAlign={"center"}>
-                    <Text fontWeight={"bold"} fontSize={"xl"}>
-                      Coming Soon
-                    </Text>
-                  </Box>
-                ) : (
-                  <Wrap spacing={"5"}>
-                    {filteredDataByCategory[id]?.map((e: any, idx: number) => {
-                      return (
-                        <WrapItem
-                          w={{ md: "23%", base: "43%" }}
-                          key={idx}
-                          onClick={() =>
-                            !e.isSold &&
-                            route.push(
-                              `/market/${e.uuid}?category=${e.category}`
-                            )
-                          }
-                          cursor={e.isSold ? "not-allowed" : "pointer"}
-                          _hover={{
-                            transform: "scale(1.01) ",
-                            transition: "0.1s",
-                          }}
-                        >
-                          <Stack
-                            bg="whiteAlpha.300"
-                            rounded="lg"
-                            overflow="hidden"
-                          >
-                            <Box pos={"relative"}>
-                              {e.isSold && (
-                                <>
-                                  <Box
-                                    pos={"absolute"}
-                                    top={0}
-                                    bottom={0}
-                                    left={0}
-                                    right={0}
-                                    backgroundColor={"#0000008f"}
-                                  ></Box>
-                                  <Box
-                                    pos={"absolute"}
-                                    width={"fit-content"}
-                                    height={"fit-content"}
-                                    top={0}
-                                    bottom={0}
-                                    left={0}
-                                    right={0}
-                                    p={2}
-                                    margin={"auto"}
-                                    border={"3px solid red"}
-                                    borderRadius={"lg"}
-                                    transform={"rotate(315deg);"}
-                                  >
-                                    <Text
-                                      fontSize={"3xl"}
-                                      fontWeight={"bold"}
-                                      color={"red"}
-                                    >
-                                      Sold Out
-                                    </Text>
-                                  </Box>
-                                </>
-                              )}
-                              <Image
-                                src={e.image}
-                                alt={e.name}
-                                fallbackSrc="https://via.placeholder.com/300"
-                              />
+                    cursor={e.isSold ? "not-allowed" : "pointer"}
+                    _hover={{
+                      transform: "scale(1.01) ",
+                      transition: "0.1s",
+                    }}
+                  >
+                    <Stack bg="whiteAlpha.300" rounded="lg" overflow="hidden">
+                      <Box pos={"relative"}>
+                        {e.isSold && (
+                          <>
+                            <Box
+                              pos={"absolute"}
+                              top={0}
+                              bottom={0}
+                              left={0}
+                              right={0}
+                              backgroundColor={"#0000008f"}
+                            ></Box>
+                            <Box
+                              pos={"absolute"}
+                              width={"fit-content"}
+                              height={"fit-content"}
+                              top={0}
+                              bottom={0}
+                              left={0}
+                              right={0}
+                              p={2}
+                              margin={"auto"}
+                              border={"3px solid red"}
+                              borderRadius={"lg"}
+                              transform={"rotate(315deg);"}
+                            >
+                              <Text
+                                fontSize={"3xl"}
+                                fontWeight={"bold"}
+                                color={"red"}
+                              >
+                                Sold Out
+                              </Text>
                             </Box>
-                            <Stack p="3">
-                              <Text fontSize={"xl"}>{e.name}</Text>
-                              <Stack direction={"row"} justify="space-between">
-                                <Stack>
-                                  <Text color={"whiteAlpha.700"} fontSize="xs">
-                                    Price
-                                  </Text>
-                                  <Text fontWeight={"800"}>
-                                    {fromBn(e.price, 9)} XPC
-                                  </Text>
-                                </Stack>
-                              </Stack>
-                            </Stack>
+                          </>
+                        )}
+                        <Image
+                          src={e.image}
+                          alt={e.name}
+                          fallbackSrc="https://via.placeholder.com/300"
+                        />
+                      </Box>
+                      <Stack p="3">
+                        <Text fontSize={"xl"}>{e.name}</Text>
+                        <Stack direction={"row"} justify="space-between">
+                          <Stack>
+                            <Text color={"whiteAlpha.700"} fontSize="xs">
+                              Price
+                            </Text>
+                            <Text fontWeight={"800"}>
+                              {fromBn(e.price, 9)} XPC
+                            </Text>
                           </Stack>
-                        </WrapItem>
-                      );
-                    })}
-                  </Wrap>
-                )}
-              </Stack>
-            </>
-          ))
-        )}
+                        </Stack>
+                      </Stack>
+                    </Stack>
+                  </WrapItem>
+                );
+              })}
+            </Wrap>
+          )}
+        </Stack>
       </Stack>
     </LayoutMain>
   );
 };
 
-export default Market;
+export default Home;
