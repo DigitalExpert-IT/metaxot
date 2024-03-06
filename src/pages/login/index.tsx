@@ -105,7 +105,7 @@ const LoginPage = () => {
           >
             <Image
               width={16}
-              src={`http://${host}/assets/logo/metaxot.png`}
+              src={`http://${host}/assets/logo/metaxotWhite.png`}
               alt="logo"
             />
             <Box textAlign={"center"} mb={4}>

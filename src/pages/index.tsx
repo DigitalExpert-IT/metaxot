@@ -200,7 +200,6 @@ export const Home = () => {
           marginInlineStart={"0"}
           listStyleType="none"
           py="2"
-          gap={5}
         >
           {nomarilizer.map((category, i) => {
             return (
