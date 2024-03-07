@@ -28,7 +28,7 @@ export const NavbarBrandDrawer: React.FC<NavbarBrandDrawerProps> = props => {
         data={props.data}
         isOpen={props.isOpen}
         onClose={props.onClose}
-        logo="/assets/logo/metaxot.png"
+        logo="/assets/logo/metaxotWhite.png"
       />
       <IconButton
         {...styles.drawerBurger}
@@ -36,8 +36,8 @@ export const NavbarBrandDrawer: React.FC<NavbarBrandDrawerProps> = props => {
         onClick={isOpen ? onClose : onOpen}
       />
       <Link href="/">
-        <AspectRatio w="80px" ratio={1}>
-          <Image src={"/assets/logo/metaxot.png"} alt="logo-image" />
+        <AspectRatio w="80px">
+          <Image src={"/assets/logo/metaxotWhite.png"} alt="logo-image" />
         </AspectRatio>
       </Link>
     </Stack>
