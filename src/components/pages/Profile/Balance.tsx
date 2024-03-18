@@ -6,6 +6,7 @@ import {
   Stack,
   Text,
   Divider,
+  Flex,
 } from "@chakra-ui/react";
 import { useAddress, useBalance, useWallet } from "@thirdweb-dev/react";
 import { XPC_CONTRACT } from "constant/address";
@@ -29,11 +30,13 @@ export const Balance = () => {
   return (
     <Box maxW={"full"}>
       <Heading as="h1">Profile</Heading>
-      <HStack gap={10} mt={5}>
-        <Image
-          src="https://ik.imagekit.io/msxxxaegj/metashot/dummy-profile.png?updatedAt=1707132259209"
-          alt=""
-        />
+      <Flex flexDir={{ base: "column", lg: "row" }} gap={10} mt={5}>
+        <Box>
+          <Image
+            src="https://ik.imagekit.io/msxxxaegj/metashot/dummy-profile.png?updatedAt=1707132259209"
+            alt=""
+          />
+        </Box>
         <Box
           my="1"
           borderRadius={"2xl"}
@@ -74,7 +77,7 @@ export const Balance = () => {
             </Stack>
           </HStack>
         </Box>
-      </HStack>
+      </Flex>
     </Box>
   );
 };

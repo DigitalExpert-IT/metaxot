@@ -85,6 +85,7 @@ export const Market = () => {
     });
 
     // Sort and slice NFTs in each category
+    
     const filteredData = categorizedNFTs.map((nftArray) =>
       nftArray
         .sort((a: any, b: any) =>

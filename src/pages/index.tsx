@@ -110,7 +110,7 @@ export const Home = () => {
             align="center"
             justify="center"
             position="relative"
-            py={"12rem"}
+            py={{ base: "2rem", lg: "12rem" }}
           >
             <IconButton
               icon={<ChevronLeftIcon />}
@@ -149,9 +149,10 @@ export const Home = () => {
                     zIndex={2}
                     pos={"absolute"}
                     bgGradient={"linear(to-tr, #706AF5, #A90AFF)'"}
-                    ml={"80%"}
-                    mt={"-10%"}
+                    ml={{ base: "70%", lg: "80%" }}
+                    mt={{ base: "-18%", lg: "-10%" }}
                     borderRadius={"30px"}
+                    size={{ base: "xs", lg: "lg" }}
                   >
                     More
                   </Button>
@@ -187,7 +188,7 @@ export const Home = () => {
         </Stack>
         <Stack>
           <Heading>Trending</Heading>
-          <Box height={100} mt={8} textAlign={"center"} >
+          <Box height={100} mt={8} textAlign={"center"}>
             <Text fontWeight={"bold"} fontSize={"xl"}>
               Trending NFT is Coming Soon
             </Text>
@@ -199,6 +200,7 @@ export const Home = () => {
           spacing="1rem"
           marginInlineStart={"0"}
           listStyleType="none"
+          overflowY="scroll"
           py="2"
         >
           {nomarilizer.map((category, i) => {

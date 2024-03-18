@@ -56,7 +56,7 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
       <DrawerContent bgColor="gray.800">
         <DrawerCloseButton />
         <DrawerHeader>
-          <AspectRatio w={100} h={4} ratio={1}>
+          <AspectRatio w={10} h={10} ratio={1}>
             <Image src={logo} alt={logo} />
           </AspectRatio>
         </DrawerHeader>
