@@ -1,6 +1,6 @@
 import { Stack } from "@chakra-ui/react";
 import { LayoutMain } from "components";
-import { Balance, NFTs, } from "components/pages/Profile";
+import { Balance, NFTs } from "components/pages/Profile";
 import { CircleGalaxy } from "components";
 
 const Profile = () => {

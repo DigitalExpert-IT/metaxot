@@ -47,6 +47,21 @@ const chainMap = {
     },
     rpc: ["http://127.0.0.1:8545/"],
   },
+  "0x61": {
+    // Testnet
+    chainId: 97,
+    chain: "BNBTestnet",
+    name: "BNB Smart Chain Testnet",
+    testnet: true,
+    slug: "bnbtestnet",
+    shortName: "bts",
+    nativeCurrency: {
+      name: "TBNB",
+      symbol: "TBNB",
+      decimals: 10,
+    },
+    rpc: ["https://data-seed-prebsc-1-s1.bnbchain.org:8545"],
+  },
 };
 
 export const getActiveChain = () => {
