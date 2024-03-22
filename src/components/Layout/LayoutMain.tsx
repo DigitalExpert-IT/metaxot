@@ -19,7 +19,7 @@ export const LayoutMain: React.FC<LayoutMainProps> = props => {
       )}
       <Navbar />
       <Container
-        pt={{ base: "20", md: "40" }}
+        pt={{ base: "32", md: "40" }}
         maxW="container.xl"
         overflow={"hidden"}
       >

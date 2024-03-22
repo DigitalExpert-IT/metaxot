@@ -1,12 +1,9 @@
 import {
   Stack,
   Text,
-  UnorderedList,
-  ListItem,
   Wrap,
   WrapItem,
   Image,
-  Icon,
   Box,
   HStack,
   Heading,
@@ -18,11 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { LayoutMain, CircleGalaxy } from "components";
 import { CATEGORY } from "constant/pages/category";
-import {
-  useListNftSalesQuery,
-  // useListPreMintQueryByCategory,
-} from "hooks/market";
-import { t } from "i18next";
+import { useListNftSalesQuery } from "hooks/market";
 import { useRouter } from "next/router";
 import { useMemo, useState, useEffect } from "react";
 import { fromBn } from "evm-bn";
@@ -31,7 +24,6 @@ import axRef from "hooks/metaxotGame/axiosRef";
 import { SearchIcon } from "@chakra-ui/icons";
 import { CgSortAz } from "react-icons/cg";
 import { BsArrowsAngleExpand, BsArrowsAngleContract } from "react-icons/bs";
-import { INFTData } from "../../components/pages/Profile/NFTs";
 
 export const Market = () => {
   const [isActive, setIsActive] = useState<number>(-1);
@@ -40,14 +32,6 @@ export const Market = () => {
   const [selectFilter, setSelectFilter] = useState<number>(-1);
   const activeSort = CATEGORY[selectFilter];
 
-  const nomarilizer = useMemo(() => {
-    return CATEGORY.map((ctg, i) => {
-      if (isActive === i) {
-        return { ...ctg, isActive: true };
-      }
-      return { ...ctg, isActive: false };
-    });
-  }, [isActive]);
   const route = useRouter();
 
   // Cause the uri needing auth, we need (temporary until found the propper way)
@@ -191,7 +175,10 @@ export const Market = () => {
                           w={{ md: "23%", base: "43%" }}
                           key={idx}
                           onClick={() =>
-                            !e.isSold && route.push(`/market/${e.uuid}`)
+                            !e.isSold &&
+                            route.push(
+                              `/trade-center/${e.nftId}?uuid=${e.uuid}&category=${e.category}`
+                            )
                           }
                           cursor={e.isSold ? "not-allowed" : "pointer"}
                           _hover={{
@@ -308,7 +295,10 @@ export const Market = () => {
                           w={{ md: "23%", base: "43%" }}
                           key={idx}
                           onClick={() =>
-                            !e.isSold && route.push(`/market/${e.uuid}`)
+                            !e.isSold &&
+                            route.push(
+                              `/trade-center/${e.nftId}?uuid=${e.uuid}&category=${e.category}`
+                            )
                           }
                           cursor={e.isSold ? "not-allowed" : "pointer"}
                           _hover={{
