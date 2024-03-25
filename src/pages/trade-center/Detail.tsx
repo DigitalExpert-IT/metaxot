@@ -104,7 +104,30 @@ const Detail = () => {
               ml={{ base: "0", sm: "5rem" }}
               rounded={"lg"}
               pos={"relative"}
-            ></Image>
+            />
+            <Button
+              pos={"absolute"}
+              alignSelf={"center"}
+              top={"21rem"}
+              minW={"412px"}
+              minH={"68px"}
+              borderRadius={15}
+              bgGradient={"linear(to-l, #5984F3, #A442E8)"}
+              bgClip="button"
+              _hover={{
+                bgGradient: "linear(to-l, #5984F3, #A442E8)",
+              }}
+              fontSize={"xl"}
+              onClick={buy}
+              isLoading={isLoading}
+              isDisabled={detailNft?.isSold}
+            >
+              {detailNft?.isSold
+                ? t("common.sold")
+                : wallet
+                ? t("common.buy")
+                : t("common.connectWallet")}
+            </Button>
           </Stack>
           <Stack flex={1}>
             <HStack justifyContent={"space-between"}>
@@ -150,7 +173,7 @@ const Detail = () => {
             </HStack>
           </Stack>
         </Stack>
-        <Box textAlign={"center"} pt={8}>
+        {/* <Box textAlign={"center"} pt={8}>
           <Button
             margin={"auto"}
             minW={{ base: "100%", sm: "412px" }}
@@ -173,7 +196,7 @@ const Detail = () => {
               ? t("common.buy")
               : t("common.connectWallet")}
           </Button>
-        </Box>
+        </Box> */}
       </Stack>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
