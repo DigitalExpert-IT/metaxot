@@ -95,20 +95,22 @@ const Detail = () => {
             cursor={"pointer"}
             onClick={onOpen}
             justifyContent="center"
+            alignContent={"center"}
           >
             <Image
               src={detailNft?.image}
               alt={detailNft?.name}
               fallbackSrc="https://via.placeholder.com/600"
               maxW={"30rem"}
+              maxH={"20rem"}
               ml={"5rem"}
               rounded={"lg"}
               pos={"relative"}
-            ></Image>
+            />
             <Button
               pos={"absolute"}
-              top={"50%"}
-              left={"35vh"}
+              alignSelf={"center"}
+              top={"21rem"}
               minW={"412px"}
               minH={"68px"}
               borderRadius={15}

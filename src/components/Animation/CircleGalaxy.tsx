@@ -31,6 +31,7 @@ export const CircleGalaxy = (props?: BoxProps) => {
         top="20rem"
         left="5rem"
         zIndex={2}
+        transform={"translateZ(0)"}
         animation={animation}
         as={motion.div}
       ></Box>
@@ -42,6 +43,7 @@ export const CircleGalaxy = (props?: BoxProps) => {
         filter={"blur(150px)"}
         position="relative"
         zIndex={1}
+        transform={"translateZ(0)"}
         animation={animation2}
         as={motion.div}
       ></Box>
@@ -55,6 +57,7 @@ export const CircleGalaxy = (props?: BoxProps) => {
         bottom="12rem"
         left="-3rem"
         zIndex={2}
+        transform={"translateZ(0)"}
         animation={animation3}
         as={motion.div}
       ></Box>
