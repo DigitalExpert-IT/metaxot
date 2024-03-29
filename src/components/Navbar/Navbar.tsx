@@ -8,18 +8,25 @@ import {
 import React, { useEffect, useState } from "react";
 import { NAVIGATION } from "constant";
 import Link from "next/link";
-import { Button, Flex, useDisclosure } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  IconButton,
+  Image,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { ConnectWallet, darkTheme } from "@thirdweb-dev/react";
 import { useTranslation } from "react-i18next";
-// import LoginModal from "components/AuthModal/LoginModal";
-// import NiceModal from "@ebay/nice-modal-react";
 import useAuth from "hooks/metaxotGame/useAuth";
+import { useModal } from "@ebay/nice-modal-react";
+import Swap from "components/Swap/Swap";
 
 export const Navbar = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [host, setHost] = useState("");
   const { isAuthenticated, logout } = useAuth();
+  const swapModal = useModal(Swap);
 
   useEffect(() => {
     if (window.location.host) {
@@ -46,18 +53,27 @@ export const Navbar = () => {
           alignItems="center"
           display={{ base: "none", md: "none", lg: "flex" }}
         >
-          {/* <Button colorScheme={"metaxot"}>Connect Wallet</Button> */}
           {isAuthenticated ? (
             <Button me={4} onClick={logout} suppressHydrationWarning>
               Logout
             </Button>
           ) : (
             <Link href={"/login"}>
-              <Button me={4} suppressHydrationWarning>
-                Login
-              </Button>
+              <Button suppressHydrationWarning>Login</Button>
             </Link>
           )}
+          <Button
+            suppressHydrationWarning
+            size={"small"}
+            onClick={() => swapModal.show()}
+          >
+            <IconButton
+              aria-label="Swap"
+              background={"transparent"}
+              icon={<Image src={"/assets/icon/swap.png"} alt={"Swap icon"} />}
+              _hover={{ background: "transparent" }}
+            />
+          </Button>
           <ConnectWallet
             theme={darkTheme({
               colors: {
