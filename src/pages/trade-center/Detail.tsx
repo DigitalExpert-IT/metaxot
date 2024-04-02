@@ -1,22 +1,9 @@
-import {
-  Button,
-  Image,
-  Stack,
-  Text,
-  Modal,
-  useDisclosure,
-  ModalBody,
-  ModalOverlay,
-  ModalContent,
-  HStack,
-  Divider,
-  Box,
-} from "@chakra-ui/react";
+import { Button, Image, Stack, Text, HStack, Divider } from "@chakra-ui/react";
 import { CircleGalaxy, LayoutMain } from "components";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { useBuyMutation, useListNftSalesQuery } from "hooks/market";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { fromBn } from "evm-bn";
 import { useAsyncCall } from "hooks/useAsyncCall";
 import { detail } from "./[id]";
@@ -30,7 +17,6 @@ const Detail = () => {
   const [detailNft, setDetailNft] = useState<detail | undefined | any>({});
   const [nftIndex, setNftIndex] = useState<string | any>(-1);
   const [isCallBuyApi, setIsCallBuyApi] = useState<boolean>(false);
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
   const wallet = useWallet();
 
@@ -93,7 +79,6 @@ const Detail = () => {
             spacing="0"
             overflow="hidden"
             cursor={"pointer"}
-            onClick={onOpen}
             justifyContent="center"
           >
             <Image
@@ -198,14 +183,6 @@ const Detail = () => {
           </Button>
         </Box> */}
       </Stack>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalBody p="0" rounded={"lg"} overflow="hidden">
-            <Image src={detailNft.picture} alt={detailNft.picture}></Image>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
     </LayoutMain>
   );
 };
