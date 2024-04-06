@@ -1,20 +1,19 @@
-import { Box, Select, Input, Image, Text } from "@chakra-ui/react";
-
-type TokenList = {
-  name: string;
-  iconUrl?: string;
-};
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Box, Input, Button } from "@chakra-ui/react";
+import { TokenListType } from "./TokenList";
 
 interface ITokenInput {
-  tokenList: Array<TokenList>;
-  onChangeToken: React.ChangeEventHandler<HTMLSelectElement>;
+  selectedToken: TokenListType;
   onChangeAmount: React.ChangeEventHandler<HTMLInputElement>;
+  onClickToken: (origin: string) => void;
+  origin: string;
 }
 
 const TokenInput: React.FC<ITokenInput> = ({
-  tokenList,
-  onChangeToken,
+  selectedToken,
   onChangeAmount,
+  onClickToken,
+  origin,
 }) => {
   return (
     <Box
@@ -24,22 +23,19 @@ const TokenInput: React.FC<ITokenInput> = ({
       background={"#424343"}
       my={2}
     >
-      <Select
+      <Button
         minH={50}
-        maxW={120}
-        borderRadius={15}
+        display={"flex"}
+        flexDirection={"row"}
+        alignItems={"center"}
         background={"#6779F3"}
-        _focus={{ background: "#6779F3" }}
         _hover={{ background: "#6779F3" }}
-        onChange={onChangeToken}
+        gap={5}
+        onClick={() => onClickToken(origin)}
       >
-        {tokenList.map((token: TokenList) => (
-          <option key={token.name} value={token.name}>
-            <Image src={token.iconUrl} alt={`${token.name} logo`} w={100} />
-            <Text>{token.name}</Text>
-          </option>
-        ))}
-      </Select>
+        {selectedToken.name}
+        <ChevronDownIcon />
+      </Button>
       <Input
         minH={50}
         background={"transparent"}

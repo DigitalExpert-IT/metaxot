@@ -4,7 +4,7 @@ import { useApproveMutation, useXpcContract } from "hooks/xpc";
 import { ZERO_ADDRESS } from "constant/dummyResAPI";
 import { BigNumber } from "ethers";
 import useAuth from "hooks/metaxotGame/useAuth";
-import { useBalanceQuery } from "hooks/xpc/useBalanceQuery";
+import { useBalanceQuery } from "hooks/xpc/useXpcBalanceQuery";
 
 export const useBuyPreMintMutation = () => {
   const market = useMarketContract();

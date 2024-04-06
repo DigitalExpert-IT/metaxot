@@ -13,17 +13,22 @@ import {
 } from "@chakra-ui/react";
 import TokenInput from "./TokenInput";
 import { useState } from "react";
+import TokenList, { TokenListType } from "components/Swap/TokenList";
+import { useUsdtBalanceQuery } from "hooks/usdt/useUsdtBalanceQuery";
+import { useBalanceQuery } from "hooks/xpc/useXpcBalanceQuery";
+import { USDT_CONTRACT, XPC_CONTRACT } from "constant/address";
+import { CURRENT_CHAIN_ID } from "lib/contractFactory";
 
-export const dummyTokenData = [
+export const dummyTokenList = [
   {
-    name: "BNB",
-    balance: 0,
-    iconUrl: "https://cryptologos.cc/logos/bnb-bnb-logo.png",
+    name: "USDT",
+    address: USDT_CONTRACT[CURRENT_CHAIN_ID],
+    iconUrl: "https://cryptologos.cc/logos/tether-usdt-logo.png",
   },
   {
-    name: "SOL",
-    balance: 500,
-    iconUrl: "https://cryptologos.cc/logos/solana-sol-logo.png",
+    name: "XPC",
+    address: XPC_CONTRACT[CURRENT_CHAIN_ID],
+    iconUrl: undefined,
   },
 ];
 
@@ -32,12 +37,24 @@ export default NiceModal.create(() => {
   const handleModalClose = () => {
     modal.hide();
   };
-  const [sourceToken, setSourceToken] = useState("");
-  const [destinationToken, setDestinationToken] = useState("");
-  const sourceBalance =
-    dummyTokenData.find(token => token.name === sourceToken)?.balance ?? 0;
+  const usdtBalanceQuery = useUsdtBalanceQuery();
+  const xpcBalanceQuery = useBalanceQuery();
+  const usdtBalance = Number(usdtBalanceQuery?.data?.displayValue);
+  const xpcBalance = Number(xpcBalanceQuery?.data?.displayValue);
+  const [sourceToken, setSourceToken] = useState(dummyTokenList[0]);
+  const [destinationToken, setDestinationToken] = useState(dummyTokenList[1]);
+  const [showTokenList, setShowTokenList] = useState("");
+
+  const sourceBalance = sourceToken.name === "USDT" ? usdtBalance : xpcBalance;
   const destinationBalance =
-    dummyTokenData.find(token => token.name === destinationToken)?.balance ?? 0;
+    destinationToken.name === "USDT" ? usdtBalance : xpcBalance;
+
+  const onSelectNewToken = (token: TokenListType) => {
+    showTokenList === "source"
+      ? setSourceToken(token)
+      : setDestinationToken(token);
+    setShowTokenList("");
+  };
 
   return (
     <Modal isOpen={modal.visible} onClose={handleModalClose}>
@@ -61,44 +78,63 @@ export default NiceModal.create(() => {
         </ModalHeader>
         <ModalCloseButton top={"5"} py={6} px={6} />
         <ModalBody pb={6}>
-          <Box my={6}>
-            <Text ml={5} fontSize={"large"} as={"label"}>
-              From
-            </Text>
-            <TokenInput
-              tokenList={dummyTokenData}
-              onChangeAmount={tokenAmount => {}}
-              onChangeToken={token => setSourceToken(token.target.value)}
-            />
-            <Text textAlign={"right"} fontSize={"small"} color={"#A4A4BE"}>
-              Balance: {sourceBalance}
-            </Text>
-          </Box>
-          <Box display={"flex"} justifyContent={"center"}>
-            <Image src={"/assets/icon/swap.png"} alt={"Swap icon"} />
-          </Box>
-          <Box>
-            <Text ml={5} fontSize={"large"} as={"label"}>
-              To
-            </Text>
-            <TokenInput
-              tokenList={dummyTokenData}
-              onChangeAmount={tokenAmount => {}}
-              onChangeToken={token => setDestinationToken(token.target.value)}
-            />
-            <Text textAlign={"right"} fontSize={"small"} color={"#A4A4BE"}>
-              Balance: {destinationBalance}
-            </Text>
-          </Box>
+          {showTokenList ? (
+            <Box my={6}>
+              <TokenList
+                tokenList={dummyTokenList}
+                onSelectToken={onSelectNewToken}
+              />
+            </Box>
+          ) : (
+            <>
+              <Box my={6}>
+                <Text fontSize={"large"} as={"label"}>
+                  From
+                </Text>
+                <TokenInput
+                  origin={"source"}
+                  selectedToken={sourceToken}
+                  onChangeAmount={tokenAmount => {}}
+                  onClickToken={origin => {
+                    setShowTokenList(origin);
+                  }}
+                />
+                <Text textAlign={"right"} fontSize={"small"} color={"#A4A4BE"}>
+                  Balance: {sourceBalance}
+                </Text>
+              </Box>
+              <Box display={"flex"} justifyContent={"center"}>
+                <Image src={"/assets/icon/swap.png"} alt={"Swap icon"} />
+              </Box>
+              <Box>
+                <Text fontSize={"large"} as={"label"}>
+                  To
+                </Text>
+                <TokenInput
+                  origin={"destination"}
+                  selectedToken={destinationToken}
+                  onChangeAmount={tokenAmount => {}}
+                  onClickToken={origin => {
+                    setShowTokenList(origin);
+                  }}
+                />
+                <Text textAlign={"right"} fontSize={"small"} color={"#A4A4BE"}>
+                  Balance: {destinationBalance}
+                </Text>
+              </Box>
+            </>
+          )}
         </ModalBody>
         <ModalFooter>
-          <Button
-            type="button"
-            bgGradient={"linear(to-tr, #706AF5, #A90AFF)"}
-            w={"100%"}
-          >
-            SWAP
-          </Button>
+          {!showTokenList && (
+            <Button
+              type="button"
+              bgGradient={"linear(to-tr, #706AF5, #A90AFF)"}
+              w={"100%"}
+            >
+              SWAP
+            </Button>
+          )}
         </ModalFooter>
       </ModalContent>
     </Modal>

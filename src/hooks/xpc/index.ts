@@ -1,3 +1,3 @@
-export * from "./useAllowanceQuery";
-export * from "./useApproveMutation";
+export * from "./useXpcAllowanceQuery";
+export * from "./useXpcApproveMutation";
 export * from "./useXpcContract";

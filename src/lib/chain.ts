@@ -1,6 +1,6 @@
 import { Mumbai, Polygon } from "@thirdweb-dev/chains";
 
-const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID || "0x89") as "0x89";
+const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID || "0x61") as "0x61";
 
 const chainMap = {
   "0x13881": Mumbai,
