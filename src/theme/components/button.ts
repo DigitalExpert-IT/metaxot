@@ -54,6 +54,52 @@ const variantGradient = defineStyle(props => {
   };
 });
 
+const variantPrimary = defineStyle(() => {
+  return {
+    [$fg.variable]: `colors.white`,
+    _dark: {
+      [$fg.variable]: `colors.whiteAlpha.800`,
+    },
+    bgGradient: `linear-gradient(90deg, #6779F3 316.67%, #6D1099 416.67%)`,
+    color: $fg.reference,
+    _loading: {
+      bgGradient: `linear-gradient(90deg, #313973 316.67%, #6D1099 416.67%)`,
+    },
+    _disabled: {
+      bgGradient: `linear-gradient(90deg, #313973 316.67%, #6D1099 416.67%)`,
+    },
+    _active: {
+      bgGradient: `linear-gradient(90deg, #313973 316.67%, #6D1099 416.67%)`,
+    },
+    _hover: {
+      bgGradient: `linear-gradient(90deg, #313973 316.67%, #6D1099 416.67%)`,
+    },
+  };
+});
+
+const variantSecondary = defineStyle(() => {
+  return {
+    [$fg.variable]: `colors.white`,
+    _dark: {
+      [$fg.variable]: `colors.whiteAlpha.800`,
+    },
+    bgGradient: `linear-gradient(90deg, #C667F3 316.67%, #B555E7 353.17%, #9736D1 416.67%)`,
+    color: $fg.reference,
+    _loading: {
+      bgGradient: `linear-gradient(90deg, #793997 316.67%, #B555E7 353.17%, #9736D1 416.67%)`,
+    },
+    _disabled: {
+      bgGradient: `linear-gradient(90deg, #793997 316.67%, #B555E7 353.17%, #9736D1 416.67%)`,
+    },
+    _active: {
+      bgGradient: `linear-gradient(90deg, #793997 316.67%, #B555E7 353.17%, #9736D1 416.67%)`,
+    },
+    _hover: {
+      bgGradient: `linear-gradient(90deg, #793997 316.67%, #B555E7 353.17%, #9736D1 416.67%)`,
+    },
+  };
+});
+
 const variantGhost = defineStyle(props => {
   const { colorScheme: c, theme } = props;
 
@@ -61,7 +107,7 @@ const variantGhost = defineStyle(props => {
     return {
       color: mode(`inherit`, `whiteAlpha.900`)(props),
       _hover: {
-        bg: mode(`gray.100`, `whiteAlpha.200`)(props),
+        bg: "transparent",
       },
       _active: { bg: mode(`gray.200`, `whiteAlpha.300`)(props) },
     };
@@ -200,6 +246,8 @@ const variants = {
   solid: variantSolid,
   link: variantLink,
   gradient: variantGradient,
+  primary: variantPrimary,
+  secondary: variantSecondary,
   unstyled: variantUnstyled,
 };
 

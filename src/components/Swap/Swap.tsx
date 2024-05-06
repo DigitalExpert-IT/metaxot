@@ -10,6 +10,12 @@ import {
   Text,
   Box,
   Image,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  TabProps,
 } from "@chakra-ui/react";
 import TokenInput from "./TokenInput";
 import { useState } from "react";
@@ -18,6 +24,7 @@ import { useUsdtBalanceQuery } from "hooks/usdt/useUsdtBalanceQuery";
 import { useBalanceQuery } from "hooks/xpc/useXpcBalanceQuery";
 import { USDT_CONTRACT, XPC_CONTRACT } from "constant/address";
 import { CURRENT_CHAIN_ID } from "lib/contractFactory";
+import { TradeXpc } from "./TradeXpc";
 
 export const dummyTokenList = [
   {
@@ -31,6 +38,20 @@ export const dummyTokenList = [
     iconUrl: undefined,
   },
 ];
+
+const TabButton = (props: TabProps) => {
+  return (
+    <Tab
+      width={"100%"}
+      borderRadius={8}
+      color={"white"}
+      background={"#424343"}
+      _selected={{ backgroundColor: "#6779F3", color: "#fff" }}
+    >
+      {props.children}
+    </Tab>
+  );
+};
 
 export default NiceModal.create(() => {
   const modal = useModal();
@@ -62,80 +83,97 @@ export default NiceModal.create(() => {
         position={"absolute"}
         top={30}
         left={{ md: "unset", lg: "60%" }}
-        py={16}
+        pt={16}
         borderRadius={10}
       >
-        <ModalHeader
-          position={"absolute"}
-          top={"1"}
-          py={6}
-          px={6}
-          textAlign={"left"}
-          borderBottom={"1px solid #424343"}
-          w={"100%"}
-        >
-          SWAP
-        </ModalHeader>
-        <ModalCloseButton top={"5"} py={6} px={6} />
-        <ModalBody pb={6}>
-          {showTokenList ? (
-            <Box my={6}>
-              <TokenList
-                tokenList={dummyTokenList}
-                onSelectToken={onSelectNewToken}
-              />
-            </Box>
-          ) : (
-            <>
-              <Box my={6}>
-                <Text fontSize={"large"} as={"label"}>
-                  From
-                </Text>
-                <TokenInput
-                  origin={"source"}
-                  selectedToken={sourceToken}
-                  onChangeAmount={tokenAmount => {}}
-                  onClickToken={origin => {
-                    setShowTokenList(origin);
-                  }}
-                />
-                <Text textAlign={"right"} fontSize={"small"} color={"#A4A4BE"}>
-                  Balance: {sourceBalance}
-                </Text>
-              </Box>
-              <Box display={"flex"} justifyContent={"center"}>
-                <Image src={"/assets/icon/swap.png"} alt={"Swap icon"} />
-              </Box>
-              <Box>
-                <Text fontSize={"large"} as={"label"}>
-                  To
-                </Text>
-                <TokenInput
-                  origin={"destination"}
-                  selectedToken={destinationToken}
-                  onChangeAmount={tokenAmount => {}}
-                  onClickToken={origin => {
-                    setShowTokenList(origin);
-                  }}
-                />
-                <Text textAlign={"right"} fontSize={"small"} color={"#A4A4BE"}>
-                  Balance: {destinationBalance}
-                </Text>
-              </Box>
-            </>
-          )}
-        </ModalBody>
-        <ModalFooter>
-          {!showTokenList && (
-            <Button
-              type="button"
-              bgGradient={"linear(to-tr, #706AF5, #A90AFF)"}
-              w={"100%"}
-            >
-              SWAP
-            </Button>
-          )}
-        </ModalFooter>
+        <Tabs variant="soft-rounded" colorScheme="green">
+          <ModalHeader
+            position={"absolute"}
+            top={"1"}
+            py={6}
+            px={6}
+            textAlign={"left"}
+            w={"100%"}
+          >
+            <Text mb={5}>SWAP</Text>
+            <TabList borderRadius={8} color={"white"} background={"#424343"}>
+              <TabButton>Exchange</TabButton>
+              <TabButton>Trade Exchange</TabButton>
+            </TabList>
+          </ModalHeader>
+          <ModalCloseButton top={"5"} py={6} px={6} />
+          <ModalBody py={8} px={4}>
+            <TabPanels>
+              <TabPanel>
+                {showTokenList ? (
+                  <Box my={6}>
+                    <TokenList
+                      tokenList={dummyTokenList}
+                      onSelectToken={onSelectNewToken}
+                    />
+                  </Box>
+                ) : (
+                  <>
+                    <Box my={6}>
+                      <Text fontSize={"large"} as={"label"}>
+                        From
+                      </Text>
+                      <TokenInput
+                        origin={"source"}
+                        selectedToken={sourceToken}
+                        onChangeAmount={tokenAmount => {}}
+                        onClickToken={origin => {
+                          setShowTokenList(origin);
+                        }}
+                      />
+                      <Text
+                        textAlign={"right"}
+                        fontSize={"small"}
+                        color={"#A4A4BE"}
+                      >
+                        Balance: {sourceBalance}
+                      </Text>
+                    </Box>
+                    <Box display={"flex"} justifyContent={"center"}>
+                      <Image src={"/assets/icon/swap.png"} alt={"Swap icon"} />
+                    </Box>
+                    <Box>
+                      <Text fontSize={"large"} as={"label"}>
+                        To
+                      </Text>
+                      <TokenInput
+                        origin={"destination"}
+                        selectedToken={destinationToken}
+                        onChangeAmount={tokenAmount => {}}
+                        onClickToken={origin => {
+                          setShowTokenList(origin);
+                        }}
+                      />
+                      <Text
+                        textAlign={"right"}
+                        fontSize={"small"}
+                        color={"#A4A4BE"}
+                      >
+                        Balance: {destinationBalance}
+                      </Text>
+                    </Box>
+                    <Button
+                      type="button"
+                      bgGradient={"linear(to-tr, #706AF5, #A90AFF)"}
+                      w={"100%"}
+                      mt={8}
+                    >
+                      SWAP
+                    </Button>
+                  </>
+                )}
+              </TabPanel>
+              <TabPanel>
+                <TradeXpc />
+              </TabPanel>
+            </TabPanels>
+          </ModalBody>
+        </Tabs>
       </ModalContent>
     </Modal>
   );
