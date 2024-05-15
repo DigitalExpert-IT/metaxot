@@ -1,3 +1,5 @@
+export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
+
 export const MARKET_CONTRACT = {
   "0x29a": "0xAaf1de9f7Cfc82Ec2ca7F7Db48F11DC0408bba12",
   "0x539": "0x18E98D443620dfe60836d65Aa87351036FBC9fdf", // localhost test
@@ -9,7 +11,7 @@ export const XPC_CONTRACT = {
   "0x29a": "0xF2cC058312FE879e24a8443DD04b10e14493403C",
   "0x539": "0x7fD12598525Fbe62e1F12644c534F88723F5213F", // localhost test
   "0x7a69": "0x63ed0e10D14FE3e7C97Dd27ef6Ec65F5084b50D1", // localhost Vicko test
-  "0x61": "0x806C5bD421Aa78002F3F9eC6f0b265B45Faf0354", // Testnet
+  "0x61": "0xa65D501aD3482f41e06231878f7ba47283e09Db9", // Testnet
 };
 
 export const MATERIAL_NFT = {
@@ -24,4 +26,12 @@ export const MNFT = {
   "0x539": "0xd3bdad3f9e4eD17153163DC4C04E9cDCe0D64eBB", // localhost test
   "0x7a69": "0x01a7d8fD68DB0dbFbBD543853703E8c2e275E7f5", // localhost Vicko test
   "0x61": "0xF4f28A617465677E7b834106CB72E2Dba6d97339", // Testnet
+};
+
+export const SWAP_CONTRACT = {
+  "0x61": "0x8626cc7218f6374DD7357e73739616cF4855d03B",
+};
+
+export const USDT_CONTRACT = {
+  "0x61": "0x39D98C2d29B50a62B7C6CB65081293a197043023",
 };
