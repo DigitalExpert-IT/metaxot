@@ -26,6 +26,11 @@ const TokenList: React.FC<ITokenList> = ({ tokenList, onSelectToken }) => {
             alignItems={"center"}
             my={4}
             gap={4}
+            p={4}
+            borderRadius={"lg"}
+            border={"1px solid transparent"}
+            transition={"0.3s"}
+            _hover={{ border: "1px solid purple" }}
           >
             <Image
               src={

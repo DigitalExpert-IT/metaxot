@@ -1,20 +1,19 @@
-import { BigNumber } from "ethers";
 import { toBn } from "evm-bn";
 
-// need pure function to calculate price
-export const getGnetPrice = (usdtAmount: BigNumber) => {
-  const unit = toBn("1", 9);
-  const ratePerGnet = toBn("0.015");
-  const ratePerUnit = ratePerGnet.div(unit);
-  const gnetAmount = usdtAmount.div(ratePerUnit);
-  const tax = gnetAmount.mul(5).div(1000);
-  return gnetAmount.add(tax);
+export const getXpcRate = (usdtAmount: string) => {
+  if (+usdtAmount <= 0) return toBn("0");
+
+  const ratePerXpc = toBn("1", 9); // 1 XPC : 1 USDT
+  const xpcAmount = ratePerXpc.mul(usdtAmount);
+
+  return xpcAmount;
 };
 
-export const getUsdtPrice = (gnetAmount: BigNumber) => {
-  const unit = toBn("1");
-  const ratePerUsdt = toBn("66.66666666666666");
-  const usdtAmout = gnetAmount.mul(unit).div(ratePerUsdt);
-  const tax = usdtAmout.mul(5).div(1000);
-  return usdtAmout.add(tax).mul(10 ** 9);
+export const getUsdtRate = (xpcAmount: string) => {
+  if (+xpcAmount <= 0) return toBn("0");
+
+  const ratePerUsdt = toBn("0.7", 6); // 0.7 USDT : 1 XPC
+  const usdtAmount = ratePerUsdt.mul(xpcAmount);
+
+  return usdtAmount;
 };

@@ -5,7 +5,6 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   Text,
   Box,
@@ -16,15 +15,25 @@ import {
   TabPanels,
   TabPanel,
   TabProps,
+  VStack,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 import TokenInput from "./TokenInput";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import TokenList, { TokenListType } from "components/Swap/TokenList";
 import { useUsdtBalanceQuery } from "hooks/usdt/useUsdtBalanceQuery";
 import { useBalanceQuery } from "hooks/xpc/useXpcBalanceQuery";
-import { USDT_CONTRACT, XPC_CONTRACT } from "constant/address";
+import { SWAP_CONTRACT, USDT_CONTRACT, XPC_CONTRACT } from "constant/address";
 import { CURRENT_CHAIN_ID } from "lib/contractFactory";
 import { TradeXpc } from "./TradeXpc";
+import _ from "lodash";
+import { getXpcRate, getUsdtRate } from "utils/swapCalculation";
+import { fromBn, toBn } from "evm-bn";
+import { useAsyncCall } from "hooks";
+import { BigNumber } from "ethers";
+import { useUsdtApproveMutation } from "hooks/usdt";
+import { useApproveMutation as useXpcApproveMutation } from "hooks/xpc";
+import { useSwapUsdtMutation, useSwapXpcMutation } from "hooks/exchange";
 
 export const dummyTokenList = [
   {
@@ -58,13 +67,23 @@ export default NiceModal.create(() => {
   const handleModalClose = () => {
     modal.hide();
   };
+  const { control, getValues, setValue, resetField, reset, handleSubmit } =
+    useForm();
   const usdtBalanceQuery = useUsdtBalanceQuery();
   const xpcBalanceQuery = useBalanceQuery();
+
   const usdtBalance = Number(usdtBalanceQuery?.data?.displayValue);
   const xpcBalance = Number(xpcBalanceQuery?.data?.displayValue);
+
   const [sourceToken, setSourceToken] = useState(dummyTokenList[0]);
   const [destinationToken, setDestinationToken] = useState(dummyTokenList[1]);
+
   const [showTokenList, setShowTokenList] = useState("");
+
+  const { mutateAsync: mutateAsyncUsdtApprove } = useUsdtApproveMutation();
+  const { mutateAsync: mutateAsyncXpcApprove } = useXpcApproveMutation();
+  const swapUsdt = useSwapUsdtMutation();
+  const swapXpc = useSwapXpcMutation();
 
   const sourceBalance = sourceToken.name === "USDT" ? usdtBalance : xpcBalance;
   const destinationBalance =
@@ -76,6 +95,67 @@ export default NiceModal.create(() => {
       : setDestinationToken(token);
     setShowTokenList("");
   };
+
+  const calculateSwap = useCallback(
+    _.debounce(() => {
+      const { source } = getValues();
+
+      if (destinationToken.name == "USDT") {
+        setValue("destination", fromBn(getUsdtRate(`${source}`), 6));
+      } else {
+        setValue("destination", fromBn(getXpcRate(`${source}`), 9));
+      }
+    }, 700),
+    [destinationToken]
+  );
+
+  const swapCurrency = () => {
+    setSourceToken(destinationToken);
+    setDestinationToken(sourceToken);
+    resetField("source");
+    resetField("destination");
+  };
+
+  const swap = async (data: { currency: string; amount: BigNumber }) => {
+    const swapToUSDT = data.currency === "USDT";
+    const swapAddress = SWAP_CONTRACT[CURRENT_CHAIN_ID];
+
+    if (swapToUSDT) {
+      await mutateAsyncXpcApprove({ args: [swapAddress, data.amount] });
+
+      const swap = await swapXpc.mutateAsync({
+        args: [data.amount],
+      });
+
+      const receipt = swap.receipt;
+      return receipt;
+    }
+
+    await mutateAsyncUsdtApprove({ args: [swapAddress, data.amount] });
+    const swap = await swapUsdt.mutateAsync({
+      args: [data.amount],
+    });
+    const receipt = swap.receipt;
+    return receipt;
+  };
+
+  const { exec, isLoading: isSwapLoading } = useAsyncCall(
+    swap,
+    "Success swap token"
+  );
+
+  const onSubmit = handleSubmit(async data => {
+    const swap = await exec({
+      currency: destinationToken.name,
+      amount: toBn(data.source, destinationToken.name === "USDT" ? 9 : 6),
+    });
+
+    if (swap.status === 1) {
+      reset();
+      xpcBalanceQuery.refetch();
+      usdtBalanceQuery.refetch();
+    }
+  });
 
   return (
     <Modal isOpen={modal.visible} onClose={handleModalClose}>
@@ -113,18 +193,18 @@ export default NiceModal.create(() => {
                     />
                   </Box>
                 ) : (
-                  <>
+                  <VStack as={"form"} onSubmit={onSubmit}>
                     <Box my={6}>
                       <Text fontSize={"large"} as={"label"}>
                         From
                       </Text>
                       <TokenInput
+                        name={"source"}
                         origin={"source"}
                         selectedToken={sourceToken}
-                        onChangeAmount={tokenAmount => {}}
-                        onClickToken={origin => {
-                          setShowTokenList(origin);
-                        }}
+                        control={control}
+                        onKeyUp={calculateSwap}
+                        placeholder="Enter amount here"
                       />
                       <Text
                         textAlign={"right"}
@@ -134,20 +214,19 @@ export default NiceModal.create(() => {
                         Balance: {sourceBalance}
                       </Text>
                     </Box>
-                    <Box display={"flex"} justifyContent={"center"}>
+                    <Button onClick={swapCurrency}>
                       <Image src={"/assets/icon/swap.png"} alt={"Swap icon"} />
-                    </Box>
-                    <Box>
+                    </Button>
+                    <Box pb={8}>
                       <Text fontSize={"large"} as={"label"}>
                         To
                       </Text>
                       <TokenInput
+                        name={"destination"}
                         origin={"destination"}
                         selectedToken={destinationToken}
-                        onChangeAmount={tokenAmount => {}}
-                        onClickToken={origin => {
-                          setShowTokenList(origin);
-                        }}
+                        control={control}
+                        disabled={true}
                       />
                       <Text
                         textAlign={"right"}
@@ -158,14 +237,14 @@ export default NiceModal.create(() => {
                       </Text>
                     </Box>
                     <Button
-                      type="button"
+                      type="submit"
                       bgGradient={"linear(to-tr, #706AF5, #A90AFF)"}
                       w={"100%"}
-                      mt={8}
+                      isLoading={isSwapLoading}
                     >
                       SWAP
                     </Button>
-                  </>
+                  </VStack>
                 )}
               </TabPanel>
               <TabPanel>

@@ -1,19 +1,33 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Box, Input, Button } from "@chakra-ui/react";
+import { Box, Input, Button, Image, InputProps } from "@chakra-ui/react";
+import { Control, Controller, FieldValues } from "react-hook-form";
 import { TokenListType } from "./TokenList";
 
-interface ITokenInput {
+interface ITokenInput extends Omit<InputProps, "placeholder" | "label"> {
+  name: string;
   selectedToken: TokenListType;
-  onChangeAmount: React.ChangeEventHandler<HTMLInputElement>;
-  onClickToken: (origin: string) => void;
+  // onClickToken: (origin: string) => void;
   origin: string;
+  control?: Control<FieldValues, any>;
+  defaultValue?: string | number;
+  rules?: any;
+  value?: string | number;
+  disabled?: boolean;
+  placeholder?: string;
 }
 
 const TokenInput: React.FC<ITokenInput> = ({
+  name,
   selectedToken,
-  onChangeAmount,
-  onClickToken,
+  // onClickToken,
+  control,
+  defaultValue,
+  value,
   origin,
+  rules,
+  disabled,
+  placeholder,
+  ...props
 }) => {
   return (
     <Box
@@ -31,19 +45,38 @@ const TokenInput: React.FC<ITokenInput> = ({
         background={"#6779F3"}
         _hover={{ background: "#6779F3" }}
         gap={5}
-        onClick={() => onClickToken(origin)}
+        // onClick={() => onClickToken(origin)}
       >
+        <Image
+          src={
+            selectedToken.iconUrl ??
+            "https://cryptologos.cc/logos/bnb-bnb-logo.png"
+          }
+          alt={`${selectedToken.name} logo`}
+          maxW={8}
+        />
         {selectedToken.name}
-        <ChevronDownIcon />
+        {/* <ChevronDownIcon /> */}
       </Button>
-      <Input
-        minH={50}
-        background={"transparent"}
-        _focus={{ background: "transparent" }}
-        _hover={{ background: "transparent" }}
-        type="number"
-        placeholder="Enter amount here"
-        onChange={onChangeAmount}
+
+      <Controller
+        control={control}
+        defaultValue={defaultValue}
+        rules={rules}
+        name={name}
+        render={({ field: { value, ...rest } }) => (
+          <Input
+            minH={50}
+            background={"transparent"}
+            _focus={{ background: "transparent", border: "unset" }}
+            _hover={{ background: "transparent" }}
+            placeholder={placeholder}
+            disabled={disabled}
+            value={value ?? ""}
+            {...rest}
+            {...props}
+          />
+        )}
       />
     </Box>
   );
