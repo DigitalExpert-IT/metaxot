@@ -1,5 +1,6 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Box, Input, Button, Image, InputProps } from "@chakra-ui/react";
+import { BNB_LOGO } from "constant/tokenLogo";
 import { Control, Controller, FieldValues } from "react-hook-form";
 import { TokenListType } from "./TokenList";
 
@@ -48,10 +49,7 @@ const TokenInput: React.FC<ITokenInput> = ({
         // onClick={() => onClickToken(origin)}
       >
         <Image
-          src={
-            selectedToken.iconUrl ??
-            "https://cryptologos.cc/logos/bnb-bnb-logo.png"
-          }
+          src={selectedToken.iconUrl ?? BNB_LOGO}
           alt={`${selectedToken.name} logo`}
           maxW={8}
         />

@@ -14,7 +14,16 @@ export const TradeExchangeContext = createContext<TContext>({
   setState: () => {},
 });
 
-const states = {
+type TState = {
+  title: string;
+  component: JSX.Element;
+};
+
+interface IStates {
+  [key: string]: TState;
+}
+
+const states: IStates = {
   EXCHANGE_LIST: {
     title: "Live Rate",
     component: <ExchangeList />,

@@ -34,12 +34,13 @@ import { BigNumber } from "ethers";
 import { useUsdtApproveMutation } from "hooks/usdt";
 import { useApproveMutation as useXpcApproveMutation } from "hooks/xpc";
 import { useSwapUsdtMutation, useSwapXpcMutation } from "hooks/exchange";
+import { USDT_LOGO } from "constant/tokenLogo";
 
 export const dummyTokenList = [
   {
     name: "USDT",
     address: USDT_CONTRACT[CURRENT_CHAIN_ID],
-    iconUrl: "https://cryptologos.cc/logos/tether-usdt-logo.png",
+    iconUrl: USDT_LOGO,
   },
   {
     name: "XPC",
