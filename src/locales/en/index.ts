@@ -6,6 +6,7 @@ import modal from "./modal.json";
 import pages from "./pages.json";
 import hoc from "./hoc.json";
 import succes from "./succes.json";
+import exchange from "./exchange.json";
 const en = {
   common,
   form,
@@ -14,6 +15,7 @@ const en = {
   pages,
   hoc,
   succes,
+  exchange,
 };
 
 export default en;

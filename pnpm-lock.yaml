@@ -114,8 +114,8 @@ dependencies:
     specifier: ^4.17.21
     version: 4.17.21
   metaxot-contract:
-    specifier: ^1.8.2
-    version: 1.8.2(@ethersproject/bignumber@5.7.0)
+    specifier: ^1.9.1
+    version: 1.9.1(@ethersproject/bignumber@5.7.0)
   next:
     specifier: 13.1.2
     version: 13.1.2(@babel/core@7.20.5)(react-dom@18.2.0)(react@18.2.0)
@@ -234,7 +234,7 @@ packages:
       '@account-abstraction/contracts': 0.5.0
       '@ethersproject/abi': 5.7.0
       '@ethersproject/providers': 5.7.2
-      '@openzeppelin/contracts': 4.9.3
+      '@openzeppelin/contracts': 4.9.6
       debug: 4.3.4
       ethers: 5.7.2
     transitivePeerDependencies:
@@ -500,7 +500,7 @@ packages:
     dependencies:
       '@eth-optimism/contracts': 0.5.40(ethers@5.7.2)
       '@openzeppelin/contracts': 4.3.3
-      '@openzeppelin/contracts-upgradeable': 4.9.3
+      '@openzeppelin/contracts-upgradeable': 4.9.6
       '@openzeppelin/contracts-v0.7': /@openzeppelin/contracts@3.4.2
     transitivePeerDependencies:
       - bufferutil
@@ -2751,7 +2751,7 @@ packages:
     dependencies:
       '@types/debug': 4.1.10
       debug: 4.3.4
-      semver: 7.5.4
+      semver: 7.6.2
       superstruct: 1.0.3
     transitivePeerDependencies:
       - supports-color
@@ -3063,7 +3063,7 @@ packages:
     requiresBuild: true
     dependencies:
       '@gar/promisify': 1.1.3
-      semver: 7.5.4
+      semver: 7.6.2
     dev: false
     optional: true
 
@@ -3086,10 +3086,6 @@ packages:
     resolution: {integrity: sha512-5GeFgqMiDlqGT8EdORadp1ntGF0qzWZLmEY7Wbp/yVhN7/B3NNzCxujuI77ktlyG81N3CUZP8cZe3ZAQ/cW10w==}
     dev: false
 
-  /@openzeppelin/contracts-upgradeable@4.9.3:
-    resolution: {integrity: sha512-jjaHAVRMrE4UuZNfDwjlLGDxTHWIOwTJS2ldnc278a0gevfXfPr8hxKEVBGFBE96kl2G3VHDZhUimw/+G3TG2A==}
-    dev: false
-
   /@openzeppelin/contracts-upgradeable@4.9.6:
     resolution: {integrity: sha512-m4iHazOsOCv1DgM7eD7GupTJ+NFVujRZt1wzddDPSVGpWdKq1SKkla5htKG7+IS4d2XOCtzkUNwRZ7Vq5aEUMA==}
     dev: false
@@ -3108,10 +3104,6 @@ packages:
 
   /@openzeppelin/contracts@4.8.0:
     resolution: {integrity: sha512-AGuwhRRL+NaKx73WKRNzeCxOCOCxpaqF+kp8TJ89QzAipSwZy/NoflkWaL9bywXFRhIzXt8j38sfF7KBKCPWLw==}
-    dev: false
-
-  /@openzeppelin/contracts@4.9.3:
-    resolution: {integrity: sha512-He3LieZ1pP2TNt5JbkPA4PNT9WC3gOTOlDcFGJW4Le4QKqwmiNJCRt44APfxMxvq7OugU/cqYuPcSBzOw38DAg==}
     dev: false
 
   /@openzeppelin/contracts@4.9.6:
@@ -4018,7 +4010,7 @@ packages:
     resolution: {integrity: sha512-ITocwSWlFUA1K9VMP/eJiMfgbP/I9qDxAaFz7ukj5N5NZD3ihVQZkmqML6hjse5UhrfjCnfIEcLkNZhtB2XC2Q==}
     dependencies:
       '@safe-global/safe-core-sdk-types': 1.10.1
-      semver: 7.5.4
+      semver: 7.6.2
       web3-utils: 1.10.3
     transitivePeerDependencies:
       - encoding
@@ -4033,7 +4025,7 @@ packages:
       '@safe-global/safe-core-sdk-utils': 1.7.4
       '@safe-global/safe-deployments': 1.28.0
       ethereumjs-util: 7.1.5
-      semver: 7.5.4
+      semver: 7.6.2
       web3-utils: 1.10.3
       zksync-web3: 0.14.4(ethers@5.7.2)
     transitivePeerDependencies:
@@ -4045,7 +4037,7 @@ packages:
   /@safe-global/safe-deployments@1.28.0:
     resolution: {integrity: sha512-zWn55unMucN3i3awjDA0XxH9BzGNHyC/qCbuISBh0GMZP/q+VCxERAOEO4OqwyGaxk6sSAzP4usGdmgz2y2svg==}
     dependencies:
-      semver: 7.5.4
+      semver: 7.6.2
     dev: false
 
   /@safe-global/safe-ethers-adapters@0.1.0-alpha.17(@ethersproject/abstract-provider@5.7.0)(@ethersproject/abstract-signer@5.7.0)(@ethersproject/bignumber@5.7.0)(@ethersproject/properties@5.7.0)(ethers@5.7.2):
@@ -6016,6 +6008,7 @@ packages:
   /are-we-there-yet@3.0.1:
     resolution: {integrity: sha512-QZW4EDmGwlYur0Yyf/b2uGucHQMa8aFUP7eu9ddR73vvhFyt4V0Vl3QHPcTNJ8l6qYOBdxgXdnBXQrHilfRQBg==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    deprecated: This package is no longer supported.
     requiresBuild: true
     dependencies:
       delegates: 1.0.0
@@ -7506,7 +7499,7 @@ packages:
   /erc721a-upgradeable@3.3.0:
     resolution: {integrity: sha512-ILE0SjKuvhx+PABG0A/41QUp0MFiYmzrgo71htQ0Ov6JfDOmgUzGxDW8gZuYfKrdlYjNwSAqMpUFWBbyW3sWBA==}
     dependencies:
-      '@openzeppelin/contracts-upgradeable': 4.9.3
+      '@openzeppelin/contracts-upgradeable': 4.9.6
     dev: false
 
   /err-code@2.0.3:
@@ -8568,6 +8561,7 @@ packages:
   /gauge@4.0.4:
     resolution: {integrity: sha512-f9m+BEN5jkg6a0fZjleidjN51VE1X+mPFQ2DJ0uv1V39oCLCbsGe6yjbBnp7eK7z/+GAon99a3nHuqbuuthyPg==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    deprecated: This package is no longer supported.
     requiresBuild: true
     dependencies:
       aproba: 2.0.0
@@ -8707,6 +8701,7 @@ packages:
 
   /glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
     requiresBuild: true
     dependencies:
       fs.realpath: 1.0.0
@@ -8719,6 +8714,7 @@ packages:
   /glob@8.1.0:
     resolution: {integrity: sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==}
     engines: {node: '>=12'}
+    deprecated: Glob versions prior to v9 are no longer supported
     dependencies:
       fs.realpath: 1.0.0
       inflight: 1.0.6
@@ -9990,11 +9986,11 @@ packages:
     resolution: {integrity: sha512-mUYWsMKNrm4lfygPkL3OfGzOPTR2DBlTkBNHM//F6hGp8cLThY897crAlk3/Jo17LEOOjQUrNAx6DvgO77QJkA==}
     dev: false
 
-  /metaxot-contract@1.8.2(@ethersproject/bignumber@5.7.0):
-    resolution: {integrity: sha512-YXEA/xFsbuvn5sUR7z0wgaQ7bzHdiMg/ZP6sjrW/fEonOhm2CTl/L87o03ZmOFgvzQujX7UDAiQ//mhFq/q+0Q==}
+  /metaxot-contract@1.9.1(@ethersproject/bignumber@5.7.0):
+    resolution: {integrity: sha512-OTKmRUZCIbS9vqzXec5aH1FdHzgw3Tz4wrW8Y+oBYaHpgg+x5ALW7g5ZBWgsjBXEb7PMqVoZvElOZXaCNTgZDw==}
     dependencies:
-      '@openzeppelin/contracts': 4.9.3
-      '@openzeppelin/contracts-upgradeable': 4.9.3
+      '@openzeppelin/contracts': 4.9.6
+      '@openzeppelin/contracts-upgradeable': 4.9.6
       dotenv: 16.3.1
       evm-bn: 1.1.2(@ethersproject/bignumber@5.7.0)
       jsonexport: 3.2.0
@@ -10343,7 +10339,7 @@ packages:
     resolution: {integrity: sha512-p7eGEiQil0YUV3ItH4/tBb781L5impVmmx2E9FRKF7d18XXzp4PGT2tdYMFY6wQqgxD0IwNZOiSJ0/K0fSi/OA==}
     engines: {node: '>=10'}
     dependencies:
-      semver: 7.5.4
+      semver: 7.6.2
     dev: false
 
   /node-addon-api@2.0.2:
@@ -10411,7 +10407,7 @@ packages:
       nopt: 5.0.0
       npmlog: 6.0.2
       rimraf: 3.0.2
-      semver: 7.5.4
+      semver: 7.6.2
       tar: 6.2.0
       which: 2.0.2
     transitivePeerDependencies:
@@ -10482,6 +10478,7 @@ packages:
   /npmlog@6.0.2:
     resolution: {integrity: sha512-/vBvz5Jfr9dT/aFWd0FIRf+T/Q2WBsLENygUaFUqstqsycmZAP/t5BvFJTK0viFmSUxiUKTUplWy5vt+rvKIxg==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    deprecated: This package is no longer supported.
     requiresBuild: true
     dependencies:
       are-we-there-yet: 3.0.1
@@ -11004,7 +11001,7 @@ packages:
       jsdoc: 4.0.2
       minimist: 1.2.8
       protobufjs: 7.2.4
-      semver: 7.5.4
+      semver: 7.6.2
       tmp: 0.2.1
       uglify-js: 3.17.4
     dev: false
@@ -11527,6 +11524,7 @@ packages:
 
   /rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
     dependencies:
       glob: 7.2.3

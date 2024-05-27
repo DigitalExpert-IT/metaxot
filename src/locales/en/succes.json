@@ -4,5 +4,6 @@
   "successBuyNft": "success buy nft",
   "successTransferToGame": "success transfer item to Game",
   "successCancelSellNFT": "success cancel selling NFT",
-  "successSellNft": "success sell nft"
+  "successSellNft": "success sell nft",
+  "sellXpc": "success sell xpc on market"
 }
