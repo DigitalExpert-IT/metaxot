@@ -12,7 +12,6 @@ export const useSellXpcMutation = () => {
   const { contract } = useSwapContract();
   const { contract: xpcContract } = useXpcContract();
   const { mutateAsync: mutateAsyncApprove } = useApproveMutation();
-  const { contract: usdtContract } = useUsdtContract();
 
   const sell = async (rate: number, amount: number) => {
     try {
@@ -23,7 +22,6 @@ export const useSellXpcMutation = () => {
         address,
         contract?.getAddress(),
       ]);
-      console.log("allowance", allowance, " address:", contract?.getAddress());
 
       if (allowance.lte(toBn(amount.toString(), 9).add(feeTransaction))) {
         await mutateAsyncApprove({
@@ -32,15 +30,10 @@ export const useSellXpcMutation = () => {
             toBn(amount.toString(), 9).add(feeTransaction),
           ],
         });
-
-        const allowance2 = await xpcContract?.call("allowance", [
-          address,
-          contract?.getAddress(),
-        ]);
-        console.log("after approve allowance", allowance2);
       }
 
-      const sellContract = await contract?.call("sellXpc", [rate, amount]);
+      const { receipt } = await contract?.call("sellXpc", [rate, amount]);
+      return receipt;
     } catch (error) {
       throw error;
     }

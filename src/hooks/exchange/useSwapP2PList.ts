@@ -11,12 +11,14 @@ type TTokenSell = {
 export const useSwapP2PList = () => {
   const { contract } = useSwapContract();
   const { data: cheapestRate } = useContractRead(contract, "cheapestRate");
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [tokenSellList, setTokenList] = useState<TTokenSell[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(true);
+  const [tokenSellList, setTokenList] = useState<TTokenSell[] | null>(null);
 
-  useEffect(() => {
-    const getTokenList = async () => {
-      let list: TTokenSell[] = [];
+  const getTokenList = async () => {
+    if (!contract) return;
+    let list: TTokenSell[] = [];
+
+    try {
       setLoading(true);
 
       for (let i = Number(cheapestRate); i < 100; i++) {
@@ -28,10 +30,19 @@ export const useSwapP2PList = () => {
 
       setTokenList(list);
       setLoading(false);
-    };
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    getTokenList();
+  useEffect(() => {
+    const getTokenInter = setInterval(getTokenList, 10000); // refetch per 10sc
+
+    return () => clearInterval(getTokenInter);
   }, [cheapestRate]);
 
-  return { tokenSellList, isLoading };
+  return {
+    tokenSellList,
+    isLoading: tokenSellList ? false : isLoading,
+  };
 };

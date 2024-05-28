@@ -42,11 +42,11 @@ export const ExchangeList = () => {
     setExpand(!isExpand);
   }, [tableWrapper, isExpand]);
 
-  if (isLoadingList) return <Spinner />;
+  if (isLoadingList || !tokenSellList) return <Spinner />;
 
   return (
     <>
-      {!tokenSellList || !tokenSellList.length ? (
+      {!tokenSellList.length ? (
         <Text w={"full"} p={8} textAlign={"center"}>
           {t("exchange.exchangeList.emptyList")}
         </Text>
@@ -103,7 +103,7 @@ export const ExchangeList = () => {
               </Tbody>
             </Table>
           </Box>
-          {tokenSellList.length <= 0 ? (
+          {tokenSellList.length > 1 ? (
             <IconButton
               w={"full"}
               variant="ghost"
