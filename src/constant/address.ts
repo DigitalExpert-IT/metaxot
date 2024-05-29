@@ -29,7 +29,7 @@ export const MNFT = {
 };
 
 export const SWAP_CONTRACT = {
-  "0x61": "0x1cc91e3EC343e8598899d8B3F0f90F4481b27F99",
+  "0x61": "0xB97a3d0A0a8ea5d41917DefCCfcDD171DDbF21F6",
 };
 
 export const USDT_CONTRACT = {
