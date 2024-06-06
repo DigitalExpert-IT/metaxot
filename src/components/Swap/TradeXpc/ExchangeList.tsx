@@ -61,16 +61,16 @@ export const ExchangeList = () => {
             overflowY={isExpand ? "auto" : "hidden"}
           >
             <Table>
-              <Thead background={"gray.400"}>
+              <Thead background={"#6779F3"} fontWeight={"bold"}>
                 <Tr>
                   <Th color={"white"}>Rate</Th>
                   <Th color={"white"}>Amount</Th>
                 </Tr>
               </Thead>
-              <Tbody background={"gray.800"}>
+              <Tbody background={"white"}>
                 {tokenSellList.map(token => (
                   <Tr key={token.rate}>
-                    <Td>
+                    <Td color={"black"}>
                       <Text
                         as={"span"}
                         textColor={"#A90AFF"}
@@ -78,7 +78,7 @@ export const ExchangeList = () => {
                       >
                         {token.rate / 100}
                       </Text>
-                      USDT :
+                      USDT : {"  "}
                       <Text
                         as={"span"}
                         textColor={"#A90AFF"}
@@ -88,13 +88,13 @@ export const ExchangeList = () => {
                       </Text>
                       XPC
                     </Td>
-                    <Td>
+                    <Td color={"black"}>
                       <Text
                         as={"span"}
                         textColor={"#A90AFF"}
                         fontWeight={"bold"}
                       >
-                        {token.amount}
+                        {token.amount}{"  "}
                       </Text>
                       XPC
                     </Td>

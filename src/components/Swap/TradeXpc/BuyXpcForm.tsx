@@ -1,4 +1,4 @@
-import { KeyboardEvent, FocusEvent, useContext, useState } from "react";
+import { KeyboardEvent, FocusEvent, useContext, useState, useRef } from "react";
 import {
   Box,
   Button,
@@ -15,6 +15,7 @@ import {
   Tbody,
   Tfoot,
   Td,
+  Stack,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
@@ -25,6 +26,7 @@ import { useBuyXpcMutation } from "hooks/exchange";
 export const BuyXpcForm = () => {
   const { setState } = useContext(TradeExchangeContext);
   const [value, setValue] = useState<number>(0);
+  const tableWrapper = useRef<HTMLDivElement>(null);
   const { data, isLoading, error } = useCheapestRateList(value);
   const { buyXpc, isLoading: isLoadingBuy } = useBuyXpcMutation();
   const { t } = useTranslation();
@@ -53,7 +55,7 @@ export const BuyXpcForm = () => {
             px={8}
           >
             <Image
-              src={"/assets/icon/xpc_token.svg"}
+              src={"/assets/icon/xpc_token.png"}
               alt="XPC TOKEN"
               width={32}
               height={32}
@@ -80,60 +82,81 @@ export const BuyXpcForm = () => {
           {error}
         </Text>
       ) : data.rateList && value ? (
-        <Box background={"#2d2d2d"} p={2}>
-          <Text>{t("exchange.buyXpc.cheapestRateResult.title")}</Text>
-          <Divider />
-          <Table>
-            <Thead background={"gray.400"}>
-              <Tr>
-                <Th color={"white"}>Rate</Th>
-                <Th color={"white"}>Amount</Th>
-              </Tr>
-            </Thead>
-            <Tbody background={"gray.800"}>
-              {data.rateList.map(token => (
-                <Tr key={token.rate}>
-                  <Td>
-                    <Text as={"span"} textColor={"#A90AFF"} fontWeight={"bold"}>
-                      {token.rate / 100}
-                    </Text>
-                    USDT :
-                    <Text as={"span"} textColor={"#A90AFF"} fontWeight={"bold"}>
-                      1
-                    </Text>
-                    XPC
+        <Stack w={"full"}>
+          <Text alignSelf={"left"}>
+            {t("exchange.buyXpc.cheapestRateResult.title")}
+          </Text>
+          <Box p={2}>
+            <Table borderRadius={"xl"} overflow={"hidden"}>
+              <Thead background={"#6779F3"}>
+                <Tr>
+                  <Th color={"white"}>Rate</Th>
+                  <Th color={"white"}>Amount</Th>
+                </Tr>
+              </Thead>
+              <Tbody background={"white"}>
+                {data.rateList.map(token => (
+                  <Tr key={token.rate} color={"black"}>
+                    <Td>
+                      <Text
+                        as={"span"}
+                        textColor={"#A90AFF"}
+                        fontWeight={"bold"}
+                      >
+                        {token.rate / 100}
+                      </Text>
+                      USDT : {"  "}
+                      <Text
+                        as={"span"}
+                        textColor={"#A90AFF"}
+                        fontWeight={"bold"}
+                      >
+                        1
+                      </Text>
+                      XPC
+                    </Td>
+                    <Td>
+                      <Text
+                        as={"span"}
+                        textColor={"#A90AFF"}
+                        fontWeight={"bold"}
+                      >
+                        {token.amount} {"  "}
+                      </Text>
+                      XPC
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+            <Table mt={3} borderRadius={"xl"} overflow={"hidden"}>
+              <Tbody backgroundColor={"white"} color={"black"}>
+                <Tr>
+                  <Td color={"#6779F3"} fontWeight={"bold"}>
+                    After Fee:
                   </Td>
                   <Td>
                     <Text as={"span"} textColor={"#A90AFF"} fontWeight={"bold"}>
-                      {token.amount}
+                      {data.afterFee} {"  "}
                     </Text>
                     XPC
                   </Td>
                 </Tr>
-              ))}
-            </Tbody>
-            <Tfoot>
-              <Tr>
-                <Td>After Fee:</Td>
-                <Td>
-                  <Text as={"span"} textColor={"#A90AFF"} fontWeight={"bold"}>
-                    {data.afterFee}
-                  </Text>
-                  XPC
-                </Td>
-              </Tr>
-              <Tr>
-                <Td>Total Spend:</Td>
-                <Td>
-                  <Text as={"span"} textColor={"#A90AFF"} fontWeight={"bold"}>
-                    {data.totalSpend}
-                  </Text>
-                  USDT
-                </Td>
-              </Tr>
-            </Tfoot>
-          </Table>
-        </Box>
+                <Tr>
+                  <Td color={"#6779F3"} fontWeight={"bold"}>
+                    Total Spend:
+                  </Td>
+                  <Td>
+                    <Text as={"span"} textColor={"#A90AFF"} fontWeight={"bold"}>
+                      {data.totalSpend} {"  "}
+                    </Text>
+                    USDT
+                  </Td>
+                </Tr>
+              </Tbody>
+            </Table>
+          </Box>
+        </Stack>
       ) : null}
       <VStack w={"full"}>
         <Button
@@ -147,6 +170,7 @@ export const BuyXpcForm = () => {
         <Button
           w={"full"}
           variant={"ghost"}
+          color={"#A4A4BE"}
           onClick={() => setState("EXCHANGE_LIST")}
         >
           Back

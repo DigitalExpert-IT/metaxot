@@ -86,7 +86,7 @@ const Detail = () => {
               fallbackSrc="https://via.placeholder.com/600"
               maxW={"30rem"}
               maxH={"20rem"}
-              ml={"5rem"}
+              ml={{ lg: "5rem", base: "" }}
               rounded={"lg"}
               pos={"relative"}
             />

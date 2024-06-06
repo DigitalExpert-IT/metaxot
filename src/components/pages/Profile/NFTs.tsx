@@ -190,11 +190,13 @@ export const NFTs = () => {
       return { ...e, ...detail };
     });
 
+    console.log("nft with metadata", nftWithMetadata)
+
     // Filter by category
     const filteredNftWithMetadata = nftWithMetadata.filter(nft => {
       // Define the category you want to filter by
       const categoryToFilter = `get_${CATEGORY[isActive].name}`;
-      const uri = nft.external_url || "";
+      const uri = nft.external_uri || "";
       const lowerCaseUri = uri.toLowerCase();
       const lowerCaseCategory = categoryToFilter.toLowerCase();
 
@@ -203,6 +205,7 @@ export const NFTs = () => {
 
     return filteredNftWithMetadata;
   }, [NFTsData, nftOnListSales, metadatas, isActive]);
+
 
   const handleCancelSell = async (e: IListNftSales | INFTData) => {
     if (
@@ -380,7 +383,7 @@ export const NFTs = () => {
                         </Box>
                       )}
                       <Image
-                        src={e.image}
+                        src={e.image || "https://via.placeholder.com/300"}
                         alt={e.name}
                         fallbackSrc="https://via.placeholder.com/300"
                       />
